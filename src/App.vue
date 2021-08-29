@@ -14,10 +14,10 @@
             <button @click='learnAboutUs'>About Us</button>
           </li>
           <li class="nav-item">
-            <button @click="seeReviews">Reviews</button>
+            <button @click="seeReviews">Our Reviews</button>
           </li>
           <li class="nav-item">
-           <button v-on:click="makeReport">Safety and Reporting</button> 
+           <button v-on:click="makeEnquiry">Contact Us</button> 
           </li>
         </ul>
         <button>Log In</button>
@@ -28,7 +28,7 @@
     <JoinUs v-if="page=='join-us'"/>
     <AboutUs v-if="page=='about-us'"/>
     <Reviews v-if="page=='reviews'"/>
-    <Report v-if="page=='report'"/>
+    <Contact v-if="page=='contact'"/>
   </div>
 </template>
 
@@ -37,7 +37,7 @@ import JoinUs from './components/JoinUs.vue'
 import Home from './components/Home.vue'
 import AboutUs from './components/AboutUs.vue'
 import Reviews from './components/Reviews.vue'
-import Report from './components/Report.vue'
+import Contact from './components/Contact.vue'
 
 export default {
   name: 'App',
@@ -46,7 +46,7 @@ export default {
     Home,
     AboutUs,
     Reviews,
-    Report
+    Contact
   },
   data() {
     return {
@@ -57,8 +57,8 @@ export default {
     goHome() {
       this.page = "home"
     },
-    makeReport() {
-      this.page = "report"
+    makeEnquiry() {
+      this.page = "contact"
     },
     joinUs() {
       this.page = 'join-us'
