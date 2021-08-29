@@ -1,4 +1,4 @@
-# project2-sample
+# tgc-assignment-2
 
 ## Project setup
 ```
