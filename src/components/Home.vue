@@ -1,7 +1,9 @@
 <template>
     <div class="hero">
-      <h1>A community that accepts everyone</h1>
-      <button v-on:click="joinUsToday">Join Us Today!</button>
+      <h1 class="display-1 text-uppercase">Special Connections</h1>
+      <p class="lead">A safe community for everyone</p>
+      <button class="btn btn-outline-danger" @click="joinUsToday">Join Us Today!</button>
+          <font-awesome-icon icon="wifi" />
     </div>
 </template>
 
@@ -17,3 +19,13 @@ export default {
   }
 }
 </script>
+
+<style>
+.hero {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+}
+</style>
