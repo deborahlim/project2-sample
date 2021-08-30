@@ -29,12 +29,20 @@
       </div>
     </div>
 
-    <Home v-if="page == 'home'" v-on:join-button-click="joinUs" />
-    <JoinUs v-if="page == 'join-us'" v-on:create-profile-btn-click="goToProfile"/>
+    <Home v-if="page == 'home'" @join-button-click="joinUs" />
+    <JoinUs
+      v-if="page == 'join-us'"
+      v-on:create-profile-btn-click="goToProfile"
+    />
     <AboutUs v-if="page == 'about-us'" />
     <Reviews v-if="page == 'reviews'" />
     <Contact v-if="page == 'contact'" />
-    <CreateProfile  v-if="page == 'create-profile'" />
+    <CreateProfile
+      v-if="page == 'create-profile'"
+      @create-profile2-btn-click="goToProfile2"
+    />
+    <CreateProfile2 v-if="page == 'create-profile-2'" @back-to-profile1-btn-click="goToProfile" @create-profile3-btn-click="goToProfile3" />
+       <CreateProfile3 v-if="page == 'create-profile-3'" @back-to-profile2-btn-click="goToProfile2" />
   </div>
 </template>
 
@@ -45,7 +53,8 @@ import AboutUs from "./components/AboutUs.vue";
 import Reviews from "./components/Reviews.vue";
 import Contact from "./components/Contact.vue";
 import CreateProfile from "./components/CreateProfile.vue";
-
+import CreateProfile2 from "./components/CreateProfile2.vue";
+import CreateProfile3 from "./components/CreateProfile3.vue";
 export default {
   name: "App",
   components: {
@@ -55,6 +64,8 @@ export default {
     Reviews,
     Contact,
     CreateProfile,
+    CreateProfile2,
+       CreateProfile3,
   },
   data() {
     return {
@@ -80,13 +91,18 @@ export default {
     goToProfile() {
       this.page = "create-profile";
     },
+    goToProfile2() {
+      this.page = "create-profile-2";
+    },
+        goToProfile3() {
+      this.page = "create-profile-3";
+    },
   },
 };
 </script>
 
 <style>
 /* #ce4343 */
-
 
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
