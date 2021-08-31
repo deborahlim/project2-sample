@@ -43,7 +43,7 @@
         :is="page"
         @join-button-click="setPage('JoinUs')"
         @create-profile-btn-click="setPage('BaseForm')"
-        @back-home="setPage('Home')"
+        @back-home-click="setPage('Home')"
       ></component>
     </keep-alive>
   </div>

@@ -90,7 +90,7 @@ export default {
     },
     validateEmail() {},
     submitBasic() {
-      this.clickProfileBtn;
+      this.clickProfileBtn();
       axios.post(
         "https://3000-red-elephant-ado1sn07.ws-us16.gitpod.io/special-connections/signup",
         {
