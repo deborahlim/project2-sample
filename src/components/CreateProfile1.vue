@@ -1,12 +1,15 @@
 <template>
   <div>
+    <div class="alert alert-success" role="alert">
+      Your account has been created!
+    </div>
     <div class="mx-auto text-center">
       <p class="lead">Step 1 of 3: Tell us about yourself</p>
     </div>
     <form class="">
       <div class="mb-4">
         <label for="" class="form-label">Date of Birth</label>
-        <input class="form-control" type="date" name="dob"/>
+        <input class="form-control" type="date" name="dob" />
       </div>
       <div class="mb-4">
         <label for="" class="form-label">Gender</label>
@@ -60,6 +63,7 @@
         ></textarea>
       </div>
     </form>
+    <button class="btn btn-outline-danger" @click="clickHome">Cancel</button>
     <button class="btn btn-outline-danger" @click="clickProfile2">Next</button>
   </div>
 </template>
@@ -68,17 +72,16 @@
 export default {
   name: "CreateProfile",
   data() {
-    return {
-
-    }
+    return {};
   },
   props: {},
   methods: {
     clickProfile2() {
       this.$emit("create-profile2-btn-click");
     },
+    clickHome() {
+      this.$emit("back-home-click")
+    }
   },
 };
 </script>
-
-

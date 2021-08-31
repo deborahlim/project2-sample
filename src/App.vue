@@ -29,14 +29,23 @@
             </button>
           </li>
         </ul>
-        <button class="btn btn-sm btn-outline-light">Log In</button>
+        <button
+          class="btn btn-sm btn-outline-light"
+          v-show="this.page !== 'BaseForm'"
+        >
+          Log In
+        </button>
       </div>
     </div>
 
     <keep-alive>
-      <component :is="page" @join-button-click="setPage('JoinUs')" @create-profile-btn-click="setPage('BaseForm')"></component>
+      <component
+        :is="page"
+        @join-button-click="setPage('JoinUs')"
+        @create-profile-btn-click="setPage('BaseForm')"
+        @back-home="setPage('Home')"
+      ></component>
     </keep-alive>
-
   </div>
 </template>
 
@@ -56,13 +65,15 @@ export default {
     AboutUs,
     Reviews,
     Contact,
-    BaseForm
- 
+    BaseForm,
   },
   data() {
     return {
       page: "Home",
     };
+  },
+  provide: {
+    currentPage: "Home",
   },
   props: [],
   methods: {

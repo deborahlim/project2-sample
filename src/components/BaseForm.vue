@@ -1,9 +1,11 @@
 <template>
-  <div class="sign-up">
+  <div class="sign-up" >
+  
           <h1 class="display-7 m-3">Create your profile</h1>
     <CreateProfile1
       v-if="form == 'createProfile1'"
       @create-profile2-btn-click="setForm('createProfile2')"
+      @back-home-click="$emit('back-home')"
     />
     <CreateProfile2
       v-if="form == 'createProfile2'"
@@ -34,6 +36,9 @@ export default {
       form: "createProfile1",
     };
   },
+  inject: 
+    ['currentPage'],
+  
   props: {},
   computed: {},
   methods: {
