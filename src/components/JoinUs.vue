@@ -91,15 +91,12 @@ export default {
     validateEmail() {},
     submitBasic() {
       this.clickProfileBtn();
-      axios.post(
-        "https://3000-red-elephant-ado1sn07.ws-us16.gitpod.io/special-connections/signup",
-        {
-          username: this.username,
-          email: this.email,
-          password: this.password,
-          confirmPassword: this.confirmPassword,
-        }
-      );
+      axios.post(" http://localhost:3000/special-connections/signup", {
+        username: this.username,
+        email: this.email,
+        password: this.password,
+        confirmPassword: this.confirmPassword,
+      });
       console.log("hi");
     },
   },

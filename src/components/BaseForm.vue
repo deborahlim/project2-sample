@@ -291,23 +291,20 @@ export default {
       this.$emit("back-home-click");
     },
     submitFull() {
-      axios.post(
-        "https://3000-red-elephant-ado1sn07.ws-us16.gitpod.io/special-connections/profile",
-        {
-          dob: this.dob,
-          gender: this.gender,
-          country: this.country,
-          disability: this.disability,
-          interestedIn: this.interestedIn,
-          genderPreference: this.genderPreference,
-          minAge: this.minAge,
-          maxAge: this.maxAge,
-          countryPreference: this.countryPreference,
-          disabilityPreference: this.disabilityPreference,
-          aboutMe: this.aboutMe,
-          interests: this.interests,
-        }
-      );
+      axios.post(" http://localhost:3000/special-connections/profile", {
+        dob: this.inputs.dob,
+        gender: this.inputs.gender,
+        country: this.inputs.country,
+        disability: this.inputs.disability,
+        interestedIn: this.inputs.interestedIn,
+        genderPreference: this.inputs.genderPreference,
+        minAge: this.inputs.minAge,
+        maxAge: this.inputs.maxAge,
+        countryPreference: this.inputs.countryPreference,
+        disabilityPreference: this.inputs.disabilityPreference,
+        aboutMe: this.inputs.aboutMe,
+        interests: this.inputs.interests,
+      });
       console.log("hi");
     },
   },
