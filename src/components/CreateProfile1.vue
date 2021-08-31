@@ -1,13 +1,12 @@
 <template>
-  <div class="sign-up">
+  <div>
     <div class="mx-auto text-center">
-      <h1 class="display-7 m-3">Create your profile</h1>
       <p class="lead">Step 1 of 3: Tell us about yourself</p>
     </div>
     <form class="">
       <div class="mb-4">
         <label for="" class="form-label">Date of Birth</label>
-        <input class="form-control" type="date" />
+        <input class="form-control" type="date" name="dob"/>
       </div>
       <div class="mb-4">
         <label for="" class="form-label">Gender</label>
@@ -68,6 +67,11 @@
 <script>
 export default {
   name: "CreateProfile",
+  data() {
+    return {
+
+    }
+  },
   props: {},
   methods: {
     clickProfile2() {
@@ -77,10 +81,4 @@ export default {
 };
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-.sign-up {
-  width: 50%;
-  transform: translateX(50%);
-}
-</style>
+

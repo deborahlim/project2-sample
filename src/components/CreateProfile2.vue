@@ -1,7 +1,6 @@
 <template>
-  <div class="sign-up">
+  <div>
     <div class="mx-auto text-center">
-      <h1 class="display-7 m-3">Create your profile</h1>
       <p class="lead">Step 2 of 3: Tell us about your preferences</p>
     </div>
     <form class="">
@@ -136,8 +135,5 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.sign-up {
-  width: 50%;
-  transform: translateX(50%);
-}
+
 </style>
