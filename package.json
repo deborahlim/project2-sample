@@ -1,5 +1,5 @@
 {
-  "name": "project2-sample",
+  "name": "tgc-assignment2",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -16,7 +16,8 @@
     "axios": "^0.21.1",
     "bootstrap": "^5.1.0",
     "core-js": "^3.6.5",
-    "vue": "^2.6.11"
+    "vue": "^2.6.11",
+    "vue-router": "^3.5.2"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.0",

@@ -1,50 +1,6 @@
 <template>
   <div id="app">
-    <div class="navbar bg-danger">
-      <div class="container-fluid">
-        <ul class="nav nav-tab me-auto mb-lg-0">
-          <li class="nav-item">
-            <button class="btn text-uppercase" @click="setPage('Home')">
-              Home
-            </button>
-          </li>
-          <li class="nav-item" v-if="page !== 'Profiles'">
-            <button class="btn text-uppercase" @click="setPage('JoinUs')">
-              Join Us
-            </button>
-          </li>
-          <li class="nav-item">
-            <button class="btn text-uppercase" @click="setPage('AboutUs')">
-              About Us
-            </button>
-          </li>
-          <li class="nav-item">
-            <button class="btn text-uppercase" @click="setPage('Reviews')">
-              Our Reviews
-            </button>
-          </li>
-          <li class="nav-item">
-            <button class="btn text-uppercase" @click="setPage('Contact')">
-              Contact Us
-            </button>
-          </li>
-        </ul>
-        <button
-          class="btn btn-sm btn-outline-light"
-          v-if="this.page == 'Profiles'"
-        >
-          Log Out
-        </button>
-        <button
-          class="btn btn-sm btn-outline-light"
-          v-else-if="this.page !== 'CreateProfile'"
-        >
-          Log In
-        </button>
-      </div>
-    </div>
-
-    <keep-alive>
+    <!-- <keep-alive>
       <component
         :is="page"
         @join-button-click="setPage('JoinUs')"
@@ -52,43 +8,28 @@
         @back-home-click="setPage('Home')"
         @go-to-profiles-click="setPage('Profiles')"
       ></component>
-    </keep-alive>
+    </keep-alive> -->
+    <TheNavbar />
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-import JoinUs from "./components/JoinUs.vue";
-import Home from "./components/Home.vue";
-import AboutUs from "./components/AboutUs.vue";
-import Reviews from "./components/Reviews.vue";
-import Contact from "./components/Contact.vue";
-import CreateProfile from "./components/CreateProfile.vue";
-import Profiles from "./components/Profiles.vue";
-
+import TheNavbar from "./components/TheNavbar";
 export default {
   name: "App",
   components: {
-    JoinUs,
-    Home,
-    AboutUs,
-    Reviews,
-    Contact,
-    CreateProfile,
-    Profiles,
+    TheNavbar,
   },
   data() {
     return {
       page: "Home",
+      isLoggedIn: false,
     };
   },
-  provide: {
-    currentPage: "Home",
-  },
-  props: [],
+  props: [name],
   methods: {
-    setPage(pg) {
-      this.page = pg;
-    },
+    checkLoggedIn() {},
   },
 };
 </script>

@@ -48,7 +48,7 @@
           v-model="confirmPassword"
         />
       </div>
-      <button class="btn btn-outline-danger">
+      <button class="btn btn-outline-danger" @click="goToCreateProfile">
         Get Started!
       </button>
     </form>
@@ -70,17 +70,14 @@ export default {
   },
   props: {},
   methods: {
-    clickProfileBtn() {
-      if (
-        !(
-          this.username == "" ||
-          this.email == "" ||
-          this.password == "" ||
-          this.confirmPassword == ""
-        )
-      )
-        this.$emit("create-profile-btn-click");
+    goToCreateProfile() {
+      this.$router.push("/create-profile");
     },
+
+    // this.username == "" ||
+    // this.email == "" ||
+    // this.password == "" ||
+    // this.confirmPassword == ""
     validateUsername() {
       if (this.username === "") {
         this.usernameValidity = "invalid";

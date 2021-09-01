@@ -302,10 +302,10 @@ export default {
       this.form++;
     },
     clickHome() {
-      this.$emit("back-home-click");
+      this.$router.push("/");
     },
     clickProfilePage() {
-      this.$emit("go-to-profiles-click");
+      this.$router.push("/profile");
     },
     submitFull() {
       try {
@@ -325,7 +325,7 @@ export default {
         //   photoURL: this.inputs.photoURL,
         // });
         console.log("hi");
-        this.clickProfilePage();
+        this.$router.push("/user/:id");
       } catch (e) {
         console.log(e.message);
       }
