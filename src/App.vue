@@ -8,7 +8,7 @@
               Home
             </button>
           </li>
-          <li class="nav-item">
+          <li class="nav-item" v-if="page !== 'Profiles'">
             <button class="btn text-uppercase" @click="setPage('JoinUs')">
               Join Us
             </button>
@@ -31,7 +31,13 @@
         </ul>
         <button
           class="btn btn-sm btn-outline-light"
-          v-show="this.page !== 'BaseForm'"
+          v-if="this.page == 'Profiles'"
+        >
+          Log Out
+        </button>
+        <button
+          class="btn btn-sm btn-outline-light"
+          v-else-if="this.page !== 'CreateProfile'"
         >
           Log In
         </button>
@@ -42,8 +48,9 @@
       <component
         :is="page"
         @join-button-click="setPage('JoinUs')"
-        @create-profile-btn-click="setPage('BaseForm')"
+        @create-profile-btn-click="setPage('CreateProfile')"
         @back-home-click="setPage('Home')"
+        @go-to-profiles-click="setPage('Profiles')"
       ></component>
     </keep-alive>
   </div>
@@ -55,7 +62,8 @@ import Home from "./components/Home.vue";
 import AboutUs from "./components/AboutUs.vue";
 import Reviews from "./components/Reviews.vue";
 import Contact from "./components/Contact.vue";
-import BaseForm from "./components/BaseForm.vue";
+import CreateProfile from "./components/CreateProfile.vue";
+import Profiles from "./components/Profiles.vue";
 
 export default {
   name: "App",
@@ -65,7 +73,8 @@ export default {
     AboutUs,
     Reviews,
     Contact,
-    BaseForm,
+    CreateProfile,
+    Profiles,
   },
   data() {
     return {

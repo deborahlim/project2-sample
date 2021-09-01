@@ -56,7 +56,7 @@
 </template>
 
 <script>
-import axios from "axios";
+// import axios from "axios";
 export default {
   name: "JoinUs",
   data() {
@@ -91,12 +91,12 @@ export default {
     validateEmail() {},
     submitBasic() {
       this.clickProfileBtn();
-      axios.post(" http://localhost:3000/special-connections/signup", {
-        username: this.username,
-        email: this.email,
-        password: this.password,
-        confirmPassword: this.confirmPassword,
-      });
+      // axios.post(" http://localhost:3000/special-connections/signup", {
+      //   username: this.username,
+      //   email: this.email,
+      //   password: this.password,
+      //   confirmPassword: this.confirmPassword,
+      // });
       console.log("hi");
     },
   },

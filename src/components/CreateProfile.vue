@@ -10,7 +10,7 @@
       <div class="mx-auto text-center">
         <p class="lead">Step 1 of 3: Tell us about yourself</p>
       </div>
-      <form class="">
+      <form class="text-start">
         <div class="mb-4">
           <label for="" class="form-label">Date of Birth</label>
           <input
@@ -69,6 +69,7 @@
 
     <!-- FORM 2 -->
     <div
+      class="text-start"
       v-if="form == 2"
       @back-to-profile1-btn-click="setForm(1)"
       @create-profile3-btn-click="setForm(3)"
@@ -78,7 +79,7 @@
       </div>
       <form class="">
         <div class="mb-4">
-          <p class="fs-5">What are you interested In?</p>
+          <p class="">What are you interested In?</p>
           <div class="">
             <div class="form-check-inline">
               <input
@@ -88,7 +89,9 @@
                 id="friendships"
                 v-model="inputs.interestedIn"
               />
-              <label for="friendships" class="form-label">Friendships</label>
+              <label for="friendships" class="form-label fw-normal"
+                >Friendships</label
+              >
             </div>
             <div class="form-check-inline">
               <input
@@ -98,7 +101,7 @@
                 id="dating"
                 v-model="inputs.interestedIn"
               />
-              <label for="dating" class="form-label">Dating</label>
+              <label for="dating" class="form-label fw-normal">Dating</label>
             </div>
           </div>
         </div>
@@ -188,7 +191,11 @@
     </div>
 
     <!-- FORM 3 -->
-    <div v-if="form == 3" @back-to-profile2-btn-click="setForm(2)">
+    <div
+      class="text-start"
+      v-if="form == 3"
+      @back-to-profile2-btn-click="setForm(2)"
+    >
       <div class="mx-auto text-center">
         <p class="lead">Step 3 of 3: Tell us more about yourself</p>
       </div>
@@ -217,13 +224,22 @@
               v-model="inputs.interests"
               id="interests"
             />
-            <label :for="interest.hobby" class="form-label">{{
+            <label :for="interest.hobby" class="form-label fw-normal">{{
               interest.hobby
             }}</label>
           </div>
         </div>
         <div class="mb-4">
           <label for="" class="form-label">Upload Photo</label>
+          <input
+            class="form-control"
+            type="url"
+            name="photo"
+            v-model="inputs.photoURL"
+            placeholder="Enter your photo URL"
+            @input="change($event)"
+            @change="change($event)"
+          />
         </div>
       </form>
       <button class="btn btn-outline-danger" @click="prev()">
@@ -235,7 +251,7 @@
 </template>
 
 <script>
-import axios from "axios";
+// import axios from "axios";
 import countries from "./../assets/countries";
 import interests from "./../assets/interests";
 export default {
@@ -257,7 +273,7 @@ export default {
         disabilityPreference: null,
         aboutMe: null,
         interests: [],
-        photo: null,
+        photoURL: null,
       },
       countries: countries,
       disabilities: [
@@ -273,8 +289,6 @@ export default {
       interests: interests,
     };
   },
-  inject: ["currentPage"],
-
   props: {},
   computed: {},
   methods: {
@@ -290,22 +304,31 @@ export default {
     clickHome() {
       this.$emit("back-home-click");
     },
+    clickProfilePage() {
+      this.$emit("go-to-profiles-click");
+    },
     submitFull() {
-      axios.post(" http://localhost:3000/special-connections/profile", {
-        dob: this.inputs.dob,
-        gender: this.inputs.gender,
-        country: this.inputs.country,
-        disability: this.inputs.disability,
-        interestedIn: this.inputs.interestedIn,
-        genderPreference: this.inputs.genderPreference,
-        minAge: this.inputs.minAge,
-        maxAge: this.inputs.maxAge,
-        countryPreference: this.inputs.countryPreference,
-        disabilityPreference: this.inputs.disabilityPreference,
-        aboutMe: this.inputs.aboutMe,
-        interests: this.inputs.interests,
-      });
-      console.log("hi");
+      try {
+        // axios.post(" http://localhost:3000/special-connections/profile", {
+        //   dob: this.inputs.dob,
+        //   gender: this.inputs.gender,
+        //   country: this.inputs.country,
+        //   disability: this.inputs.disability,
+        //   interestedIn: this.inputs.interestedIn,
+        //   genderPreference: this.inputs.genderPreference,
+        //   minAge: this.inputs.minAge,
+        //   maxAge: this.inputs.maxAge,
+        //   countryPreference: this.inputs.countryPreference,
+        //   disabilityPreference: this.inputs.disabilityPreference,
+        //   aboutMe: this.inputs.aboutMe,
+        //   interests: this.inputs.interests,
+        //   photoURL: this.inputs.photoURL,
+        // });
+        console.log("hi");
+        this.clickProfilePage();
+      } catch (e) {
+        console.log(e.message);
+      }
     },
   },
 };
