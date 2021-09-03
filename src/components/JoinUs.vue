@@ -48,7 +48,7 @@
           v-model="confirmPassword"
         />
       </div>
-      <button class="btn btn-outline-danger" @click="goToCreateProfile">
+      <button class="btn btn-outline-danger">
         Get Started!
       </button>
     </form>
@@ -56,7 +56,6 @@
 </template>
 
 <script>
-// import axios from "axios";
 export default {
   name: "JoinUs",
   data() {
@@ -66,18 +65,15 @@ export default {
       password: "",
       confirmPassword: "",
       usernameValidity: "pending",
+      mode: "login",
     };
   },
+  computed: {},
   props: {},
   methods: {
     goToCreateProfile() {
       this.$router.push("/create-profile");
     },
-
-    // this.username == "" ||
-    // this.email == "" ||
-    // this.password == "" ||
-    // this.confirmPassword == ""
     validateUsername() {
       if (this.username === "") {
         this.usernameValidity = "invalid";
@@ -87,14 +83,18 @@ export default {
     },
     validateEmail() {},
     submitBasic() {
-      this.clickProfileBtn();
-      // axios.post(" http://localhost:3000/special-connections/signup", {
-      //   username: this.username,
-      //   email: this.email,
-      //   password: this.password,
-      //   confirmPassword: this.confirmPassword,
-      // });
-      console.log("hi");
+      //   if(this.username == "" ||
+      // this.email == "" ||
+      // this.password == "" ||
+      // this.confirmPassword == ""
+      if (this.mode === "login") {
+        this.$store.dispatch("signup", {
+          username: this.username,
+          email: this.email,
+          password: this.password,
+          confirmPassword: this.confirmPassword,
+        });
+      }
     },
   },
 };

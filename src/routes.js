@@ -7,11 +7,11 @@ import CreateProfile from "./components/CreateProfile.vue";
 import User from "./components/User.vue";
 
 export const routes = [
-  { path: "/", component: Home }, // our-domain.com/teams => TeamsList
-  { path: "/about-us", component: AboutUs },
-  { path: "/join-us", component: JoinUs },
-  { path: "/reviews", component: Reviews },
-  { path: "/user/:id", component: User },
-  { path: "/contact", component: Contact },
-  { path: "/create-profile", component: CreateProfile },
+  { path: "/", component: Home, name: "home" }, // our-domain.com/teams => TeamsList
+  { path: "/about-us", component: AboutUs, name: "aboutUs" },
+  { path: "/join-us", component: JoinUs, name: "joinUs" },
+  { path: "/reviews", component: Reviews, name: "reviews" },
+  { path: "/user/:id", component: User, name: "user" },
+  { path: "/contact", component: Contact, name: "contact" },
+  { path: "/create-profile", component: CreateProfile, name: "createProfile" },
 ];

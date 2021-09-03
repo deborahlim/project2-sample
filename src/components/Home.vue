@@ -15,7 +15,7 @@ export default {
   props: {},
   methods: {
     joinUsToday() {
-      this.$router.push("/create-profile");
+      this.$router.push("/join-us");
     },
   },
 };

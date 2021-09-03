@@ -3112,6 +3112,11 @@
   "resolved" "https://registry.npmjs.org/deepmerge/-/deepmerge-1.5.2.tgz"
   "version" "1.5.2"
 
+"deepmerge@^4.2.2":
+  "integrity" "sha512-FJ3UgI4gIl+PHZm53knsuSFpE+nESMr7M4v9QcgB7S63Kj/6WqMiFQJpBBYz1Pt+66bZpP3Q7Lye0Oo9MPKEdg=="
+  "resolved" "https://registry.npmjs.org/deepmerge/-/deepmerge-4.2.2.tgz"
+  "version" "4.2.2"
+
 "default-gateway@^4.2.0":
   "integrity" "sha512-h6sMrVB1VMWVrW13mSc6ia/DwYYw5MN6+exNu1OaJeFac5aSAvwM7lZ0NVfTABuSkQelr4h5oebg3KB1XPdjgA=="
   "resolved" "https://registry.npmjs.org/default-gateway/-/default-gateway-4.2.0.tgz"
@@ -7367,6 +7372,11 @@
   "resolved" "https://registry.npmjs.org/shell-quote/-/shell-quote-1.7.2.tgz"
   "version" "1.7.2"
 
+"shvl@^2.0.3":
+  "integrity" "sha512-V7C6S9Hlol6SzOJPnQ7qzOVEWUQImt3BNmmzh40wObhla3XOYMe4gGiYzLrJd5TFa+cI2f9LKIRJTTKZSTbWgw=="
+  "resolved" "https://registry.npmjs.org/shvl/-/shvl-2.0.3.tgz"
+  "version" "2.0.3"
+
 "side-channel@^1.0.4":
   "integrity" "sha512-q5XPytqFEIKHkGdiMIrY10mvLRvnQh42/+GoBlFW3b2LXLE2xxJpZFdm94we0BaoV3RwJyGqg5wS7epxTv0Zvw=="
   "resolved" "https://registry.npmjs.org/side-channel/-/side-channel-1.0.4.tgz"
@@ -8363,10 +8373,23 @@
   "resolved" "https://registry.npmjs.org/vue-template-es2015-compiler/-/vue-template-es2015-compiler-1.9.1.tgz"
   "version" "1.9.1"
 
-"vue@^2 || ^3.0.0-0", "vue@^2.6.11", "vue@~2":
+"vue@^2 || ^3.0.0-0", "vue@^2.0.0", "vue@^2.6.11", "vue@~2":
   "integrity" "sha512-x2284lgYvjOMj3Za7kqzRcUSxBboHqtgRE2zlos1qWaOye5yUmHn42LB1250NJBLRwEcdrB0JRwyPTEPhfQjiQ=="
   "resolved" "https://registry.npmjs.org/vue/-/vue-2.6.14.tgz"
   "version" "2.6.14"
+
+"vuex-persistedstate@^4.0.0":
+  "integrity" "sha512-jDs+awbV9YD2A2F6S5zgtYq1Bjd8v0YldOK6HPv1EJZzGMse0FtZTREfXvA7zlVfq9MpmSZJNmYQVylfpZ5znQ=="
+  "resolved" "https://registry.npmjs.org/vuex-persistedstate/-/vuex-persistedstate-4.0.0.tgz"
+  "version" "4.0.0"
+  dependencies:
+    "deepmerge" "^4.2.2"
+    "shvl" "^2.0.3"
+
+"vuex@^3.0 || ^4.0.0-rc", "vuex@^3.6.2":
+  "integrity" "sha512-ETW44IqCgBpVomy520DT5jf8n0zoCac+sxWnn+hMe/CzaSejb/eVw2YToiXYX+Ex/AuHHia28vWTq4goAexFbw=="
+  "resolved" "https://registry.npmjs.org/vuex/-/vuex-3.6.2.tgz"
+  "version" "3.6.2"
 
 "watchpack-chokidar2@^2.0.1":
   "integrity" "sha512-nCFfBIPKr5Sh61s4LPpy1Wtfi0HE8isJ3d2Yb5/Ppw2P2B/3eVSEBjKfN0fmHJSK14+31KwMKmcrzs2GM4P0Ww=="

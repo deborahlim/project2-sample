@@ -6,13 +6,13 @@
           class="nav-link link-light"
           active-class="active"
           exact
-          to="/"
+          :to="{ name: 'home' }"
           >Home</router-link
         >
 
         <router-link
           class="nav-link link-light"
-          to="/join-us"
+          :to="{ name: 'joinUs' }"
           active-class="active"
         >
           Join Us</router-link
@@ -21,7 +21,7 @@
         <router-link
           class="nav-link link-light"
           active-class="active"
-          to="/about-us"
+          :to="{ name: 'aboutUs' }"
         >
           About Us</router-link
         >
@@ -29,7 +29,7 @@
         <router-link
           class="nav-link link-light"
           active-class="active"
-          to="/reviews"
+          :to="{ name: 'reviews' }"
         >
           Our Reviews</router-link
         >
@@ -37,7 +37,7 @@
         <router-link
           class="nav-link link-light"
           active-class="active"
-          to="/contact"
+          :to="{ name: 'contact' }"
         >
           Contact Us</router-link
         >
