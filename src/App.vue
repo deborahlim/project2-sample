@@ -54,7 +54,6 @@ export default {
 
 .sign-up {
   position: absolute;
-  height: 100%;
   width: 50%;
   transform: translateX(50%);
 }

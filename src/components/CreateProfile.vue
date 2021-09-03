@@ -61,7 +61,7 @@
           </datalist>
         </div>
       </form>
-      <button class="btn btn-outline-danger" @click="clickHome">Cancel</button>
+      <button class="btn btn-outline-danger" @click="logOut">Cancel</button>
       <button class="btn btn-outline-danger" @click="next()">
         Next
       </button>
@@ -329,6 +329,10 @@ export default {
       } catch (e) {
         console.log(e.message);
       }
+    },
+    logOut() {
+      this.$store.dispatch("logOut");
+      this.$router.replace("/");
     },
   },
 };
