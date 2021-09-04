@@ -14,7 +14,11 @@ export const routes = [
   { path: "/join-us", component: JoinUs, name: "joinUs" },
   { path: "/reviews", component: Reviews, name: "reviews" },
   { path: "/contact", component: Contact, name: "contact" },
-  { path: "/create-profile", component: CreateProfile, name: "createProfile" },
+  {
+    path: "/create-profile/:id",
+    component: CreateProfile,
+    name: "createProfile",
+  },
   { path: "/login", component: Login, name: "login" },
 
   {
@@ -23,8 +27,8 @@ export const routes = [
     name: "user",
     beforeEnter: (to, from, next) => {
       console.log(to.name);
-      console.log(store.token);
-      if (to.name === "user" && store.token === undefined) {
+      console.log(store);
+      if (store.state.auth.token === undefined) {
         console.log("hi");
         next({ name: "home" });
       } else next();

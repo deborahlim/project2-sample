@@ -2,8 +2,12 @@
   <div class="vld-parent">
     <Loading :active.sync="isLoading" :can-cancel="true" :is-full-page="true">
     </Loading>
-    <base-modal :show="!!error" title="Error!" @close="handleError">
-      <p>{{ error }}</p>
+    <base-modal
+      :show="!!error"
+      title="Error!"
+      :content="error"
+      @close="handleError"
+    >
     </base-modal>
     <div class="sign-up">
       <div class="mx-auto">
@@ -54,9 +58,6 @@ export default {
   computed: {},
   props: {},
   methods: {
-    goToCreateProfile() {
-      //   this.$router.push("/rprofile");
-    },
     async submitLogin() {
       //   if(this.username == "" ||
       // this.email == "" ||

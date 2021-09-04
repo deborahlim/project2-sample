@@ -3,7 +3,12 @@
   <div class="vld-parent">
     <Loading :active.sync="isLoading" :can-cancel="true" :is-full-page="true">
     </Loading>
-    <base-modal :show="!!error" title="Error!" @close="handleError">
+    <base-modal
+      :show="!!error"
+      title="Error!"
+      :content="error"
+      @close="handleError"
+    >
       <p>{{ error }}</p>
     </base-modal>
     <div class="sign-up">
@@ -78,17 +83,25 @@ export default {
       password: "",
       confirmPassword: "",
       usernameValidity: "pending",
-      mode: "login",
+      isFormValid: false,
       isLoading: false,
       error: null,
       fullPage: true,
+      id: this.$route.params.id,
     };
   },
   computed: {},
-  props: {},
   methods: {
-    goToCreateProfile() {
-      this.$router.push("/create-profile");
+    checkInputsValid() {
+      if (
+        this.username.length > 6 &&
+        this.email.includes("@") &&
+        this.password.length > 6 &&
+        this.password === this.confirmPassword
+      ) {
+        this.isFormValid = true;
+      }
+      this.isFormValid = false;
     },
     validateUsername() {
       if (this.username === "") {
@@ -97,30 +110,33 @@ export default {
         this.usernameValidity = "valid";
       }
     },
-    validateEmail() {},
     async submitBasic() {
-      // if (
-      //   this.username == "" ||
-      //   this.email == "" ||
-      //   this.password == "" ||
-      //   this.confirmPassword == ""
-      // ) {
-      // }
-
       this.isLoading = true;
-      try {
-        await this.$store.dispatch("signup", {
-          username: this.username,
-          email: this.email,
-          password: this.password,
-          confirmPassword: this.confirmPassword,
-        });
+      if (
+        this.username.length > 6 &&
+        this.email.includes("@") &&
+        this.password.length > 6 &&
+        this.password === this.confirmPassword
+      ) {
+        try {
+          await this.$store.dispatch("signup", {
+            username: this.username,
+            email: this.email,
+            password: this.password,
+            confirmPassword: this.confirmPassword,
+          });
 
+          this.isLoading = false;
+          console.log(this.$store);
+          let id = this.$store.state.auth.userId;
+          this.$router.replace("/create-profile/" + id);
+        } catch (err) {
+          this.isLoading = false;
+          this.error = err.message || "Please fill up all the inputs";
+        }
+      } else {
         this.isLoading = false;
-        this.$router.replace("/create-profile");
-      } catch (err) {
-        this.isLoading = false;
-        this.error = err.message || "Please fill up all the inputs";
+        this.error = "Your form input does not meet the requirements";
       }
     },
     handleError() {
@@ -131,9 +147,4 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-/* .form-control:focus {
-  border-color: #28a745;
-  box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25);
-} */
-</style>
+<style scoped></style>

@@ -1,30 +1,28 @@
 <template>
-  <div class="">
-    <div v-if="show" @click="tryClose" class="backdrop"></div>
-    <dialog open v-if="show">
-      <header>
+  <div v-if="show" class="modal-backdrop">
+    <div v-if="show" class="modal-dialog">
+      <div class="modal-content">
         <slot name="header">
-          <h2>{{ title }}</h2>
+          <h1 class="modal-title">
+            {{ title }}
+          </h1>
         </slot>
-      </header>
-      <section>
-        <slot></slot>
-      </section>
-      <menu v-if="!fixed">
-        <slot name="actions">
-          <button
-            class="btn btn-dark"
-            style="cursor: pointer"
-            @click="tryClose"
-          >
-            Close
-          </button>
+        <slot name="body">
+          <div class="modal-body">
+            <h2>{{ content }}</h2>
+          </div>
         </slot>
-      </menu>
-    </dialog>
+        <slot name="footer">
+          <div class="modal-footer">
+            <button class="btn btn-sm btn-dark" @click="closeError">
+              close
+            </button>
+          </div>
+        </slot>
+      </div>
+    </div>
   </div>
 </template>
-
 <script>
 export default {
   props: {
@@ -36,18 +34,13 @@ export default {
       type: String,
       required: false,
     },
-    fixed: {
-      type: Boolean,
+    content: {
+      type: String,
       required: false,
-      default: false,
     },
   },
-  emits: ["close"],
   methods: {
-    tryClose() {
-      if (this.fixed) {
-        return;
-      }
+    closeError() {
       this.$emit("close");
     },
   },
@@ -55,57 +48,13 @@ export default {
 </script>
 
 <style scoped>
-.backdrop {
+.modal-backdrop {
   position: fixed;
   top: 0;
   left: 0;
   height: 100vh;
   width: 100%;
   background-color: rgba(0, 0, 0, 0.75);
-  z-index: 10;
-}
-
-dialog {
-  position: fixed;
-  top: 20vh;
-  left: 10%;
-  width: 80%;
-  z-index: 100;
-  border-radius: 12px;
-  border: none;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
-  padding: 0;
-  margin: 0;
-  overflow: hidden;
-  background-color: white;
-}
-
-header {
-  background-color: #3a0061;
-  color: white;
-  width: 100%;
-  padding: 1rem;
-}
-
-header h2 {
-  margin: 0;
-}
-
-section {
-  padding: 1rem;
-}
-
-menu {
-  padding: 1rem;
-  display: flex;
-  justify-content: flex-end;
-  margin: 0;
-}
-
-@media (min-width: 768px) {
-  dialog {
-    left: calc(50% - 20rem);
-    width: 40rem;
-  }
+  z-index: 20;
 }
 </style>

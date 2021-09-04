@@ -237,8 +237,6 @@
             name="photo"
             v-model="inputs.photoURL"
             placeholder="Enter your photo URL"
-            @input="change($event)"
-            @change="change($event)"
           />
         </div>
       </form>
@@ -251,7 +249,7 @@
 </template>
 
 <script>
-// import axios from "axios";
+import axios from "axios";
 import countries from "./../assets/countries";
 import interests from "./../assets/interests";
 export default {
@@ -309,23 +307,27 @@ export default {
     },
     submitFull() {
       try {
-        // axios.post(" http://localhost:3000/special-connections/profile", {
-        //   dob: this.inputs.dob,
-        //   gender: this.inputs.gender,
-        //   country: this.inputs.country,
-        //   disability: this.inputs.disability,
-        //   interestedIn: this.inputs.interestedIn,
-        //   genderPreference: this.inputs.genderPreference,
-        //   minAge: this.inputs.minAge,
-        //   maxAge: this.inputs.maxAge,
-        //   countryPreference: this.inputs.countryPreference,
-        //   disabilityPreference: this.inputs.disabilityPreference,
-        //   aboutMe: this.inputs.aboutMe,
-        //   interests: this.inputs.interests,
-        //   photoURL: this.inputs.photoURL,
-        // });
-        console.log("hi");
-        this.$router.push("/user/:id");
+        axios.patch(
+          " http://localhost:3000/special-connections/users/profile/" +
+            this.$route.params.id,
+          {
+            dob: this.inputs.dob,
+            gender: this.inputs.gender,
+            country: this.inputs.country,
+            disability: this.inputs.disability,
+            interestedIn: this.inputs.interestedIn,
+            genderPreference: this.inputs.genderPreference,
+            minAge: this.inputs.minAge,
+            maxAge: this.inputs.maxAge,
+            countryPreference: this.inputs.countryPreference,
+            disabilityPreference: this.inputs.disabilityPreference,
+            aboutMe: this.inputs.aboutMe,
+            interests: this.inputs.interests,
+            photoURL: this.inputs.photoURL,
+          }
+        );
+        //  let id = this.$store.state.auth.userId;
+        this.$router.push("/user");
       } catch (e) {
         console.log(e.message);
       }
