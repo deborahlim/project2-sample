@@ -8,6 +8,8 @@ import VueRouter from "vue-router";
 import { routes } from "./routes";
 import store from "./store";
 import BaseModal from "./../src/components/BaseModal";
+import Loading from "vue-loading-overlay";
+import "vue-loading-overlay/dist/vue-loading.css";
 // import axios from "axios";
 library.add(faUserSecret, faWifi);
 
@@ -19,10 +21,11 @@ const router = new VueRouter({ routes, mode: "history" });
 Vue.component("font-awesome-icon", FontAwesomeIcon);
 Vue.config.productionTip = false;
 Vue.component("base-modal", BaseModal);
-
+Vue.component("Loading", Loading);
 new Vue({
   router,
   store,
   BaseModal,
+  Loading,
   render: (h) => h(App),
 }).$mount("#app");

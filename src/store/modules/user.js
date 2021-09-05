@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const state = {
-  matches: null,
+  matches: [],
   // tokenExpiration: null,
 };
 
@@ -24,9 +24,11 @@ const mutations = {
 const actions = {
   async getMatches(context) {
     const response = await axios.get(
-      "http://localhost:3000/special-connections/users/613399d8ebcd5bd75b5ce7f9"
-      // this.$store.state.auth.userId
+      "http://localhost:3000/special-connections/users/" +
+        context.rootState.auth.userId
     );
+
+    console.log(response.data);
     if (response.status !== 200) {
       const error = new Error(response.status || "No Matches");
       throw error;
@@ -43,8 +45,13 @@ const actions = {
       matches.push(m);
     }
     context.commit("setMatches", {
-      matches,
+      matches: matches,
       // tokenExpiration: response.expiresIn,
+    });
+  },
+  logOut(context) {
+    context.commit("setMatches", {
+      matches: [],
     });
   },
 };

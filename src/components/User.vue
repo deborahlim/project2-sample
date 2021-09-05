@@ -1,5 +1,23 @@
 <template>
   <div class="container-fluid">
+    <Loading :active.sync="isLoading" :can-cancel="true" :is-full-page="true">
+    </Loading>
+    <base-modal
+      v-if="!!this.$store.getters.hasMatches"
+      :show="!!error"
+      title="Sorry, you currently do not have any matches"
+      :content="error"
+      @close="handleError"
+    >
+    </base-modal>
+    <base-modal
+      v-else
+      :show="!!error"
+      title="Something Went Wrong!"
+      :content="error"
+      @close="handleError"
+    >
+    </base-modal>
     <h1 class="display-3 m-5">Your Matches</h1>
     <div class="row m-4">
       <div
@@ -58,6 +76,12 @@
 <script>
 export default {
   name: "User",
+  data() {
+    return {
+      isLoading: true,
+      error: null,
+    };
+  },
   computed: {
     filteredMatches() {
       return this.$store.getters.matches;
@@ -72,7 +96,12 @@ export default {
         await this.$store.dispatch("getMatches");
       } catch (err) {
         this.error = err.message || "You have not created a profile!";
+        console.log(err);
       }
+      this.isLoading = false;
+    },
+    handleError() {
+      this.error = null;
     },
   },
   created() {
