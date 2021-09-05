@@ -24,13 +24,14 @@ const mutations = {
   setUser(state, payload) {
     state.token = payload.token;
     state.userId = payload.userId;
+    state.profile = payload.profile;
     // state.tokenExpiration = payload.tokenExpiration;
   },
 };
 
 const actions = {
   async login(context, payload) {
-    const response = await axios.post(
+    let response = await axios.post(
       "http://localhost:3000/special-connections/users/login",
       {
         email: payload.email,
@@ -39,16 +40,20 @@ const actions = {
       }
     );
 
-    if (response.status !== 200) {
-      const error = new Error(response.status || "Failed to authenticate.");
-      throw error;
-    }
-
+    // if (response.status !== 200) {
+    //   console.log(response.status);
+    //   // const error = new Error(response.status || "Failed to authenticate.");
+    //   const error = response;
+    //   console.log(error);
+    //   throw error;
+    // }
     context.commit("setUser", {
       token: response.data.token,
       userId: response.data.user._id,
+      profile: response.data.user.profile,
       // tokenExpiration: response.expiresIn,
     });
+    // }
   },
 
   async signup(context, payload) {

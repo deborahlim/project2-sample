@@ -22,14 +22,11 @@ export const routes = [
   { path: "/login", component: Login, name: "login" },
 
   {
-    path: "/user",
+    path: "/user/:id",
     component: User,
     name: "user",
     beforeEnter: (to, from, next) => {
-      console.log(to.name);
-      console.log(store);
       if (store.state.auth.token === undefined) {
-        console.log("hi");
         next({ name: "home" });
       } else next();
     },

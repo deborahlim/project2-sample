@@ -59,23 +59,22 @@ export default {
   props: {},
   methods: {
     async submitLogin() {
-      //   if(this.username == "" ||
-      // this.email == "" ||
-      // this.password == "" ||
-      // this.confirmPassword == ""
-
       this.isLoading = true;
       try {
         await this.$store.dispatch("login", {
           email: this.email,
           password: this.password,
         });
+
         this.isLoading = false;
-        this.$router.replace("/user");
+        this.$router.replace({
+          name: "user",
+          params: { id: this.$store.state.auth.userId },
+        });
       } catch (err) {
+        console.log(err);
         this.error = err.message || "Check your Login Details!";
         this.isLoading = false;
-        console.log(err);
       }
     },
     handleError() {

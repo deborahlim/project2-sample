@@ -308,8 +308,8 @@ export default {
     submitFull() {
       try {
         axios.patch(
-          " http://localhost:3000/special-connections/users/profile/" +
-            this.$route.params.id,
+          "http://localhost:3000/special-connections/users/profile/" +
+            this.$store.state.auth.userId,
           {
             dob: this.inputs.dob,
             gender: this.inputs.gender,
@@ -327,7 +327,7 @@ export default {
           }
         );
         //  let id = this.$store.state.auth.userId;
-        this.$router.push("/user");
+        this.$router.replace("/user/" + this.$store.state.auth.userId);
       } catch (e) {
         console.log(e.message);
       }
