@@ -52,8 +52,6 @@ export default {
       fullPage: true,
     };
   },
-  computed: {},
-  props: {},
   methods: {
     async submitLogin() {
       this.isLoading = true;

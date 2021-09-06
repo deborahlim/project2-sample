@@ -7,7 +7,7 @@ import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import VueRouter from "vue-router";
 import { routes } from "./routes";
 import store from "./store";
-import BaseModal from "./../src/components/BaseModal";
+import BaseModal from "./../src/components/base/BaseModal";
 import Loading from "vue-loading-overlay";
 import "vue-loading-overlay/dist/vue-loading.css";
 // import axios from "axios";

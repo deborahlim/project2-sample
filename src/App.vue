@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import TheNavbar from "./components/TheNavbar";
+import TheNavbar from "./components/layout/TheNavbar.vue";
 export default {
   name: "App",
   components: {
@@ -46,7 +46,7 @@ export default {
 
   position: relative;
   height: 100vh;
-  width: 100vw;
+  /* width: 100vw; */
   background-color: #d6cbcb;
   /* background-position: top;
   background-size: cover; */

@@ -1,24 +1,27 @@
-import JoinUs from "./components/JoinUs.vue";
-import Home from "./components/Home.vue";
-import AboutUs from "./components/AboutUs.vue";
-import Reviews from "./components/Reviews.vue";
-import Contact from "./components/Contact.vue";
-import CreateProfile from "./components/CreateProfile.vue";
-import User from "./components/User.vue";
-import Login from "./components/Login.vue";
+import JoinUs from "./components/auth/JoinUs.vue";
+import Home from "./components/pages/Home.vue";
+import AboutUs from "./components/pages/AboutUs.vue";
+import Reviews from "./components/pages/Reviews.vue";
+import Contact from "./components/pages/Contact.vue";
+import Profile from "./components/user-pages/Profile.vue";
+import User from "./components/user-pages/User.vue";
+import Login from "./components/auth/Login.vue";
+import Browse from "./components/user-pages/Browse.vue";
 import store from "./store/index.js";
 
 export const routes = [
+  { path: "/browse", component: Browse, name: "browse" },
   { path: "/", component: Home, name: "home" }, // our-domain.com/teams => TeamsList
   { path: "/about-us", component: AboutUs, name: "aboutUs" },
   { path: "/join-us", component: JoinUs, name: "joinUs" },
   { path: "/reviews", component: Reviews, name: "reviews" },
   { path: "/contact", component: Contact, name: "contact" },
   {
-    path: "/create-profile/:id",
-    component: CreateProfile,
-    name: "createProfile",
+    path: "/profile/:id",
+    component: Profile,
+    name: "profile",
   },
+
   { path: "/login", component: Login, name: "login" },
 
   {

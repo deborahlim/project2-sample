@@ -3,22 +3,41 @@
     <Loading :active.sync="isLoading" :can-cancel="true" :is-full-page="true">
     </Loading>
     <base-modal
-      v-if="!!this.$store.getters.hasMatches"
-      :show="!!error"
-      title="Sorry, you currently do not have any matches"
-      :content="error"
-      @close="handleError"
-    >
-    </base-modal>
-    <base-modal
-      v-else
       :show="!!error"
       title="Something Went Wrong!"
       :content="error"
       @close="handleError"
     >
     </base-modal>
-    <h1 class="display-3 m-5">Your Matches</h1>
+
+    <ul class=" mt-3 nav nav-tabs justify-content-center">
+      <li class="nav-item" v-if="checkProfileCompleted !== undefined">
+        <a class="nav-link link-dark" @click="goToCreateProfile"
+          >Go to Profile</a
+        >
+      </li>
+      <li class="nav-item" v-if="checkProfileCompleted !== undefined">
+        <a class="nav-link link-dark" @click="goToCreateProfile"
+          >Browse All users</a
+        >
+      </li>
+    </ul>
+
+    <div class="hero">
+      <div class="" v-if="checkProfileCompleted === undefined">
+        <h1 class="display-1 m-3">Create Your Profile Today!</h1>
+        <button @click="goToCreateProfile" class=" btn btn-lg btn-danger">
+          Create Profile
+        </button>
+      </div>
+      <h1 v-else-if="hasMatches" class="display-3 m-5">Your Matches</h1>
+      <div v-else>
+        <h1 class="m-5">
+          Sorry, you do not have not matches currently. Browse all users!
+        </h1>
+        <button class="btn btn-lg btn-dark">Browse All</button>
+      </div>
+    </div>
     <div class="row m-4">
       <div
         class="col-sm-4 mb-4 "
@@ -28,7 +47,9 @@
         <div class="card">
           <img :src="match.profile.photoURL" class="card-img-top" alt="" />
           <div class="card-body">
-            <h5 class="card-title">{{ match.username }}</h5>
+            <h5 class="card-title">
+              {{ match.username }}, {{ match.profile.age }}
+            </h5>
             <p class="card-text">{{ match.profile.aboutMe }}</p>
             <ul class="list-group list-group-flush">
               <li class="list-group-item">
@@ -69,7 +90,7 @@
         </div>
       </div>
     </div>
-    <h1 class="display-3 m-3">Your Groups</h1>
+    <!--  <h1 class="display-3 m-3">Your Groups</h1> -->
   </div>
 </template>
 
@@ -86,18 +107,32 @@ export default {
     filteredMatches() {
       return this.$store.getters.matches;
     },
+    checkProfileCompleted() {
+      return this.$store.state.auth.profile;
+    },
+    hasMatches() {
+      return this.$store.getters.hasMatches;
+    },
   },
   methods: {
-    checkArrLength(arr) {
-      return arr.length;
+    goToCreateProfile() {
+      this.$router.push({
+        name: "createProfile",
+        params: { id: this.$store.state.auth.userId },
+      });
     },
     async loadMatches() {
-      try {
-        await this.$store.dispatch("getMatches");
-      } catch (err) {
-        this.error = err.message || "You have not created a profile!";
-        console.log(err);
+      if (this.checkProfileCompleted) {
+        try {
+          await this.$store.dispatch("getMatches");
+        } catch (err) {
+          this.error = err.message;
+          console.log(err);
+        }
+      } else {
+        this.error = "Create a profile to see your matches!";
       }
+
       this.isLoading = false;
     },
     handleError() {

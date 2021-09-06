@@ -1,12 +1,16 @@
 <template>
   <div class="sign-up">
-    <h1 class="display-7 m-3">Create your profile</h1>
-
-    <!-- FORM 1 -->
-    <div v-if="form == 1">
+    <div class="" v-if="this.$store.state.auth.profile === undefined">
+      <h1 class="display-7 m-3">
+        Create your profile
+      </h1>
       <div class="alert alert-success" role="alert">
         Your account has been created!
       </div>
+    </div>
+    <h1 v-else class="display-7 m-3">Update your profile</h1>
+    <!-- FORM 1 -->
+    <div v-if="form == 1">
       <div class="mx-auto text-center">
         <p class="lead">Step 1 of 3: Tell us about yourself</p>
       </div>
@@ -250,8 +254,8 @@
 
 <script>
 import axios from "axios";
-import countries from "./../assets/countries";
-import interests from "./../assets/interests";
+import countries from "./../../assets/countries";
+import interests from "./../../assets/interests";
 export default {
   name: "BaseForm",
   components: {},
@@ -301,9 +305,6 @@ export default {
     },
     clickHome() {
       this.$router.push("/");
-    },
-    clickProfilePage() {
-      this.$router.push("/profile");
     },
     submitFull() {
       try {

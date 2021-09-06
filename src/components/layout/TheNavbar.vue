@@ -13,6 +13,24 @@
 
         <router-link
           class="nav-link link-light"
+          active-class="active"
+          exact
+          :to="'/user/' + getId"
+          v-if="loggedIn"
+          >Matches</router-link
+        >
+
+        <router-link
+          class="nav-link link-light"
+          active-class="active"
+          exact
+          :to="{ name: 'browse' }"
+          v-if="loggedIn"
+          >Browse All Users</router-link
+        >
+
+        <router-link
+          class="nav-link link-light"
           :to="{ name: 'joinUs' }"
           active-class="active"
           v-if="!loggedIn"
@@ -54,15 +72,6 @@
         >
           Contact Us</router-link
         >
-
-        <router-link
-          class="nav-link link-light"
-          active-class="active"
-          :to="{ name: 'user' }"
-          v-if="loggedIn"
-        >
-          Your Matches</router-link
-        >
       </ul>
       <router-link
         class="btn btn-sm btn-outline-light ms-auto ms-auto"
@@ -89,6 +98,9 @@ export default {
   computed: {
     loggedIn() {
       return this.$store.getters.isLoggedIn;
+    },
+    getId() {
+      return this.$store.state.auth.userId;
     },
   },
   methods: {
