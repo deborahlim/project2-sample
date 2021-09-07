@@ -16,7 +16,7 @@ const mutations = {
     state.enquiries.push(payload.newEnquiry);
     // state.tokenExpiration = payload.tokenExpiration;
   },
-  setEnquiry(state, payload) {
+  setEnquiries(state, payload) {
     state.enquiries = payload.enquiries;
   },
 };
@@ -53,7 +53,7 @@ const actions = {
       "http://localhost:3000/special-connections/enquiry"
     );
     console.log(response.data);
-    context.commit("get", response.data);
+    context.commit("setEnquires", response.data);
   },
 };
 

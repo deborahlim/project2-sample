@@ -3,6 +3,7 @@ import Home from "./components/pages/Home.vue";
 import AboutUs from "./components/pages/AboutUs.vue";
 import Reviews from "./components/pages/Reviews.vue";
 import Contact from "./components/pages/Contact.vue";
+import ProfileForm from "./components/user-pages/ProfileForm.vue";
 import Profile from "./components/user-pages/Profile.vue";
 import User from "./components/user-pages/User.vue";
 import Login from "./components/auth/Login.vue";
@@ -17,14 +18,7 @@ export const routes = [
   { path: "/join-us", component: JoinUs, name: "joinUs" },
   { path: "/reviews", component: Reviews, name: "reviews" },
   { path: "/contact", component: Contact, name: "contact" },
-  {
-    path: "/profile/:id",
-    component: Profile,
-    name: "profile",
-  },
-
   { path: "/login", component: Login, name: "login" },
-
   {
     path: "/user/:id",
     component: User,
@@ -35,6 +29,12 @@ export const routes = [
       } else next();
     },
   },
+  {
+    path: "/user/profile-form/:id",
+    component: ProfileForm,
+    name: "profileForm",
+  },
+  { path: "/user/profile/:id", component: Profile, name: "profile" },
   {
     path: "/user/review/:id",
     component: WriteReview,

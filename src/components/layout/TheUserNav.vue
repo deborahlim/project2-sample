@@ -17,7 +17,14 @@
           :to="{ name: 'browse' }"
           >Browse All Users</router-link
         >
-
+        <router-link
+          class="nav-link link-light"
+          active-class="active"
+          exact
+          :to="{ name: 'profile' }"
+        >
+          My Profile
+        </router-link>
         <router-link
           class="nav-link link-light"
           active-class="active"

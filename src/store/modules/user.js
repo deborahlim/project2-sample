@@ -1,6 +1,7 @@
 import axios from "axios";
 
 const state = {
+  profile: null,
   matches: [],
   users: [],
   disabilities: [
@@ -18,6 +19,9 @@ const state = {
 };
 
 const getters = {
+  profile(state) {
+    return state.profile;
+  },
   matches(state) {
     return state.matches;
   },
@@ -33,6 +37,9 @@ const getters = {
 };
 
 const mutations = {
+  setProfile(state, payload) {
+    state.profile = payload;
+  },
   setMatches(state, payload) {
     state.matches = payload;
     // state.tokenExpiration = payload.tokenExpiration;
@@ -48,6 +55,32 @@ const mutations = {
 };
 
 const actions = {
+  async createProfile(context, payload) {
+    console.log(payload);
+    let profile = {
+      dob: payload.dob,
+      gender: payload.gender,
+      country: payload.country,
+      disability: payload.disability,
+      interestedIn: payload.interestedIn,
+      genderPreference: payload.genderPreference,
+      minAge: payload.minAge,
+      maxAge: payload.maxAge,
+      countryPreference: payload.countryPreference,
+      disabilityPreference: payload.disabilityPreference,
+      aboutMe: payload.aboutMe,
+      interests: payload.interests,
+      photoURL: payload.photoURL,
+    };
+    await axios.patch(
+      "http://localhost:3000/special-connections/users/profile/" +
+        context.rootState.auth.userId,
+      profile
+    );
+    context.commit("setProfile", {
+      profile,
+    });
+  },
   async getMatches(context) {
     const response = await axios.get(
       "http://localhost:3000/special-connections/users/" +

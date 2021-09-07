@@ -10,19 +10,6 @@
     >
     </base-modal>
 
-    <ul class=" mt-3 nav nav-tabs justify-content-center">
-      <li class="nav-item" v-if="checkProfileCompleted !== undefined">
-        <a class="nav-link link-dark" @click="goToCreateProfile"
-          >Go to Profile</a
-        >
-      </li>
-      <li class="nav-item" v-if="checkProfileCompleted !== undefined">
-        <a class="nav-link link-dark" @click="goToCreateProfile"
-          >Browse All users</a
-        >
-      </li>
-    </ul>
-
     <div class="hero">
       <div class="" v-if="checkProfileCompleted === undefined">
         <h1 class="display-1 m-3">Create Your Profile Today!</h1>
@@ -33,9 +20,9 @@
       <h1 v-else-if="hasMatches" class="display-3 m-5">Your Matches</h1>
       <div v-else>
         <h1 class="m-5">
-          Sorry, you do not have not matches currently. Browse all users!
+          Sorry, you do not have not matches currently.
         </h1>
-        <button class="btn btn-lg btn-dark">Browse All</button>
+        <button class="btn btn-lg btn-dark">Browse All Users</button>
       </div>
     </div>
     <div class="row m-4">
