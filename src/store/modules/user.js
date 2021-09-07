@@ -13,6 +13,7 @@ const state = {
     "Physical Disability",
     "Positive about Disability",
   ],
+  review: null,
   // tokenExpiration: null,
 };
 
@@ -26,6 +27,9 @@ const getters = {
   users(state) {
     return state.users;
   },
+  review(state) {
+    return state.review;
+  },
 };
 
 const mutations = {
@@ -36,6 +40,10 @@ const mutations = {
 
   setUsers(state, payload) {
     state.users = payload;
+  },
+
+  setReview(state, payload) {
+    state.review = payload;
   },
 };
 
@@ -84,6 +92,19 @@ const actions = {
     context.commit("setUsers", {
       users,
       // tokenExpiration: response.expiresIn,
+    });
+  },
+  async postReview(context, payload) {
+    const response = await axios.patch(
+      "http://localhost:3000/special-connections/users/reviews/" +
+        context.rootState.auth.userId,
+      {
+        review: payload.review,
+      }
+    );
+    console.log(response.data);
+    context.commit("setReview", {
+      review: payload.review,
     });
   },
   logOut(context) {

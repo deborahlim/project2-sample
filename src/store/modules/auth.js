@@ -3,13 +3,16 @@ import axios from "axios";
 const state = {
   userId: null,
   token: null,
-
+  username: null,
   // tokenExpiration: null,
 };
 
 const getters = {
   userId(state) {
     return state.userId;
+  },
+  username(state) {
+    return state.username;
   },
   token(state) {
     return state.token;
@@ -25,6 +28,7 @@ const mutations = {
     state.token = payload.token;
     state.userId = payload.userId;
     state.profile = payload.profile;
+    state.username = payload.username;
     // state.tokenExpiration = payload.tokenExpiration;
   },
 };
@@ -50,6 +54,7 @@ const actions = {
     context.commit("setUser", {
       token: response.data.token,
       userId: response.data.user._id,
+      username: response.data.user.username,
       profile: response.data.user.profile,
       // tokenExpiration: response.expiresIn,
     });
@@ -74,6 +79,7 @@ const actions = {
     context.commit("setUser", {
       token: response.data.token,
       userId: response.data.data.user.insertedId,
+      username: payload.username,
       // tokenExpiration: response.expiresIn,
     });
   },

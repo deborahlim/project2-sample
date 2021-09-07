@@ -10,7 +10,7 @@
     >
     </base-modal>
 
-    <h1 class=" my-3 display-4">Discover</h1>
+    <h1 class=" m-5 display-4">Explore and Discover</h1>
     <div class="row my-3">
       <p class=" col-6 text-start fw-bold fs-4">Search By</p>
       <p class=" col-6 text-end fw-bold fs-4">

@@ -7,6 +7,7 @@ import Profile from "./components/user-pages/Profile.vue";
 import User from "./components/user-pages/User.vue";
 import Login from "./components/auth/Login.vue";
 import Browse from "./components/user-pages/Browse.vue";
+import WriteReview from "./components/user-pages/WriteReview.vue";
 import store from "./store/index.js";
 
 export const routes = [
@@ -33,5 +34,10 @@ export const routes = [
         next({ name: "home" });
       } else next();
     },
+  },
+  {
+    path: "/user/review/:id",
+    component: WriteReview,
+    name: "writeReview",
   },
 ];

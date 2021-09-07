@@ -1,15 +1,14 @@
 <template>
-    <div class="about">
-        About Us
-    </div>
+  <div class="about">
+    <h1>We</h1>
+    About Us
+  </div>
 </template>
 
 <script>
 export default {
-  name: 'AboutUs',
-  props: {
-  },
-  methods: {
-  }
-}
+  name: "AboutUs",
+  props: {},
+  methods: {},
+};
 </script>

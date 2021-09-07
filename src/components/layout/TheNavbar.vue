@@ -7,33 +7,13 @@
           active-class="active"
           exact
           :to="{ name: 'home' }"
-          v-if="!loggedIn"
           >Home</router-link
-        >
-
-        <router-link
-          class="nav-link link-light"
-          active-class="active"
-          exact
-          :to="'/user/' + getId"
-          v-if="loggedIn"
-          >Matches</router-link
-        >
-
-        <router-link
-          class="nav-link link-light"
-          active-class="active"
-          exact
-          :to="{ name: 'browse' }"
-          v-if="loggedIn"
-          >Browse All Users</router-link
         >
 
         <router-link
           class="nav-link link-light"
           :to="{ name: 'joinUs' }"
           active-class="active"
-          v-if="!loggedIn"
         >
           Join Us</router-link
         >
@@ -42,7 +22,6 @@
           class="nav-link link-light"
           active-class="active"
           :to="{ name: 'aboutUs' }"
-          v-if="!loggedIn"
         >
           About Us</router-link
         >
@@ -51,18 +30,8 @@
           class="nav-link link-light"
           active-class="active"
           :to="{ name: 'reviews' }"
-          v-if="!loggedIn"
         >
           Our Reviews</router-link
-        >
-
-        <router-link
-          class="nav-link link-light"
-          active-class="active"
-          :to="{ name: 'reviews' }"
-          v-if="loggedIn"
-        >
-          Review Us</router-link
         >
 
         <router-link
@@ -76,17 +45,9 @@
       <router-link
         class="btn btn-sm btn-outline-light ms-auto ms-auto"
         :to="{ name: 'login' }"
-        v-if="!loggedIn"
       >
         Log In</router-link
       >
-      <button
-        class="btn btn-sm btn-outline-light ms-auto"
-        v-if="loggedIn"
-        @click="logOut"
-      >
-        Log Out
-      </button>
       <!-- "btn btn-sm btn-outline-light" -->
     </div>
   </div>
@@ -95,20 +56,6 @@
 <script>
 export default {
   name: "TheNavbar",
-  computed: {
-    loggedIn() {
-      return this.$store.getters.isLoggedIn;
-    },
-    getId() {
-      return this.$store.state.auth.userId;
-    },
-  },
-  methods: {
-    logOut() {
-      this.$store.dispatch("logOut");
-      this.$router.replace("/");
-    },
-  },
 };
 </script>
 

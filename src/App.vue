@@ -9,23 +9,28 @@
         @go-to-profiles-click="setPage('Profiles')"
       ></component>
     </keep-alive> -->
-    <TheNavbar />
+    <TheNavbar v-if="!loggedIn" />
+    <TheUserNav v-if="loggedIn" />
     <router-view></router-view>
   </div>
 </template>
 
 <script>
 import TheNavbar from "./components/layout/TheNavbar.vue";
+import TheUserNav from "./components/layout/TheUserNav.vue";
 export default {
   name: "App",
   components: {
     TheNavbar,
+    TheUserNav,
   },
   data() {
-    return {
-      page: "Home",
-      isLoggedIn: false,
-    };
+    return {};
+  },
+  computed: {
+    loggedIn() {
+      return this.$store.getters.isLoggedIn;
+    },
   },
   props: [name],
   methods: {
