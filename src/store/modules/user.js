@@ -127,6 +127,14 @@ const actions = {
       // tokenExpiration: response.expiresIn,
     });
   },
+  async deleteProfile(context) {
+    await axios.delete(
+      "http://localhost:3000/special-connections/users/profile/" +
+        context.rootState.auth.userId
+    );
+
+    context.commit("setProfile", null);
+  },
   async postReview(context, payload) {
     const response = await axios.patch(
       "http://localhost:3000/special-connections/users/reviews/" +
@@ -144,6 +152,7 @@ const actions = {
     context.commit("setMatches", {
       matches: [],
       users: [],
+      profile: null,
     });
   },
 };

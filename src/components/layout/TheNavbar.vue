@@ -29,14 +29,6 @@
         <router-link
           class="nav-link link-light"
           active-class="active"
-          :to="{ name: 'reviews' }"
-        >
-          Our Reviews</router-link
-        >
-
-        <router-link
-          class="nav-link link-light"
-          active-class="active"
           :to="{ name: 'contact' }"
         >
           Contact Us</router-link

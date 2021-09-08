@@ -129,7 +129,7 @@ export default {
           this.isLoading = false;
           console.log(this.$store);
           let id = this.$store.state.auth.userId;
-          this.$router.replace("/create-profile/" + id);
+          this.$router.push("/user/profile-form/" + id);
         } catch (err) {
           this.isLoading = false;
           this.error = err.message || "Please fill up all the inputs";

@@ -21,7 +21,8 @@
           class="nav-link link-light"
           active-class="active"
           exact
-          :to="{ name: 'profile' }"
+          :to="'/user/profile/' + getId"
+          v-if="hasProfile"
         >
           My Profile
         </router-link>
@@ -47,6 +48,9 @@ export default {
   computed: {
     getId() {
       return this.$store.state.auth.userId;
+    },
+    hasProfile() {
+      return this.$store.state.auth.profile || this.$store.getters.profile;
     },
   },
   methods: {

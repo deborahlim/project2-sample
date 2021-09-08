@@ -11,7 +11,7 @@
     </base-modal>
 
     <div class="hero">
-      <div class="" v-if="checkProfileCompleted === undefined">
+      <div class="" v-if="!!checkProfileCompleted === false">
         <h1 class="display-1 m-3">Create Your Profile Today!</h1>
         <button @click="goToCreateProfile" class=" btn btn-lg btn-danger">
           Create Profile
@@ -95,7 +95,7 @@ export default {
       return this.$store.getters.matches;
     },
     checkProfileCompleted() {
-      return this.$store.state.auth.profile;
+      return this.$store.state.auth.profile || this.$store.getters.profile;
     },
     hasMatches() {
       return this.$store.getters.hasMatches;
@@ -103,11 +103,11 @@ export default {
   },
   methods: {
     goToCreateProfile() {
-      this.$router.push({
-        name: "createProfile",
-        params: { id: this.$store.state.auth.userId },
-      });
+      this.$router.replace(
+        "/user/profile-form/" + this.$store.state.auth.userId
+      );
     },
+
     async loadMatches() {
       if (this.checkProfileCompleted) {
         try {

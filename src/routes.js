@@ -40,4 +40,8 @@ export const routes = [
     component: WriteReview,
     name: "writeReview",
   },
+  {
+    path: "*",
+    redirect: "/",
+  },
 ];
