@@ -5,7 +5,8 @@
     <base-confirm
       :show="deleteClick"
       content="Confirm Delete?"
-      @close="handleError"
+      @confirm="removeProfile"
+      @cancel="deleteClick = false"
     >
     </base-confirm>
     <div class="card m-5 profile">
@@ -25,7 +26,7 @@
         <button class="btn btn-primary m-3" @click.prevent="goToProfileForm">
           Edit
         </button>
-        <button class="btn btn-danger" @click.prevent="removeProfile">
+        <button class="btn btn-danger" @click.prevent="deleteClick = true">
           Delete
         </button>
       </div>
@@ -64,8 +65,6 @@ export default {
     },
     async removeProfile() {
       this.loading = true;
-      this.deleteClick = true;
-      this.error = "Confirm Delete?";
       try {
         await this.$store.dispatch("deleteProfile");
       } catch (err) {

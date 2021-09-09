@@ -173,13 +173,7 @@ export default {
     async submitBasic() {
       this.isLoading = true;
       this.checkInputsValid();
-      if (
-        // this.username.length > 6 &&
-        // this.email.includes("@") &&
-        // this.password.length > 6 &&
-        // this.password === this.confirmPassword
-        this.isFormValid
-      ) {
+      if (this.isFormValid) {
         try {
           await this.$store.dispatch("signup", {
             username: this.username,

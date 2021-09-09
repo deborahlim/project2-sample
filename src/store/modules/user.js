@@ -162,7 +162,7 @@ const actions = {
     });
   },
   async deleteProfile(context) {
-    await axios.delete(
+    await axios.patch(
       "http://localhost:3000/special-connections/users/profile/" +
         context.rootState.auth.userId
     );
