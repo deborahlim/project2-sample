@@ -22,7 +22,6 @@
             class="form-control"
             :class="{
               'border border-3 border-danger': usernameValidity === 'invalid',
-              'form-control:focus': usernameValidity === 'valid',
             }"
             name="username"
             type="text"
@@ -39,7 +38,6 @@
             class="form-control"
             :class="{
               'border border-3 border-danger': emailValidity === 'invalid',
-              'form-control:focus': emailValidity === 'valid',
             }"
             name="email"
             v-model.trim="email"
@@ -54,20 +52,24 @@
           <input
             class="form-control"
             :class="{
-              'border border-3 border-danger': passwordValidity === 'invalid',
-              'form-control:focus': passwordValidity === 'valid',
+              'border border-3 border-danger':
+                passwordValidity === 'invalid' ||
+                confirmPasswordValidity === 'invalid',
             }"
             name="password"
             type="password"
             v-model="password"
             @blur="validatePassword"
           />
-          <p class="text-danger" v-if="passwordValidity === 'invalid'">
+          <span class="text-danger" v-if="passwordValidity === 'invalid'">
             Password is not valid!
-          </p>
-          <p class="text-danger" v-if="confirmPasswordValidity === 'invalid'">
+          </span>
+          <span
+            class="text-danger"
+            v-if="confirmPasswordValidity === 'invalid'"
+          >
             Passwords do not match!
-          </p>
+          </span>
         </div>
         <div class="mb-4">
           <label for="" class="form-label">Confirm Password</label>
@@ -75,20 +77,23 @@
             class="form-control"
             :class="{
               'border border-3 border-danger':
-                confirmPasswordValidity === 'invalid',
-              'form-control:focus': confirmPasswordValidity === 'valid',
+                confirmPasswordValidity === 'invalid' ||
+                passwordValidity === 'invalid',
             }"
             name="confirmPassword"
             type="password"
             v-model="confirmPassword"
             @blur="validateConfirmPassword"
           />
-          <p class="text-danger" v-if="passwordValidity === 'invalid'">
+          <span class="text-danger" v-if="passwordValidity === 'invalid'">
             Password is not valid!
-          </p>
-          <p class="text-danger" v-if="confirmPasswordValidity === 'invalid'">
+          </span>
+          <span
+            class="text-danger"
+            v-if="confirmPasswordValidity === 'invalid'"
+          >
             Passwords do not match!
-          </p>
+          </span>
         </div>
         <button class="btn btn-outline-danger">
           Get Started!
@@ -123,6 +128,7 @@ export default {
       id: this.$route.params.id,
     };
   },
+  watch: {},
   computed: {},
   methods: {
     checkInputsValid() {
