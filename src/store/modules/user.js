@@ -2,6 +2,7 @@ import axios from "axios";
 
 const state = {
   profile: null,
+  formattedProfile: null,
   matches: [],
   users: [],
   disabilities: [
@@ -22,6 +23,9 @@ const getters = {
   profile(state) {
     return state.profile;
   },
+  formattedProfile(state) {
+    return state.formattedProfile;
+  },
   matches(state) {
     return state.matches;
   },
@@ -41,16 +45,20 @@ const mutations = {
     state.profile = payload;
   },
   setMatches(state, payload) {
-    state.matches = payload;
+    state.matches = payload.matches;
     // state.tokenExpiration = payload.tokenExpiration;
   },
 
   setUsers(state, payload) {
-    state.users = payload;
+    console.log(payload);
+    state.users = payload.users;
   },
 
   setReview(state, payload) {
     state.review = payload;
+  },
+  setFormattedProfile(state, payload) {
+    state.formattedProfile = payload;
   },
 };
 
@@ -81,6 +89,33 @@ const actions = {
       profile,
     });
   },
+  formatProfile(context) {
+    let formattedProfile = JSON.parse(
+      JSON.stringify(context.rootState.auth.profile)
+    );
+    if (formattedProfile.interestedIn.length > 0) {
+      formattedProfile.interestedIn = formattedProfile.interestedIn.join(", ");
+    } else {
+      formattedProfile.interestedIn = "-";
+    }
+
+    if (formattedProfile.genderPreference.length > 0) {
+      formattedProfile.genderPreference = formattedProfile.genderPreference.join(
+        "and"
+      );
+    } else {
+      formattedProfile.genderPreference = "-";
+    }
+
+    formattedProfile.ageRange = `${formattedProfile.minAge} - ${formattedProfile.maxAge}`;
+    delete formattedProfile.minAge;
+    delete formattedProfile.maxAge;
+    if (formattedProfile.interests.length > 0) {
+      formattedProfile.interests = formattedProfile.interests.join(", ");
+    } else formattedProfile.interests = "";
+
+    context.commit("setFormattedProfile", formattedProfile);
+  },
   async getMatches(context) {
     const response = await axios.get(
       "http://localhost:3000/special-connections/users/" +
@@ -103,7 +138,7 @@ const actions = {
       matches.push(m);
     }
     context.commit("setMatches", {
-      matches: matches,
+      matches,
       // tokenExpiration: response.expiresIn,
     });
   },
@@ -114,7 +149,6 @@ const actions = {
 
     let users = [];
     for (const user of response.data) {
-      console.log(user.profile.interestedIn);
       const u = {
         id: user._id,
         username: user.username,

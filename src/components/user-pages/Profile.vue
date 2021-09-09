@@ -2,31 +2,30 @@
   <div class="">
     <Loading :active.sync="isLoading" :can-cancel="true" :is-full-page="true">
     </Loading>
-    <base-modal
-      :show="!!error"
-      title="Something Went Wrong!"
-      :content="error"
+    <base-confirm
+      :show="deleteClick"
+      content="Confirm Delete?"
       @close="handleError"
     >
-    </base-modal>
+    </base-confirm>
     <div class="card m-5 profile">
       <div class="card-header">
         <h1 class="display-4 my-3">{{ getUsername }}'s Profile</h1>
       </div>
-      <div class="card-body">
+      <div class="card-body mx-5">
         <h5
-          v-for="(value, key) in getProfile"
+          v-for="(value, key) in this.$store.state.user.formattedProfile"
           :key="key"
-          class="card-title row text-start ms-5"
+          class="card-title row text-start ms-5 "
         >
-          <span class="col-5">{{ key }}:</span>
-          <span class=" col-7">{{ value }}</span>
+          <span class="text-start col-6">{{ key }}:</span>
+          <span class="text-start col-6">{{ value }}</span>
         </h5>
 
-        <button class="btn btn-primary" @click.prevent="goToProfileForm">
+        <button class="btn btn-primary m-3" @click.prevent="goToProfileForm">
           Edit
         </button>
-        <button class="btn btn-primary" @click.prevent="removeProfile">
+        <button class="btn btn-danger" @click.prevent="removeProfile">
           Delete
         </button>
       </div>
@@ -41,7 +40,11 @@ export default {
     return {
       error: null,
       isLoading: false,
+      deleteClick: false,
     };
+  },
+  created() {
+    this.displayProfile();
   },
   computed: {
     getUsername() {
@@ -50,16 +53,19 @@ export default {
     getProfile() {
       return this.$store.state.auth.profile || this.$store.getters.profile;
     },
-    // getPreferences() {},
+    getBasicProfile() {
+      return this.displayProfile.dob;
+    },
   },
+
   methods: {
     goToProfileForm() {
-      this.$router.replace(
-        "/user/profile-form/" + this.$store.state.auth.userId
-      );
+      this.$router.push("/user/profile-form/" + this.$store.state.auth.userId);
     },
     async removeProfile() {
       this.loading = true;
+      this.deleteClick = true;
+      this.error = "Confirm Delete?";
       try {
         await this.$store.dispatch("deleteProfile");
       } catch (err) {
@@ -67,6 +73,9 @@ export default {
         console.log(err);
       }
       this.loading = false;
+    },
+    displayProfile() {
+      this.$store.dispatch("formatProfile");
     },
     handleError() {
       this.error = null;

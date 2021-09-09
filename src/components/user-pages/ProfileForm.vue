@@ -1,7 +1,7 @@
 <template>
   <div class="">
     <div
-      v-if="form === 1 && prevRoute.path.includes('join-us')"
+      v-if="form === 1 && prevRoutePath.includes('join-us')"
       class="alert alert-success"
       role="alert"
     >
@@ -9,7 +9,7 @@
     </div>
 
     <div class="sign-up">
-      <h1 v-if="!!hasProfile" class="display-7 m-3">
+      <h1 v-if="hasProfile" class="display-7 m-3">
         Update your profile
       </h1>
 
@@ -124,7 +124,7 @@
             </div>
           </div>
 
-          <div class="mb-4" v-show="getProfile.interestedIn.includes('dating')">
+          <div class="mb-4">
             <p class="fs-5">What is your gender preference?</p>
             <div class="">
               <div class="form-check-inline">
@@ -278,7 +278,6 @@ export default {
   data() {
     return {
       form: 1,
-      prevRoute: null,
       inputs: {
         dob: null,
         gender: null,
@@ -314,10 +313,13 @@ export default {
       return this.$store.state.auth.profile || this.$store.getters.profile;
     },
     getProfile() {
-      let profile = this.$store.state.auth.profile;
-      return profile
-        ? this.$store.state.auth.profile || this.$store.getters.profile
-        : this.inputs;
+      let profile =
+        this.$store.state.auth.profile || this.$store.getters.profile;
+      return profile ? profile : this.inputs;
+    },
+
+    prevRoutePath() {
+      return this.prevRoute ? this.prevRoute.path : "/";
     },
   },
   // https://stackoverflow.com/questions/53788975/vue-router-how-to-get-previous-page-url
@@ -341,7 +343,7 @@ export default {
     },
     submitFull() {
       try {
-        this.$store.dispatch("createProfile", this.inputs);
+        this.$store.dispatch("createProfile", this.getProfile);
         this.$router.replace("/user/" + this.$store.state.auth.userId);
       } catch (e) {
         console.log(e.message);

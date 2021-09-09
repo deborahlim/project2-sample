@@ -22,7 +22,9 @@
         <h1 class="m-5">
           Sorry, you do not have not matches currently.
         </h1>
-        <button class="btn btn-lg btn-dark">Browse All Users</button>
+        <button class="btn btn-lg btn-dark" @click="goToAllUsers">
+          Browse All Users
+        </button>
       </div>
     </div>
     <div class="row m-4">
@@ -107,7 +109,9 @@ export default {
         "/user/profile-form/" + this.$store.state.auth.userId
       );
     },
-
+    goToAllUsers() {
+      this.$router.replace("/browse");
+    },
     async loadMatches() {
       if (this.checkProfileCompleted) {
         try {

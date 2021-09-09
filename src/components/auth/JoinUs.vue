@@ -30,35 +30,65 @@
             @blur="validateUsername"
           />
           <p class="text-danger" v-if="usernameValidity === 'invalid'">
-            Username needs to be more than 1 character long!
+            Username needs to be more than 6 characters long!
           </p>
         </div>
         <div class="mb-4">
           <label for="" class="form-label">Email Address</label>
           <input
             class="form-control"
-            type="email"
+            :class="{
+              'border border-3 border-danger': emailValidity === 'invalid',
+              'form-control:focus': emailValidity === 'valid',
+            }"
             name="email"
             v-model.trim="email"
+            @blur="validateEmailAddress"
           />
+          <p class="text-danger" v-if="emailValidity === 'invalid'">
+            Email is not valid!
+          </p>
         </div>
         <div class="mb-4">
           <label for="" class="form-label">Password</label>
           <input
             class="form-control"
-            type="password"
+            :class="{
+              'border border-3 border-danger': passwordValidity === 'invalid',
+              'form-control:focus': passwordValidity === 'valid',
+            }"
             name="password"
+            type="password"
             v-model="password"
+            @blur="validatePassword"
           />
+          <p class="text-danger" v-if="passwordValidity === 'invalid'">
+            Password is not valid!
+          </p>
+          <p class="text-danger" v-if="confirmPasswordValidity === 'invalid'">
+            Passwords do not match!
+          </p>
         </div>
         <div class="mb-4">
           <label for="" class="form-label">Confirm Password</label>
           <input
             class="form-control"
-            type="password"
+            :class="{
+              'border border-3 border-danger':
+                confirmPasswordValidity === 'invalid',
+              'form-control:focus': confirmPasswordValidity === 'valid',
+            }"
             name="confirmPassword"
+            type="password"
             v-model="confirmPassword"
+            @blur="validateConfirmPassword"
           />
+          <p class="text-danger" v-if="passwordValidity === 'invalid'">
+            Password is not valid!
+          </p>
+          <p class="text-danger" v-if="confirmPasswordValidity === 'invalid'">
+            Passwords do not match!
+          </p>
         </div>
         <button class="btn btn-outline-danger">
           Get Started!
@@ -83,6 +113,9 @@ export default {
       password: "",
       confirmPassword: "",
       usernameValidity: "pending",
+      emailValidity: "pending",
+      passwordValidity: "pending",
+      confirmPasswordValidity: "pending",
       isFormValid: false,
       isLoading: false,
       error: null,
@@ -94,29 +127,52 @@ export default {
   methods: {
     checkInputsValid() {
       if (
-        this.username.length > 6 &&
-        this.email.includes("@") &&
-        this.password.length > 6 &&
-        this.password === this.confirmPassword
+        this.usernameValidity === "valid" &&
+        this.emailValidity === "valid" &&
+        this.passwordValidity === "valid" &&
+        this.confirmPasswordValidity === "valid"
       ) {
         this.isFormValid = true;
       }
       this.isFormValid = false;
     },
     validateUsername() {
-      if (this.username === "") {
-        this.usernameValidity = "invalid";
-      } else {
+      if (this.username.length > 6) {
         this.usernameValidity = "valid";
+      } else {
+        this.usernameValidity = "invalid";
+      }
+    },
+    validateEmailAddress() {
+      if (this.email.includes("@")) {
+        this.emailValidity = "valid";
+      } else {
+        this.emailValidity = "invalid";
+      }
+    },
+    validatePassword() {
+      if (this.password.length > 6) {
+        this.passwordValidity = "valid";
+      } else {
+        this.passwordValidity = "invalid";
+      }
+    },
+    validateConfirmPassword() {
+      if (this.password === this.confirmPassword) {
+        this.confirmPasswordValidity = "valid";
+      } else {
+        this.confirmPasswordValidity = "invalid";
       }
     },
     async submitBasic() {
       this.isLoading = true;
+      this.checkInputsValid();
       if (
-        this.username.length > 6 &&
-        this.email.includes("@") &&
-        this.password.length > 6 &&
-        this.password === this.confirmPassword
+        // this.username.length > 6 &&
+        // this.email.includes("@") &&
+        // this.password.length > 6 &&
+        // this.password === this.confirmPassword
+        this.isFormValid
       ) {
         try {
           await this.$store.dispatch("signup", {

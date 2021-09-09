@@ -146,7 +146,7 @@ export default {
     },
     filteredUsers() {
       let filtered = [];
-      for (let p of this.$store.getters.users.users) {
+      for (let p of this.$store.getters.users) {
         if (p.username.includes(this.usernameSearch)) {
           filtered.push(p);
         }

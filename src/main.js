@@ -8,6 +8,7 @@ import VueRouter from "vue-router";
 import { routes } from "./routes";
 import store from "./store";
 import BaseModal from "./../src/components/base/BaseModal";
+import BaseConfirm from "./../src/components/base/BaseConfirm";
 import Loading from "vue-loading-overlay";
 import "vue-loading-overlay/dist/vue-loading.css";
 // import axios from "axios";
@@ -21,11 +22,13 @@ const router = new VueRouter({ routes, mode: "history" });
 Vue.component("font-awesome-icon", FontAwesomeIcon);
 Vue.config.productionTip = false;
 Vue.component("base-modal", BaseModal);
+Vue.component("base-confirm", BaseConfirm);
 Vue.component("Loading", Loading);
 new Vue({
   router,
   store,
   BaseModal,
+  BaseConfirm,
   Loading,
   render: (h) => h(App),
 }).$mount("#app");
