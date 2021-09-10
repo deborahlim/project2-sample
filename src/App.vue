@@ -1,14 +1,5 @@
 <template>
   <div id="app">
-    <!-- <keep-alive>
-      <component
-        :is="page"
-        @join-button-click="setPage('JoinUs')"
-        @create-profile-btn-click="setPage('CreateProfile')"
-        @back-home-click="setPage('Home')"
-        @go-to-profiles-click="setPage('Profiles')"
-      ></component>
-    </keep-alive> -->
     <TheNavbar v-if="!loggedIn" />
     <TheUserNav v-if="loggedIn" />
     <router-view></router-view>
@@ -41,7 +32,7 @@ export default {
 
 <style>
 /* #ce4343 */
-
+/* #2c3e50 */
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -51,10 +42,10 @@ export default {
 
   position: relative;
   height: 100vh;
-  /* width: 100vw; */
   background-color: #d6cbcb;
-  /* background-position: top;
-  background-size: cover; */
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
 }
 
 .sign-up {

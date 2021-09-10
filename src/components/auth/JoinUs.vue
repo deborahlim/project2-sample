@@ -95,7 +95,7 @@
             Passwords do not match!
           </span>
         </div>
-        <button class="btn btn-outline-danger">
+        <button class="btn btn-outline-danger mb-5">
           Get Started!
         </button>
       </form>
