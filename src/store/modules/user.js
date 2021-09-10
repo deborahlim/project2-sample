@@ -42,7 +42,7 @@ const getters = {
 
 const mutations = {
   setProfile(state, payload) {
-    state.profile = payload;
+    state.profile = payload.profile;
   },
   setMatches(state, payload) {
     state.matches = payload.matches;
@@ -90,9 +90,11 @@ const actions = {
     });
   },
   formatProfile(context) {
+    console.log(context);
     let formattedProfile = JSON.parse(
-      JSON.stringify(context.rootState.auth.profile)
+      JSON.stringify(context.rootState.auth.profile || context.getters.profile)
     );
+    console.log(formattedProfile.interestedIn);
     if (formattedProfile.interestedIn.length > 0) {
       formattedProfile.interestedIn = formattedProfile.interestedIn.join(", ");
     } else {

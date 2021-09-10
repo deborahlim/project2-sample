@@ -123,9 +123,9 @@
               </div>
             </div>
           </div>
-
-          <div class="mb-4">
-            <p class="fs-5">What is your gender preference?</p>
+          <!-- -->
+          <div class="mb-4 ">
+            <p class="">What is your gender preference?</p>
             <div class="">
               <div class="form-check-inline">
                 <input
@@ -135,7 +135,7 @@
                   id="p-male"
                   v-model="getProfile.genderPreference"
                 />
-                <label for="p-male" class="form-label">Male</label>
+                <label for="p-male" class="form-label fw-normal">Male</label>
               </div>
               <div class="form-check-inline">
                 <input
@@ -145,7 +145,9 @@
                   v-model="getProfile.genderPreference"
                   id="p-female"
                 />
-                <label for="p-female" class="form-label">Female</label>
+                <label for="p-female" class="form-label fw-normal"
+                  >Female</label
+                >
               </div>
             </div>
           </div>
