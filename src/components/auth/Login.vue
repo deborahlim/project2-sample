@@ -67,8 +67,14 @@ export default {
           params: { id: this.$store.state.auth.userId },
         });
       } catch (err) {
-        console.log(err);
-        this.error = err.message || "Check your Login Details!";
+        if (err.message.includes("401")) {
+          this.error =
+            "Incorrect Email Address or Password. Check your Login Details.";
+        } else if (err.message.includes("400")) {
+          this.error = "Password and Email cannot be empty.";
+        } else {
+          this.error = err.message || "Check your Login Details";
+        }
         this.isLoading = false;
       }
     },

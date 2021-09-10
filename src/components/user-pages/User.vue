@@ -118,7 +118,7 @@ export default {
           await this.$store.dispatch("getMatches");
         } catch (err) {
           this.error = err.message;
-          console.log(err);
+          console.log(err.message);
         }
       } else {
         this.error = "Create a profile to see your matches!";

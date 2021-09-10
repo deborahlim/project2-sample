@@ -121,7 +121,6 @@ export default {
       emailValidity: "pending",
       passwordValidity: "pending",
       confirmPasswordValidity: "pending",
-      isFormValid: false,
       isLoading: false,
       error: null,
       fullPage: true,
@@ -131,19 +130,8 @@ export default {
   watch: {},
   computed: {},
   methods: {
-    checkInputsValid() {
-      if (
-        this.usernameValidity === "valid" &&
-        this.emailValidity === "valid" &&
-        this.passwordValidity === "valid" &&
-        this.confirmPasswordValidity === "valid"
-      ) {
-        this.isFormValid = true;
-      }
-      this.isFormValid = false;
-    },
     validateUsername() {
-      if (this.username.length > 6) {
+      if (this.username.length > 2) {
         this.usernameValidity = "valid";
       } else {
         this.usernameValidity = "invalid";
@@ -157,7 +145,7 @@ export default {
       }
     },
     validatePassword() {
-      if (this.password.length > 6) {
+      if (this.password.length > 4) {
         this.passwordValidity = "valid";
       } else {
         this.passwordValidity = "invalid";
@@ -172,8 +160,12 @@ export default {
     },
     async submitBasic() {
       this.isLoading = true;
-      this.checkInputsValid();
-      if (this.isFormValid) {
+      if (
+        this.usernameValidity === "valid" &&
+        this.emailValidity === "valid" &&
+        this.passwordValidity === "valid" &&
+        this.confirmPasswordValidity === "valid"
+      ) {
         try {
           await this.$store.dispatch("signup", {
             username: this.username,
@@ -187,8 +179,15 @@ export default {
           let id = this.$store.state.auth.userId;
           this.$router.push("/user/profile-form/" + id);
         } catch (err) {
+          if (err.message.includes("401")) {
+            this.error = "The email and username provided already exists";
+          } else if (err.message.includes("406")) {
+            this.error = "The email provided already exists";
+          } else if (err.message.includes("409")) {
+            this.error = "The username provided is already taken";
+          }
+
           this.isLoading = false;
-          this.error = err.message || "Please fill up all the inputs";
         }
       } else {
         this.isLoading = false;
