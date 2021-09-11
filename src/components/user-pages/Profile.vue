@@ -19,7 +19,7 @@
           :key="key"
           class="card-title row text-start ms-5 "
         >
-          <span class="text-start col-6">{{ key }}:</span>
+          <span class="text-start col-6">{{ keysToLabels[key] }}:</span>
           <span class="text-start col-6">{{ value }}</span>
         </h5>
 
@@ -42,6 +42,21 @@ export default {
       error: null,
       isLoading: false,
       deleteClick: false,
+      keysToLabels: {
+        dob: "Date of Birth",
+        age: "Age",
+        gender: "Gender",
+        country: "Country",
+        disability: "Disability",
+        interestedIn: "Interested In",
+        genderPreference: "Gender Preference",
+        countryPreference: "Country Preference",
+        disabilityPreference: "Disability Preference",
+        ageRange: "Age Preference",
+        aboutMe: "About Me",
+        interests: "Interests",
+        photoURL: "Profile Picture",
+      },
     };
   },
   created() {

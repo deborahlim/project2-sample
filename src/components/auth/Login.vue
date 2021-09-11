@@ -56,25 +56,27 @@ export default {
     async submitLogin() {
       this.isLoading = true;
       try {
-        await this.$store.dispatch("login", {
+        let r = await this.$store.dispatch("login", {
           email: this.email,
           password: this.password,
         });
-
+        console.log("r=", r);
         this.isLoading = false;
         this.$router.replace({
           name: "user",
           params: { id: this.$store.state.auth.userId },
         });
       } catch (err) {
-        if (err.message.includes("401")) {
-          this.error =
-            "Incorrect Email Address or Password. Check your Login Details.";
-        } else if (err.message.includes("400")) {
-          this.error = "Password and Email cannot be empty.";
-        } else {
-          this.error = err.message || "Check your Login Details";
-        }
+        console.dir(err);
+        // if (err.message.includes("401")) {
+        //   this.error =
+        //     "Incorrect Email Address or Password. Check your Login Details.";
+        // } else if (err.message.includes("400")) {
+        //   this.error = "Password and Email cannot be empty.";
+        // } else {
+        //   this.error = err.message || "Check your Login Details";
+        // }
+        this.error = err.response.data.error.message;
         this.isLoading = false;
       }
     },

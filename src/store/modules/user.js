@@ -184,6 +184,11 @@ const actions = {
       review: payload.review,
     });
   },
+  // async loadReviews(context, payload) {
+  //   const response = await axios.get(
+  //     "http://localhost:3000/special-connections/users/reviews/"
+  //   );
+  // },
   logOut(context) {
     context.commit("setMatches", {
       matches: [],

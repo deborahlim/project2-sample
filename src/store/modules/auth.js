@@ -35,14 +35,18 @@ const mutations = {
 
 const actions = {
   async login(context, payload) {
-    let response = await axios.post(
-      "http://localhost:3000/special-connections/users/login",
-      {
+    let error;
+    let response = await axios
+      .post("http://localhost:3000/special-connections/users/login", {
         email: payload.email,
         password: payload.password,
         // returnSercureToken: true,
-      }
-    );
+      })
+      .catch((err) => {
+        console.dir(err);
+        error = err;
+        throw error;
+      });
 
     // if (response.status !== 200) {
     //   console.log(response.status);
@@ -58,6 +62,8 @@ const actions = {
       profile: response.data.user.profile,
       // tokenExpiration: response.expiresIn,
     });
+
+    return error;
     // }
   },
 
