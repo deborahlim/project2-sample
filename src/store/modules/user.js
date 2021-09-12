@@ -16,6 +16,7 @@ const state = {
     "Positive about Disability",
   ],
   review: null,
+  reviews: null,
   // tokenExpiration: null,
 };
 
@@ -38,6 +39,9 @@ const getters = {
   review(state) {
     return state.review;
   },
+  reviews(state) {
+    return state.reviews;
+  },
 };
 
 const mutations = {
@@ -50,12 +54,14 @@ const mutations = {
   },
 
   setUsers(state, payload) {
-    console.log(payload);
     state.users = payload.users;
   },
 
   setReview(state, payload) {
     state.review = payload;
+  },
+  setReviews(state, payload) {
+    state.reviews = payload;
   },
   setFormattedProfile(state, payload) {
     state.formattedProfile = payload;
@@ -180,15 +186,16 @@ const actions = {
       }
     );
     console.log(response.data);
-    context.commit("setReview", {
-      review: payload.review,
-    });
+    context.commit("setReview", response.data);
   },
-  // async loadReviews(context, payload) {
-  //   const response = await axios.get(
-  //     "http://localhost:3000/special-connections/users/reviews/"
-  //   );
-  // },
+  async loadReviews(context) {
+    const response = await axios.get(
+      "http://localhost:3000/special-connections/users/reviews/reviews/reviews"
+    );
+
+    context.commit("setReviews", response.data);
+  },
+
   logOut(context) {
     context.commit("setMatches", {
       matches: [],

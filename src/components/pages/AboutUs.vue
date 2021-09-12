@@ -10,13 +10,16 @@
       nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim.
     </p>
     <h3>What our members are saying</h3>
-    <div class=" m-3 col-4 card">
-      <div class="card-title">
-        Name
-      </div>
-      <div class="card-text">
-        Some quick example text to build on the card title and make up the bulk
-        of the card's content.
+    <div class="row mx-3 my-5">
+      <div class="col-sm-4" v-for="user in getReviews" :key="user.username">
+        <div class="card p-3 h-100">
+          <div class="card-title">
+            <h1>{{ user.username }}</h1>
+          </div>
+          <div class="card-text">
+            <p>{{ user.review }}</p>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -25,8 +28,19 @@
 <script>
 export default {
   name: "AboutUs",
-  props: {},
-  methods: {},
+  computed: {
+    getReviews() {
+      return this.$store.state.user.reviews;
+    },
+  },
+  created() {
+    this.displayReviews();
+  },
+  methods: {
+    async displayReviews() {
+      await this.$store.dispatch("loadReviews");
+    },
+  },
 };
 </script>
 <style></style>

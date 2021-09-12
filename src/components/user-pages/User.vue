@@ -1,5 +1,5 @@
 <template>
-  <div class="container-fluid">
+  <div class="container-fluid centered">
     <Loading :active.sync="isLoading" :can-cancel="true" :is-full-page="true">
     </Loading>
     <base-modal
@@ -33,8 +33,9 @@
         v-for="match of filteredMatches.matches"
         :key="match.id"
       >
-        <div class="card">
-          <img :src="match.profile.photoURL" class="card-img-top" alt="" />
+        <div class="card ">
+          <img :src="match.profile.photoURL" class="img" />
+          />
           <div class="card-body">
             <h5 class="card-title">
               {{ match.username }}, {{ match.profile.age }}
@@ -88,7 +89,7 @@ export default {
   name: "User",
   data() {
     return {
-      isLoading: true,
+      isLoading: false,
       error: null,
     };
   },
@@ -113,6 +114,7 @@ export default {
       this.$router.replace("/browse");
     },
     async loadMatches() {
+      this.isLoading = true;
       if (this.checkProfileCompleted) {
         try {
           await this.$store.dispatch("getMatches");
@@ -135,3 +137,9 @@ export default {
   },
 };
 </script>
+
+<style>
+.centered {
+  height: 100vh;
+}
+</style>

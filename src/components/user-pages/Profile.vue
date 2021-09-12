@@ -69,9 +69,6 @@ export default {
     getProfile() {
       return this.$store.state.auth.profile || this.$store.getters.profile;
     },
-    getBasicProfile() {
-      return this.displayProfile.dob;
-    },
   },
 
   methods: {

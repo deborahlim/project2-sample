@@ -53,4 +53,9 @@ export default {
   width: 50%;
   transform: translateX(50%);
 }
+.img {
+  height: 500px;
+  /* width: 100px; */
+  object-fit: cover;
+}
 </style>

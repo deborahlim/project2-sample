@@ -43,13 +43,4 @@ export default {
 .users-icon {
   font-size: 200px;
 }
-
-/* .heart-icon {
-  color: yellow;
-  position: absolute;
-  font-size: 50px;
-  z-index: -1;
-  left: 50%;
-  top: 0%;
-} */
 </style>

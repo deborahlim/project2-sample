@@ -1,5 +1,5 @@
 <template>
-  <div class="container-fluid">
+  <div class="container-fluid overflow">
     <Loading :active.sync="isLoading" :can-cancel="true" :is-full-page="true">
     </Loading>
     <base-modal
@@ -19,7 +19,7 @@
     </div>
 
     <div
-      class="row  
+      class="row
     "
     >
       <div class="col-sm-4 md-3">
@@ -69,12 +69,11 @@
     <div class="row m-4">
       <div class="col-sm-4 mb-4 " v-for="user in filteredUsers" :key="user.id">
         <div class="card">
-          <img :src="user.profile.photoURL" class="card-img-top" alt="" />
+          <img :src="user.profile.photoURL" class="img" alt="" />
           <div class="card-body">
             <h5 class="card-title">
               {{ user.username }}
             </h5>
-            <p class="card-text">{{ user.profile.aboutMe }}</p>
             <ul class="list-group list-group-flush">
               <li class="list-group-item">
                 I Live in {{ user.profile.country }}
@@ -103,18 +102,9 @@
                   {{ el }}
                 </span>
               </li>
-              <li class="list-group-item">
-                My Preferences: {{ user.profile.disabilityPreference }},
-                <span
-                  class="mb-0"
-                  v-for="el of user.profile.genderPreference"
-                  :key="el"
-                >
-                  {{ el }}</span
-                >
-              </li>
             </ul>
-            <a href="#" class="mt-2 btn btn-primary">Let chat!</a>
+            <button class="mt-2  me-3 btn btn-primary">Let chat!</button>
+            <button class="mt-2 btn btn-primary">My Profile</button>
           </div>
         </div>
       </div>
@@ -189,3 +179,9 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.overflow {
+  background-color: #d6cbcb;
+}
+</style>
