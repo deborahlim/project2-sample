@@ -34,7 +34,12 @@ export const routes = [
     component: ProfileForm,
     name: "profileForm",
   },
-  { path: "/user/profile/:id", component: Profile, name: "profile" },
+  {
+    path: "/user/profile/:id",
+    component: Profile,
+    name: "profile",
+    props: true,
+  },
   {
     path: "/user/review/:id",
     component: WriteReview,

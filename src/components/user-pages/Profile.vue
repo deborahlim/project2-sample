@@ -9,13 +9,13 @@
       @cancel="deleteClick = false"
     >
     </base-confirm>
-    <div class="card m-5 profile">
+    <div class="card m-5">
       <div class="card-header">
-        <h1 class="display-4 my-3">{{ getUsername }}'s Profile</h1>
+        <h1 class="display-4 my-3">{{ selectedUser.username }}'s Profile</h1>
       </div>
       <div class="card-body mx-5">
         <h5
-          v-for="(value, key) in this.$store.state.user.formattedProfile"
+          v-for="(value, key) in this.selectedUser.profile"
           :key="key"
           class="card-title row text-start ms-5 "
         >
@@ -42,6 +42,7 @@ export default {
       error: null,
       isLoading: false,
       deleteClick: false,
+      selectedUser: null,
       keysToLabels: {
         dob: "Date of Birth",
         age: "Age",
@@ -59,8 +60,14 @@ export default {
       },
     };
   },
+  props: ["id"],
   created() {
-    this.displayProfile();
+    this.loadSelectedUser(this.id);
+  },
+  watch: {
+    id(newId) {
+      return this.loadSelectedUser(newId);
+    },
   },
   computed: {
     getUsername() {
@@ -87,6 +94,11 @@ export default {
     },
     displayProfile() {
       this.$store.dispatch("formatProfile");
+    },
+    loadSelectedUser(id) {
+      this.selectedUser = this.$store.getters["users"].find(
+        (user) => user.id === id
+      );
     },
     handleError() {
       this.error = null;

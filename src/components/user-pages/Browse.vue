@@ -65,49 +65,20 @@
         </datalist>
       </div>
     </div>
-
     <div class="row m-4">
-      <div class="col-sm-4 mb-4 " v-for="user in filteredUsers" :key="user.id">
-        <div class="card">
-          <img :src="user.profile.photoURL" class="img" alt="" />
-          <div class="card-body">
-            <h5 class="card-title">
-              {{ user.username }}
-            </h5>
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item">
-                I Live in {{ user.profile.country }}
-              </li>
-              <li class="list-group-item">I Am {{ user.profile.gender }}</li>
-              <li class="list-group-item">
-                I Love
-                <span
-                  class="mb-0"
-                  v-for="el of user.profile.interests"
-                  :key="el"
-                >
-                  {{ el }}
-                </span>
-              </li>
-              <li class="list-group-item">
-                Living With: {{ user.profile.disability }}
-              </li>
-              <li class="list-group-item">
-                I am interested in:
-                <span
-                  class="mb-0"
-                  v-for="el of user.profile.interestedIn"
-                  :key="el"
-                >
-                  {{ el }}
-                </span>
-              </li>
-            </ul>
-            <button class="mt-2  me-3 btn btn-primary">Let chat!</button>
-            <button class="mt-2 btn btn-primary">My Profile</button>
-          </div>
-        </div>
-      </div>
+      <base-profile-card
+        v-for="user in filteredUsers"
+        :key="user.id"
+        :photoURL="user.profile.photoURL"
+        :id="user.id"
+        :age="user.profile.age"
+        :username="user.username"
+        :country="user.profile.country"
+        :gender="user.profile.gender"
+        :interests="user.profile.interests"
+        :disability="user.profile.disability"
+        :interestedIn="user.profile.interestedIn"
+      ></base-profile-card>
     </div>
     <!--  <h1 class="display-3 m-3">Your Groups</h1> -->
   </div>
@@ -115,8 +86,10 @@
 
 <script>
 import countries from "./../../assets/countries";
+
 export default {
   name: "User",
+
   data() {
     return {
       isLoading: true,
