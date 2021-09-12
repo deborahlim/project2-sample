@@ -46,6 +46,7 @@ const getters = {
 
 const mutations = {
   setProfile(state, payload) {
+    console.log(payload);
     state.profile = payload.profile;
   },
   setMatches(state, payload) {
@@ -170,12 +171,14 @@ const actions = {
     });
   },
   async deleteProfile(context) {
-    await axios.patch(
+    await axios.delete(
       "http://localhost:3000/special-connections/users/profile/" +
         context.rootState.auth.userId
     );
-
-    context.commit("setProfile", null);
+    context.rootState.auth.profile = null;
+    context.commit("setProfile", {
+      profile: null,
+    });
   },
   async postReview(context, payload) {
     const response = await axios.patch(
