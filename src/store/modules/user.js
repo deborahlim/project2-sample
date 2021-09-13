@@ -2,7 +2,6 @@ import axios from "axios";
 
 const state = {
   profile: null,
-  formattedProfile: null,
   matches: [],
   users: [],
   disabilities: [
@@ -23,9 +22,6 @@ const state = {
 const getters = {
   profile(state) {
     return state.profile;
-  },
-  formattedProfile(state) {
-    return state.formattedProfile;
   },
   matches(state) {
     return state.matches;
@@ -63,9 +59,6 @@ const mutations = {
   },
   setReviews(state, payload) {
     state.reviews = payload;
-  },
-  setFormattedProfile(state, payload) {
-    state.formattedProfile = payload;
   },
 };
 

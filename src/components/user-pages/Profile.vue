@@ -1,5 +1,5 @@
 <template>
-  <div class="">
+  <div class="overflow">
     <Loading :active.sync="isLoading" :can-cancel="true" :is-full-page="true">
     </Loading>
     <base-confirm
@@ -9,43 +9,61 @@
       @cancel="deleteClick = false"
     >
     </base-confirm>
-    <h1 class="display-3 m-5">Profile</h1>
-    <div class="card m-5">
-      <div class="card-header">
-        <h1 class="display-4 my-3">{{ selectedUser.username }}</h1>
+    <h1 class="display-3 m-5">{{ selectedUser.username }}</h1>
+    <div class="row d-flex align-items-center">
+      <div class="col-6">
+        <img :src="selectedUser.profile.photoURL" alt="" class="img" />
       </div>
-      <div class="card-body mx-5">
-        <h5
-          v-for="(value, key) in this.selectedUser.profile"
-          :key="key"
-          class="card-title row text-start ms-5 "
-        >
-          <span class="text-start col-6">{{ keysToLabels[key] }}:</span>
-          <span class="text-start col-6">{{ value }}</span>
-        </h5>
+      <div class="col-6">
+        <div class=" mx-5 text-start">
+          <h3 class="display-7 py-3">Basic Information</h3>
+          <div class="mx-3">
+            <li class="">Date of Birth: {{ selectedUser.profile.dob }}</li>
+            <li class="">Age: {{ selectedUser.profile.age }}</li>
+            <li class="">Gender: {{ selectedUser.profile.gender }}</li>
+            <li class="">Country: {{ selectedUser.profile.country }}</li>
+          </div>
+        </div>
+        <div class=" mx-5 text-start">
+          <h3 class="display-7 py-3">Preferences</h3>
+          <div class="mx-3">
+            <li class="">Interested In: {{ getInterestedIn }}</li>
+            <li class="">Gender Preference: {{ getGenderPref }}</li>
 
-        <button
-          v-if="isCurrentUser"
-          class="btn btn-primary m-3"
-          @click="goToProfileForm"
-        >
-          Edit
-        </button>
-        <button
-          v-if="isCurrentUser"
-          class="btn btn-danger"
-          @click="deleteClick = true"
-        >
-          Delete
-        </button>
-        <button
-          v-if="!isCurrentUser"
-          class="btn btn-primary"
-          @click="goToBrowse"
-        >
-          Back
-        </button>
+            <li class="">
+              Disability Preference:
+              {{ selectedUser.profile.disabilityPreference }}
+            </li>
+            <li class="">Age Preference: {{ getAgeRange }}</li>
+          </div>
+        </div>
+        <div class=" mx-5 text-start">
+          <h3 class="display-7 py-3">Additional Information</h3>
+          <div class="mx-3">
+            <li class="">Interests and Hobbies: {{ getInterests }}</li>
+            <li class="">About Me: {{ selectedUser.profile.aboutMe }}</li>
+          </div>
+        </div>
       </div>
+    </div>
+    <div class="">
+      <button
+        v-if="isCurrentUser"
+        class="btn btn-primary m-3"
+        @click="goToProfileForm"
+      >
+        Edit
+      </button>
+      <button
+        v-if="isCurrentUser"
+        class="btn btn-danger"
+        @click="deleteClick = true"
+      >
+        Delete
+      </button>
+      <button v-if="!isCurrentUser" class="btn btn-primary" @click="goToBrowse">
+        Back
+      </button>
     </div>
   </div>
 </template>
@@ -59,21 +77,6 @@ export default {
       isLoading: false,
       deleteClick: false,
       selectedUser: null,
-      keysToLabels: {
-        dob: "Date of Birth",
-        age: "Age",
-        gender: "Gender",
-        country: "Country",
-        disability: "Disability",
-        interestedIn: "Interested In",
-        genderPreference: "Gender Preference",
-        countryPreference: "Country Preference",
-        disabilityPreference: "Disability Preference",
-        ageRange: "Age Preference",
-        aboutMe: "About Me",
-        interests: "Interests",
-        photoURL: "Profile Picture",
-      },
     };
   },
   props: ["id"],
@@ -94,6 +97,20 @@ export default {
     },
     getProfile() {
       return this.$store.state.auth.profile || this.$store.getters.profile;
+    },
+    getAgeRange() {
+      return `${this.selectedUser.profile.minAge} - ${this.selectedUser.profile.maxAge}`;
+    },
+    getInterests() {
+      return this.selectedUser.profile.interests.join(", ");
+    },
+
+    getInterestedIn() {
+      return this.selectedUser.profile.interestedIn.join(" and ");
+    },
+
+    getGenderPreference() {
+      return this.selectedUser.profile.genderPreferance.join(" and ");
     },
   },
 
@@ -117,9 +134,7 @@ export default {
       this.loading = false;
       this.deleteClick = false;
     },
-    displayProfile() {
-      this.$store.dispatch("formatProfile");
-    },
+
     loadSelectedUser(id) {
       let users = this.$store.getters.users;
       let profile =
