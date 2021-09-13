@@ -10,9 +10,14 @@
     >
     </base-confirm>
     <h1 class="display-3 m-5">{{ selectedUser.username }}</h1>
-    <div class="row d-flex align-items-center">
+    <div class="row d-flex align-items-center mb-3">
       <div class="col-6">
-        <img :src="selectedUser.profile.photoURL" alt="" class="img" />
+        <img
+          :src="selectedUser.profile.photoURL"
+          alt=""
+          class="img"
+          style="width:80%"
+        />
       </div>
       <div class="col-6">
         <div class=" mx-5 text-start">
