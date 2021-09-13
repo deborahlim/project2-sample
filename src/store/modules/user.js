@@ -153,7 +153,10 @@ const actions = {
   },
   async getAllUsers(context) {
     const response = await axios.get(
-      "http://localhost:3000/special-connections/users/"
+      "http://localhost:3000/special-connections/users/",
+      {
+        _id: context.rootState.auth.userId,
+      }
     );
 
     let users = [];

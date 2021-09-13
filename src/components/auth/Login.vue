@@ -56,11 +56,10 @@ export default {
     async submitLogin() {
       this.isLoading = true;
       try {
-        let r = await this.$store.dispatch("login", {
+        await this.$store.dispatch("login", {
           email: this.email,
           password: this.password,
         });
-        console.log("r=", r);
         this.isLoading = false;
         this.$router.replace({
           name: "user",

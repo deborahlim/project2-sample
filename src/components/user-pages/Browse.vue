@@ -153,7 +153,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 .overflow {
   background-color: #d6cbcb;
 }

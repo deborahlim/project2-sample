@@ -52,3 +52,11 @@ export default {
   },
 };
 </script>
+<style>
+.img {
+  height: 500px;
+  /* width: 100px; */
+  object-fit: cover;
+  object-position: top;
+}
+</style>
