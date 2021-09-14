@@ -9,6 +9,7 @@ import User from "./components/user-pages/User.vue";
 import Login from "./components/auth/Login.vue";
 import Browse from "./components/user-pages/Browse.vue";
 import WriteReview from "./components/user-pages/WriteReview.vue";
+import Chat from "./components/user-pages/Chat.vue";
 import store from "./store/index.js";
 
 export const routes = [
@@ -44,6 +45,12 @@ export const routes = [
     path: "/user/review/:id",
     component: WriteReview,
     name: "writeReview",
+  },
+  {
+    path: "/user/chat/:id/:username",
+    component: Chat,
+    name: "chat",
+    props: true,
   },
   {
     path: "*",

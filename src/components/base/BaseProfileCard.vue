@@ -21,7 +21,7 @@
             </span>
           </li>
         </ul>
-        <button class="mt-2  me-3 btn btn-primary">Let chat!</button>
+
         <button class="mt-2 btn btn-primary" @click="goToMyProfile">
           My Profile
         </button>
@@ -46,7 +46,6 @@ export default {
   computed: {},
   methods: {
     goToMyProfile() {
-      console.log(this.id);
       this.$router.push("/user/profile/" + this.id);
     },
   },

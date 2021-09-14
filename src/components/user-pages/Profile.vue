@@ -69,6 +69,13 @@
       <button v-if="!isCurrentUser" class="btn btn-primary" @click="goToBrowse">
         Back
       </button>
+      <button
+        class="mt-2  me-3 btn btn-primary"
+        v-if="!isCurrentUser"
+        @click="goToChat"
+      >
+        Let chat!
+      </button>
     </div>
   </div>
 </template>
@@ -84,7 +91,7 @@ export default {
       selectedUser: null,
     };
   },
-  props: ["id"],
+  props: ["id", "username"],
   created() {
     this.loadSelectedUser(this.id);
   },
@@ -114,8 +121,8 @@ export default {
       return this.selectedUser.profile.interestedIn.join(" and ");
     },
 
-    getGenderPreference() {
-      return this.selectedUser.profile.genderPreferance.join(" and ");
+    getGenderPref() {
+      return this.selectedUser.profile.genderPreference.join(" and ");
     },
   },
 
@@ -125,6 +132,11 @@ export default {
     },
     goToBrowse() {
       this.$router.push("/browse");
+    },
+    goToChat() {
+      this.$router.push(
+        "/user/chat/" + this.id + "/" + this.selectedUser.username
+      );
     },
     async removeProfile() {
       this.loading = true;
@@ -141,7 +153,11 @@ export default {
     },
 
     loadSelectedUser(id) {
-      let users = this.$store.getters.users;
+      let users =
+        this.$store.getters.users.length !== 0
+          ? this.$store.getters.users
+          : this.$store.getters.matches;
+
       let profile =
         this.$store.state.auth.profile || this.$store.getters.profile;
       if (id === this.getCurrentUser) {

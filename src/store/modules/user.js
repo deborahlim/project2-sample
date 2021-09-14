@@ -130,8 +130,6 @@ const actions = {
     // }
     let matches = [];
     for (const match of response.data) {
-      console.log(match);
-
       const m = {
         id: match._id,
         username: match.username,
