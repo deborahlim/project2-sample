@@ -46,6 +46,7 @@
 </template>
 
 <script>
+import socket from "./../../socket";
 export default {
   name: "User",
   data() {
@@ -95,6 +96,7 @@ export default {
   },
   created() {
     this.loadMatches();
+    socket.connect();
   },
 };
 </script>

@@ -66,13 +66,17 @@
       >
         Delete
       </button>
-      <button v-if="!isCurrentUser" class="btn btn-primary" @click="goToBrowse">
+      <button
+        v-if="!isCurrentUser"
+        class="me-3 btn btn-primary"
+        @click="goToBrowse"
+      >
         Back
       </button>
       <button
-        class="mt-2  me-3 btn btn-primary"
+        class="  btn btn-primary"
         v-if="!isCurrentUser"
-        @click="goToChat"
+        @click="goToChats"
       >
         Let chat!
       </button>
@@ -133,9 +137,12 @@ export default {
     goToBrowse() {
       this.$router.push("/browse");
     },
-    goToChat() {
+    goToChats() {
       this.$router.push(
-        "/user/chat/" + this.id + "/" + this.selectedUser.username
+        "/user/chats/" +
+          this.$store.state.auth.userId +
+          "/" +
+          this.selectedUser.username
       );
     },
     async removeProfile() {
