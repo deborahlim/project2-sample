@@ -29,6 +29,14 @@
         <router-link
           class="nav-link link-light"
           active-class="active"
+          exact
+          :to="'/user/chats/' + getId"
+          v-if="hasProfile"
+          >My Chats
+        </router-link>
+        <router-link
+          class="nav-link link-light"
+          active-class="active"
           :to="'/user/review/' + getId"
         >
           Review Us</router-link

@@ -31,14 +31,10 @@ export default {
     },
   },
   methods: {
-    onIdSelected(id) {
-      socket.auth = { id };
-      socket.connect();
-    },
     sendMessage() {
       socket.emit("private message", {
         input: this.input,
-        to: this.username,
+        to: this.id,
         from: this.getCurrentUser,
       });
       this.messages.push({
@@ -50,7 +46,8 @@ export default {
     },
   },
   created() {
-    this.onIdSelected(this.id);
+    socket.connect();
+    socket.emit("join", `${this.getCurrentUser}--with--${this.username}`);
     socket.on("connect_error", (err) => {
       if (err.message === "invalid id") {
         close(
@@ -66,7 +63,7 @@ export default {
     });
   },
   destroyed() {
-    socket.off("connect_error");
+    socket.disconnect();
     console.log("destroyed");
   },
 };
