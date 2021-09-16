@@ -157,14 +157,15 @@ export default {
       this.deleteClick = false;
     },
 
-    loadSelectedUser(id) {
+    async loadSelectedUser(id) {
+      await this.$store.dispatch("getUpdatedProfile");
       let users =
         this.$store.getters.users.length !== 0
           ? this.$store.getters.users
           : this.$store.getters.matches;
-
+      console.log(this.$store.getters.profile);
       let profile =
-        this.$store.state.auth.profile || this.$store.getters.profile;
+        this.$store.getters.profile || this.$store.state.auth.profile;
       if (id === this.getCurrentUser) {
         this.selectedUser = this.$store.state.auth;
         this.selectedUser.profile = profile;
@@ -183,10 +184,5 @@ export default {
 .details {
   list-style: none;
   font-size: 1.5rem;
-}
-
-.profile {
-  /* display: flex;
-  flex-direction: column; */
 }
 </style>

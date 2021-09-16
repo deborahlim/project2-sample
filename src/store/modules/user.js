@@ -42,8 +42,10 @@ const getters = {
 
 const mutations = {
   setProfile(state, payload) {
-    console.log(payload);
     state.profile = payload.profile;
+  },
+  updateProfile(state, payload) {
+    state.profile = payload.updatedProfile.profile;
   },
   setMatches(state, payload) {
     state.matches = payload.matches;
@@ -64,7 +66,6 @@ const mutations = {
 
 const actions = {
   async createProfile(context, payload) {
-    console.log(payload);
     let profile = {
       dob: payload.dob,
       gender: payload.gender,
@@ -89,34 +90,15 @@ const actions = {
       profile,
     });
   },
-  formatProfile(context) {
-    console.log(context);
-    let formattedProfile = JSON.parse(
-      JSON.stringify(context.rootState.auth.profile || context.getters.profile)
+  async getUpdatedProfile(context) {
+    let result = await axios.get(
+      "http://localhost:3000/special-connections/users/profile/" +
+        context.rootState.auth.userId
     );
-    console.log(formattedProfile.interestedIn);
-    if (formattedProfile.interestedIn.length > 0) {
-      formattedProfile.interestedIn = formattedProfile.interestedIn.join(", ");
-    } else {
-      formattedProfile.interestedIn = "-";
-    }
-
-    if (formattedProfile.genderPreference.length > 0) {
-      formattedProfile.genderPreference = formattedProfile.genderPreference.join(
-        "and"
-      );
-    } else {
-      formattedProfile.genderPreference = "-";
-    }
-
-    formattedProfile.ageRange = `${formattedProfile.minAge} - ${formattedProfile.maxAge}`;
-    delete formattedProfile.minAge;
-    delete formattedProfile.maxAge;
-    if (formattedProfile.interests.length > 0) {
-      formattedProfile.interests = formattedProfile.interests.join(", ");
-    } else formattedProfile.interests = "";
-
-    context.commit("setFormattedProfile", formattedProfile);
+    let updatedProfile = result.data;
+    context.commit("updateProfile", {
+      updatedProfile,
+    });
   },
   async getMatches(context) {
     const response = await axios.get(
