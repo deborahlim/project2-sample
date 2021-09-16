@@ -48,13 +48,6 @@ const actions = {
         throw error;
       });
 
-    // if (response.status !== 200) {
-    //   console.log(response.status);
-    //   // const error = new Error(response.status || "Failed to authenticate.");
-    //   const error = response;
-    //   console.log(error);
-    //   throw error;
-    // }
     context.commit("setUser", {
       token: response.data.token,
       userId: response.data.user._id,
@@ -68,15 +61,19 @@ const actions = {
   },
 
   async signup(context, payload) {
-    const response = await axios.post(
-      "http://localhost:3000/special-connections/users/joinUs",
-      {
+    let error;
+    const response = await axios
+      .post("http://localhost:3000/special-connections/users/joinUs", {
         username: payload.username,
         email: payload.email,
         password: payload.password,
         confirmPassword: payload.confirmPassword,
-      }
-    );
+      })
+      .catch((err) => {
+        console.dir(err);
+        error = err;
+        throw error;
+      });
 
     if (response.status !== 201) {
       const error = new Error(response.status || "Failed to authenticate.");

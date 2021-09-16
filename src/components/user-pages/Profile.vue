@@ -9,75 +9,77 @@
       @cancel="deleteClick = false"
     >
     </base-confirm>
-    <h1 class="display-3 m-5">{{ selectedUser.username }}</h1>
-    <div class="row d-flex justify-content-center align-items-center m-3">
-      <div class="col-md-6">
-        <img
-          :src="selectedUser.profile.photoURL"
-          alt=""
-          class="img"
-          style="object-position: center; "
-        />
+    <div class="" v-if="!!selectedUser">
+      <h1 class="display-3 m-5">{{ selectedUser.username }}</h1>
+      <div class="row d-flex justify-content-center align-items-center m-3">
+        <div class="col-md-6">
+          <img
+            :src="selectedUser.profile.photoURL"
+            alt=""
+            class="img"
+            style="object-position: center; "
+          />
+        </div>
+        <div class="col-md-6 text-start">
+          <h3 class="display-7 my-3 text-underline">Basic Information</h3>
+
+          <ul class="details">
+            <li>Date of Birth: {{ selectedUser.profile.dob }}</li>
+            <li class="">Age: {{ selectedUser.profile.age }}</li>
+            <li class="">Gender: {{ selectedUser.profile.gender }}</li>
+            <li class="">Country: {{ selectedUser.profile.country }}</li>
+          </ul>
+
+          <h3 class="display-7 my-3">Preferences</h3>
+
+          <ul class="details">
+            <li class="">Interested In: {{ getInterestedIn }}</li>
+            <li class="">Gender Preference: {{ getGenderPref }}</li>
+            <li class="">
+              Disability Preference:
+              {{ selectedUser.profile.disabilityPreference }}
+            </li>
+            <li class="">Age Preference: {{ getAgeRange }}</li>
+          </ul>
+
+          <h3 class="display-7 my-3">Additional Information</h3>
+
+          <ul class="details">
+            <li class="">Interests and Hobbies: {{ getInterests }}</li>
+            <li class="">About Me: {{ selectedUser.profile.aboutMe }}</li>
+          </ul>
+        </div>
       </div>
-      <div class="col-md-6 text-start">
-        <h3 class="display-7 my-3 text-underline">Basic Information</h3>
-
-        <ul class="details">
-          <li>Date of Birth: {{ selectedUser.profile.dob }}</li>
-          <li class="">Age: {{ selectedUser.profile.age }}</li>
-          <li class="">Gender: {{ selectedUser.profile.gender }}</li>
-          <li class="">Country: {{ selectedUser.profile.country }}</li>
-        </ul>
-
-        <h3 class="display-7 my-3">Preferences</h3>
-
-        <ul class="details">
-          <li class="">Interested In: {{ getInterestedIn }}</li>
-          <li class="">Gender Preference: {{ getGenderPref }}</li>
-          <li class="">
-            Disability Preference:
-            {{ selectedUser.profile.disabilityPreference }}
-          </li>
-          <li class="">Age Preference: {{ getAgeRange }}</li>
-        </ul>
-
-        <h3 class="display-7 my-3">Additional Information</h3>
-
-        <ul class="details">
-          <li class="">Interests and Hobbies: {{ getInterests }}</li>
-          <li class="">About Me: {{ selectedUser.profile.aboutMe }}</li>
-        </ul>
+      <div class="">
+        <button
+          v-if="isCurrentUser"
+          class="btn btn-primary m-3"
+          @click="goToProfileForm"
+        >
+          Edit
+        </button>
+        <button
+          v-if="isCurrentUser"
+          class="btn btn-danger"
+          @click="deleteClick = true"
+        >
+          Delete
+        </button>
+        <button
+          v-if="!isCurrentUser"
+          class="me-3 btn btn-primary"
+          @click="goToBrowse"
+        >
+          Back
+        </button>
+        <button
+          class="  btn btn-primary"
+          v-if="!isCurrentUser"
+          @click="goToChats"
+        >
+          Let chat!
+        </button>
       </div>
-    </div>
-    <div class="">
-      <button
-        v-if="isCurrentUser"
-        class="btn btn-primary m-3"
-        @click="goToProfileForm"
-      >
-        Edit
-      </button>
-      <button
-        v-if="isCurrentUser"
-        class="btn btn-danger"
-        @click="deleteClick = true"
-      >
-        Delete
-      </button>
-      <button
-        v-if="!isCurrentUser"
-        class="me-3 btn btn-primary"
-        @click="goToBrowse"
-      >
-        Back
-      </button>
-      <button
-        class="  btn btn-primary"
-        v-if="!isCurrentUser"
-        @click="goToChats"
-      >
-        Let chat!
-      </button>
     </div>
   </div>
 </template>
@@ -93,9 +95,11 @@ export default {
       selectedUser: null,
     };
   },
-  props: ["id", "username"],
+  props: ["id"],
   created() {
+    this.isLoading = true;
     this.loadSelectedUser(this.id);
+    this.isLoading = false;
   },
   watch: {
     id(newId) {
@@ -163,7 +167,7 @@ export default {
         this.$store.getters.users.length !== 0
           ? this.$store.getters.users
           : this.$store.getters.matches;
-      console.log(this.$store.getters.profile);
+
       let profile =
         this.$store.getters.profile || this.$store.state.auth.profile;
       if (id === this.getCurrentUser) {

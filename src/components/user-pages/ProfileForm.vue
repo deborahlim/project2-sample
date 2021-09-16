@@ -77,7 +77,7 @@
             </datalist>
           </div>
         </form>
-        <button class="btn btn-outline-danger" @click="goUserPage">
+        <button class="btn btn-outline-danger" @click="goUserOrProfilePage">
           Cancel
         </button>
         <button class="btn btn-outline-danger" @click="next()">
@@ -340,8 +340,12 @@ export default {
     next() {
       this.form++;
     },
-    goUserPage() {
-      this.$router.replace("/user/" + this.$store.state.auth.userId);
+    goUserOrProfilePage() {
+      if (this.hasProfile) {
+        this.$router.replace("/user/profile/" + this.$store.state.auth.userId);
+      } else {
+        this.$router.replace("/user/" + this.$store.state.auth.userId);
+      }
     },
     submitFull() {
       try {

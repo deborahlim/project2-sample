@@ -1,5 +1,7 @@
 <template>
   <div class="navbar bg-danger">
+    <Loading :active.sync="isLoading" :can-cancel="true" :is-full-page="true">
+    </Loading>
     <div class="container-fluid">
       <ul class="nav nav-pills">
         <router-link
@@ -46,6 +48,11 @@
 <script>
 export default {
   name: "TheNavbar",
+  data() {
+    return {
+      isLoading: false,
+    };
+  },
   computed: {
     getId() {
       return this.$store.state.auth.userId;
@@ -56,8 +63,10 @@ export default {
   },
   methods: {
     logOut() {
+      this.isLoading = true;
       this.$store.dispatch("logOut");
       this.$router.replace("/");
+      this.isLoading = false;
     },
   },
 };

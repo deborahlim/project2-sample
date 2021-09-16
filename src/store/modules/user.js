@@ -44,9 +44,7 @@ const mutations = {
   setProfile(state, payload) {
     state.profile = payload.profile;
   },
-  updateProfile(state, payload) {
-    state.profile = payload.updatedProfile.profile;
-  },
+
   setMatches(state, payload) {
     state.matches = payload.matches;
     // state.tokenExpiration = payload.tokenExpiration;
@@ -96,9 +94,7 @@ const actions = {
         context.rootState.auth.userId
     );
     let updatedProfile = result.data;
-    context.commit("updateProfile", {
-      updatedProfile,
-    });
+    context.commit("setProfile", updatedProfile);
   },
   async getMatches(context) {
     const response = await axios.get(

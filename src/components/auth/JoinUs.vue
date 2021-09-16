@@ -179,14 +179,7 @@ export default {
           let id = this.$store.state.auth.userId;
           this.$router.push("/user/profile-form/" + id);
         } catch (err) {
-          if (err.message.includes("401")) {
-            this.error = "The email and username provided already exists";
-          } else if (err.message.includes("406")) {
-            this.error = "The email provided already exists";
-          } else if (err.message.includes("409")) {
-            this.error = "The username provided is already taken";
-          }
-
+          this.error = err.response.data.message;
           this.isLoading = false;
         }
       } else {
