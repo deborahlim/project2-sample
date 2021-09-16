@@ -47,7 +47,7 @@
         </datalist>
       </div>
       <div class="col-sm-4 md-3">
-        <label for="" class="form-label">Disability Preference</label>
+        <label for="" class="form-label">Disability</label>
         <input
           class="form-control"
           list="disabilityPreferenceOptions"
@@ -66,6 +66,7 @@
       </div>
     </div>
     <div class="row m-4">
+      <h3 class="display-6 mt-5 mb-3">Results</h3>
       <base-profile-card
         v-for="user in filteredUsers"
         :key="user.id"

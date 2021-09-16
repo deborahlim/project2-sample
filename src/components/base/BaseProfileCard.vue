@@ -1,5 +1,5 @@
 <template>
-  <div class="col-sm-4 mb-4 ">
+  <div class="col-sm-12 col-md-6 col-lg-4 mb-4 ">
     <div class="card">
       <img :src="photoURL" class="img" alt="" />
       <div class="card-body">
@@ -7,18 +7,10 @@
         <ul class="list-group list-group-flush">
           <li class="list-group-item">I Live in {{ country }}</li>
           <li class="list-group-item">I Am {{ gender }}</li>
-          <li class="list-group-item">
-            I Love
-            <span class="mb-0" v-for="el of interests" :key="el">
-              {{ el }}
-            </span>
-          </li>
+          <li class="list-group-item truncate">I Love {{ getInterests }}</li>
           <li class="list-group-item">Living With: {{ disability }}</li>
-          <li class="list-group-item">
-            I am interested in:
-            <span class="mb-0" v-for="el of interestedIn" :key="el">
-              {{ el }}
-            </span>
+          <li class="list-group-item truncate">
+            I am interested in: {{ getInterestedIn }}
           </li>
         </ul>
 
@@ -43,7 +35,14 @@ export default {
     "disability",
     "interestedIn",
   ],
-  computed: {},
+  computed: {
+    getInterests() {
+      return this.interests.join(", ");
+    },
+    getInterestedIn() {
+      return this.interestedIn.join(" and ");
+    },
+  },
   methods: {
     goToMyProfile() {
       this.$router.push("/user/profile/" + this.id);
@@ -57,5 +56,11 @@ export default {
   /* width: 100px; */
   object-fit: cover;
   object-position: top;
+}
+
+.truncate {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 </style>

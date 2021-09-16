@@ -1,5 +1,5 @@
 <template>
-  <div class="overflow">
+  <div class="overflow d-flex flex-column">
     <Loading :active.sync="isLoading" :can-cancel="true" :is-full-page="true">
     </Loading>
     <base-confirm
@@ -10,45 +10,43 @@
     >
     </base-confirm>
     <h1 class="display-3 m-5">{{ selectedUser.username }}</h1>
-    <div class="row d-flex align-items-center mb-3">
-      <div class="col-6">
+    <div class="row d-flex justify-content-center align-items-center m-3">
+      <div class="col-md-6">
         <img
           :src="selectedUser.profile.photoURL"
           alt=""
           class="img"
-          style="width:80%"
+          style="object-position: center; "
         />
       </div>
-      <div class="col-6">
-        <div class=" mx-5 text-start">
-          <h3 class="display-7 py-3">Basic Information</h3>
-          <div class="mx-3">
-            <li class="">Date of Birth: {{ selectedUser.profile.dob }}</li>
-            <li class="">Age: {{ selectedUser.profile.age }}</li>
-            <li class="">Gender: {{ selectedUser.profile.gender }}</li>
-            <li class="">Country: {{ selectedUser.profile.country }}</li>
-          </div>
-        </div>
-        <div class=" mx-5 text-start">
-          <h3 class="display-7 py-3">Preferences</h3>
-          <div class="mx-3">
-            <li class="">Interested In: {{ getInterestedIn }}</li>
-            <li class="">Gender Preference: {{ getGenderPref }}</li>
+      <div class="col-md-6 text-start">
+        <h3 class="display-7 my-3 text-underline">Basic Information</h3>
 
-            <li class="">
-              Disability Preference:
-              {{ selectedUser.profile.disabilityPreference }}
-            </li>
-            <li class="">Age Preference: {{ getAgeRange }}</li>
-          </div>
-        </div>
-        <div class=" mx-5 text-start">
-          <h3 class="display-7 py-3">Additional Information</h3>
-          <div class="mx-3">
-            <li class="">Interests and Hobbies: {{ getInterests }}</li>
-            <li class="">About Me: {{ selectedUser.profile.aboutMe }}</li>
-          </div>
-        </div>
+        <ul class="details">
+          <li>Date of Birth: {{ selectedUser.profile.dob }}</li>
+          <li class="">Age: {{ selectedUser.profile.age }}</li>
+          <li class="">Gender: {{ selectedUser.profile.gender }}</li>
+          <li class="">Country: {{ selectedUser.profile.country }}</li>
+        </ul>
+
+        <h3 class="display-7 my-3">Preferences</h3>
+
+        <ul class="details">
+          <li class="">Interested In: {{ getInterestedIn }}</li>
+          <li class="">Gender Preference: {{ getGenderPref }}</li>
+          <li class="">
+            Disability Preference:
+            {{ selectedUser.profile.disabilityPreference }}
+          </li>
+          <li class="">Age Preference: {{ getAgeRange }}</li>
+        </ul>
+
+        <h3 class="display-7 my-3">Additional Information</h3>
+
+        <ul class="details">
+          <li class="">Interests and Hobbies: {{ getInterests }}</li>
+          <li class="">About Me: {{ selectedUser.profile.aboutMe }}</li>
+        </ul>
       </div>
     </div>
     <div class="">
@@ -181,4 +179,14 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped>
+.details {
+  list-style: none;
+  font-size: 1.5rem;
+}
+
+.profile {
+  /* display: flex;
+  flex-direction: column; */
+}
+</style>
