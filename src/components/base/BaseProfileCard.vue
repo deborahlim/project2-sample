@@ -53,7 +53,7 @@ export default {
 <style>
 .img {
   height: 500px;
-  /* width: 100px; */
+  width: 100%;
   object-fit: cover;
   object-position: top;
 }
