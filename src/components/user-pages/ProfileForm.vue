@@ -1,5 +1,15 @@
 <template>
   <div class="">
+    <Loading :active.sync="isLoading" :can-cancel="true" :is-full-page="true">
+    </Loading>
+    <base-modal
+      :show="!!error"
+      title="Error!"
+      :content="error"
+      @close="handleError"
+    >
+      <p>{{ error }}</p>
+    </base-modal>
     <div
       v-if="form === 1 && prevRoutePath.includes('join-us')"
       class="alert alert-success"
@@ -280,6 +290,8 @@ export default {
   data() {
     return {
       form: 1,
+      isLoading: false,
+      error: null,
       inputs: {
         dob: null,
         gender: null,
@@ -347,13 +359,18 @@ export default {
         this.$router.replace("/user/" + this.$store.state.auth.userId);
       }
     },
-    submitFull() {
+    async submitFull() {
       try {
-        this.$store.dispatch("createProfile", this.getProfile);
+        this.loading = true;
+        await this.$store.dispatch("createProfile", this.getProfile);
         this.$router.replace("/user/" + this.$store.state.auth.userId);
-      } catch (e) {
-        console.log(e.message);
+      } catch (err) {
+        this.error = err.response.data.message;
+        this.isLoading = false;
       }
+    },
+    handleError() {
+      this.error = null;
     },
     logOut() {
       this.$store.dispatch("logOut");

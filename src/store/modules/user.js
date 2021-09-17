@@ -64,6 +64,7 @@ const mutations = {
 
 const actions = {
   async createProfile(context, payload) {
+    let error;
     let profile = {
       dob: payload.dob,
       gender: payload.gender,
@@ -79,11 +80,17 @@ const actions = {
       interests: payload.interests,
       photoURL: payload.photoURL,
     };
-    await axios.patch(
-      "http://localhost:3000/special-connections/users/profile/" +
-        context.rootState.auth.userId,
-      profile
-    );
+    await axios
+      .patch(
+        "http://localhost:3000/special-connections/users/profile/" +
+          context.rootState.auth.userId,
+        profile
+      )
+      .catch((err) => {
+        console.dir(err);
+        error = err;
+        throw error;
+      });
     context.commit("setProfile", {
       profile,
     });
@@ -93,6 +100,7 @@ const actions = {
       "http://localhost:3000/special-connections/users/profile/" +
         context.rootState.auth.userId
     );
+
     let updatedProfile = result.data;
     context.commit("setProfile", updatedProfile);
   },
@@ -102,10 +110,6 @@ const actions = {
         context.rootState.auth.userId
     );
 
-    // if (response.status !== 200) {
-    //   const error = new Error(response.status || "No Matches");
-    //   throw error;
-    // }
     let matches = [];
     for (const match of response.data) {
       const m = {

@@ -45,6 +45,7 @@
           <h3 class="display-7 my-3">Additional Information</h3>
 
           <ul class="details">
+            <li>Disability: {{ selectedUser.profile.disability }}</li>
             <li class="">Interests and Hobbies: {{ getInterests }}</li>
             <li class="">About Me: {{ selectedUser.profile.aboutMe }}</li>
           </ul>

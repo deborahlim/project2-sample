@@ -75,10 +75,6 @@ const actions = {
         throw error;
       });
 
-    if (response.status !== 201) {
-      const error = new Error(response.status || "Failed to authenticate.");
-      throw error;
-    }
     context.commit("setUser", {
       token: response.data.token,
       userId: response.data.data.user.insertedId,

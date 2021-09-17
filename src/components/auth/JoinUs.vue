@@ -173,9 +173,7 @@ export default {
             password: this.password,
             confirmPassword: this.confirmPassword,
           });
-
           this.isLoading = false;
-          console.log(this.$store);
           let id = this.$store.state.auth.userId;
           this.$router.push("/user/profile-form/" + id);
         } catch (err) {
