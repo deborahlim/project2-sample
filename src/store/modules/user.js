@@ -128,7 +128,7 @@ const actions = {
     const response = await axios.get(
       "http://localhost:3000/special-connections/users/",
       {
-        _id: context.rootState.auth.userId,
+        params: { _id: context.rootState.auth.userId },
       }
     );
 

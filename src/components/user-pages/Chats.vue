@@ -43,6 +43,7 @@
 </template>
 <script>
 import socket from "./../../socket";
+import axios from "axios";
 export default {
   name: "Chats",
 
@@ -84,8 +85,35 @@ export default {
     });
   },
 
-  created() {
+  async created() {
     socket.emit("join", `${this.getCurrentUser}--with--${this.username}`);
+    socket.on("joined", async (updatedRoomName) => {
+      console.log("joined");
+      console.log(updatedRoomName);
+      let result = await axios.get(
+        "http://localhost:3000/special-connections/chats",
+        { params: { room: updatedRoomName } }
+      );
+      console.log(result.data);
+      for (let message of result.data.messages) {
+        this.messages.push(message);
+      }
+
+      if (!result.data) {
+        await axios.post("http://localhost:3000/special-connections/chats", {
+          room: updatedRoomName,
+          messages: [
+            {
+              input: "",
+              fromSelf: true,
+              to: "",
+            },
+          ],
+        });
+        console.log(result);
+      }
+    });
+
     socket.on("connect_error", (err) => {
       if (err.message === "invalid id") {
         close(
@@ -95,9 +123,11 @@ export default {
         );
       }
     });
-
-    socket.on("receive message", ({ input, to, from, fromSelf }) => {
+    socket.on("receive message", async ({ input, to, from, fromSelf }) => {
       this.messages.push({ input, to, from, fromSelf });
+      // let response = await axios.post("http://localhost:3000/special-connections/chats", {
+
+      // })
     });
   },
   destroyed() {
