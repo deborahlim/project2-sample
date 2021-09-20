@@ -8,7 +8,9 @@
           <li class="list-group-item">I Live in {{ country }}</li>
           <li class="list-group-item">I Am {{ gender }}</li>
           <li class="list-group-item truncate">I Love {{ getInterests }}</li>
-          <li class="list-group-item">Living With: {{ disability }}</li>
+          <li class="list-group-item truncate">
+            Living With: {{ disability }}
+          </li>
           <li class="list-group-item truncate">
             I am interested in: {{ getInterestedIn }}
           </li>

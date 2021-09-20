@@ -24,7 +24,7 @@
         </div>
         <div class="mb-5 fw-bold fs-5">
           <label for="" class="form-label">Your Review</label>
-          <textarea class="form-control" v-model="review" />
+          <textarea class="form-control" rows="3" v-model="review" />
         </div>
         <button class="btn btn-lg btn-danger" @click.prevent="submitReview">
           Submit

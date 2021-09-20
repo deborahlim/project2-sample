@@ -1,5 +1,5 @@
 <template>
-  <div class="">
+  <div class="overflow">
     <Loading :active.sync="isLoading" :can-cancel="true" :is-full-page="true">
     </Loading>
     <base-modal
@@ -31,6 +31,7 @@
           <textarea
             class="form-control"
             type="textarea"
+            rows="3"
             v-model="enquiry"
           ></textarea>
         </div>

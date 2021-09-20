@@ -235,6 +235,7 @@
             <textarea
               class="form-control"
               type="textarea"
+              rows="3"
               placeholder="Write about yourself"
               v-model="getProfile.aboutMe"
             ></textarea>
@@ -371,10 +372,6 @@ export default {
     },
     handleError() {
       this.error = null;
-    },
-    logOut() {
-      this.$store.dispatch("logOut");
-      this.$router.replace("/");
     },
   },
 };
