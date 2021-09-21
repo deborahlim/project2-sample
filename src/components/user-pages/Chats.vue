@@ -1,7 +1,7 @@
 <template>
-  <div class="d-flex flex-column">
+  <div class="d-flex flex-column flex-grow-1">
     <h1 class="text-start m-3">{{ this.username }}</h1>
-    <div class="messages">
+    <div class="messages flex-grow-1" v-if="messages !== []">
       <div
         v-for="message in messages"
         :key="message.id"
@@ -16,14 +16,14 @@
           class="alert alert-primary "
         >
           <span class="fw-bold"
-            >{{ message.fromSelf ? "(yourself)" : message.from }} :</span
+            >{{ message.fromSelf ? "(yourself)" : username }} :</span
           >
           {{ message.input }}
         </div>
       </div>
     </div>
 
-    <div class="input-group position-absolute bottom-0">
+    <div class="ms-auto input-group">
       <input
         v-model="input"
         type="text"
@@ -53,6 +53,7 @@ export default {
       selectedChat: this.username,
       chats: [],
       messages: [],
+      updatedRoomName: "",
     };
   },
   computed: {
@@ -65,7 +66,24 @@ export default {
   },
   props: ["id", "username"],
   methods: {
-    sendMessage() {
+    formatMessages() {
+      for (let message of this.messages) {
+        if (message.from === this.getCurrentUser) {
+          message.fromSelf = true;
+        } else {
+          message.fromSelf = false;
+        }
+      }
+    },
+    async sendMessage() {
+      await axios.patch("http://localhost:3000/special-connections/chats", {
+        room: this.updatedRoomName,
+        messages: {
+          input: this.input,
+          from: this.getCurrentUser,
+          to: this.username,
+        },
+      });
       socket.emit("private message", {
         input: this.input,
         to: this.username,
@@ -74,8 +92,9 @@ export default {
       this.messages.push({
         input: this.input,
         to: this.username,
-        fromSelf: true,
+        from: this.getCurrentUser,
       });
+      this.formatMessages();
       this.input = "";
     },
   },
@@ -88,32 +107,25 @@ export default {
   async created() {
     socket.emit("join", `${this.getCurrentUser}--with--${this.username}`);
     socket.on("joined", async (updatedRoomName) => {
-      console.log("joined");
-      console.log(updatedRoomName);
+      this.updatedRoomName = updatedRoomName;
       let result = await axios.get(
         "http://localhost:3000/special-connections/chats",
         { params: { room: updatedRoomName } }
       );
-      console.log(result.data);
-      for (let message of result.data.messages) {
-        this.messages.push(message);
-      }
 
       if (!result.data) {
         await axios.post("http://localhost:3000/special-connections/chats", {
           room: updatedRoomName,
-          messages: [
-            {
-              input: "",
-              fromSelf: true,
-              to: "",
-            },
-          ],
+          messages: [],
         });
         console.log(result);
+      } else {
+        for (let message of result.data.messages) {
+          this.messages.push(message);
+        }
+        this.formatMessages();
       }
     });
-
     socket.on("connect_error", (err) => {
       if (err.message === "invalid id") {
         close(
@@ -123,11 +135,9 @@ export default {
         );
       }
     });
-    socket.on("receive message", async ({ input, to, from, fromSelf }) => {
-      this.messages.push({ input, to, from, fromSelf });
-      // let response = await axios.post("http://localhost:3000/special-connections/chats", {
 
-      // })
+    socket.on("receive message", async ({ input, to, from }) => {
+      this.messages.push({ input, to, from });
     });
   },
   destroyed() {
@@ -139,10 +149,16 @@ export default {
 
 <style>
 .messages {
-  height: 77vh;
+  background-color: #d6cbcb;
 }
 
 .alert {
   display: inline-block;
+}
+
+.message-box {
+  /* position: fixed;
+  bottom: 0; */
+  margin-bottom: auto;
 }
 </style>

@@ -11,16 +11,11 @@
     </base-confirm>
     <div class="" v-if="!!selectedUser">
       <h1 class="display-3 m-5">{{ selectedUser.username }}</h1>
-      <div class="row d-flex justify-content-center align-items-center m-3">
-        <div class="col-md-6">
-          <img
-            :src="selectedUser.profile.photoURL"
-            alt=""
-            class="img"
-            style="object-position: center; "
-          />
+      <div class="row d-flex justify-content-center  m-3">
+        <div class="col-lg-6">
+          <img :src="selectedUser.profile.photoURL" alt="" class="profile" />
         </div>
-        <div class="col-md-6 text-start">
+        <div class="col-lg-6 text-start ps-5">
           <h3 class="display-7 my-3 text-underline">Basic Information</h3>
 
           <ul class="details">
@@ -189,5 +184,12 @@ export default {
 .details {
   list-style: none;
   font-size: 1.5rem;
+}
+
+.profile {
+  height: 600px;
+  width: 70%;
+  object-fit: cover;
+  object-position: top;
 }
 </style>

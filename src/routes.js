@@ -1,7 +1,6 @@
 import JoinUs from "./components/auth/JoinUs.vue";
 import Home from "./components/pages/Home.vue";
 import AboutUs from "./components/pages/AboutUs.vue";
-import Reviews from "./components/pages/Reviews.vue";
 import Contact from "./components/pages/Contact.vue";
 import ProfileForm from "./components/user-pages/ProfileForm.vue";
 import Profile from "./components/user-pages/Profile.vue";
@@ -18,7 +17,6 @@ export const routes = [
   { path: "/", component: Home, name: "home" }, // our-domain.com/teams => TeamsList
   { path: "/about-us", component: AboutUs, name: "aboutUs" },
   { path: "/join-us", component: JoinUs, name: "joinUs" },
-  { path: "/reviews", component: Reviews, name: "reviews" },
   { path: "/contact", component: Contact, name: "contact" },
   { path: "/login", component: Login, name: "login" },
   {
