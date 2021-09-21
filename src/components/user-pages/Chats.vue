@@ -155,10 +155,4 @@ export default {
 .alert {
   display: inline-block;
 }
-
-.message-box {
-  /* position: fixed;
-  bottom: 0; */
-  margin-bottom: auto;
-}
 </style>

@@ -111,7 +111,11 @@ export default {
     filteredUsers() {
       let filtered = [];
       for (let p of this.$store.getters.users) {
-        if (p.username.includes(this.usernameSearch)) {
+        if (
+          p.username.includes(this.usernameSearch) &&
+          p.profile.country.includes(this.countrySearch) &&
+          p.profile.disability.includes(this.disabilitySearch)
+        ) {
           filtered.push(p);
         }
       }
