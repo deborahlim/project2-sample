@@ -67,14 +67,6 @@ export default {
         });
       } catch (err) {
         console.dir(err);
-        // if (err.message.includes("401")) {
-        //   this.error =
-        //     "Incorrect Email Address or Password. Check your Login Details.";
-        // } else if (err.message.includes("400")) {
-        //   this.error = "Password and Email cannot be empty.";
-        // } else {
-        //   this.error = err.message || "Check your Login Details";
-        // }
         this.error = err.response.data.error.message;
         this.isLoading = false;
       }
@@ -87,9 +79,4 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-/* .form-control:focus {
-  border-color: #28a745;
-  box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25);
-} */
-</style>
+<style scoped></style>

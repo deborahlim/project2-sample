@@ -4,6 +4,7 @@ const state = {
   userId: null,
   token: null,
   username: null,
+  email: null,
   // tokenExpiration: null,
 };
 
@@ -14,6 +15,10 @@ const getters = {
   username(state) {
     return state.username;
   },
+  email(state) {
+    return state.email;
+  },
+
   token(state) {
     return state.token;
   },
@@ -29,6 +34,7 @@ const mutations = {
     state.userId = payload.userId;
     state.profile = payload.profile;
     state.username = payload.username;
+    state.email = payload.email;
     // state.tokenExpiration = payload.tokenExpiration;
   },
 };
@@ -53,6 +59,7 @@ const actions = {
       userId: response.data.user._id,
       username: response.data.user.username,
       profile: response.data.user.profile,
+      email: response.data.user.email,
       // tokenExpiration: response.expiresIn,
     });
 
@@ -79,8 +86,42 @@ const actions = {
       token: response.data.token,
       userId: response.data.data.user.insertedId,
       username: payload.username,
+      email: payload.email,
       // tokenExpiration: response.expiresIn,
     });
+  },
+  async updatePassword(context, payload) {
+    let error;
+    const response = await axios
+      .patch(
+        "http://localhost:3000/special-connections/users/update-password/" +
+          context.rootState.auth.userId,
+        {
+          currentPassword: payload.currentPassword,
+          password: payload.password,
+          confirmPassword: payload.confirmPassword,
+        }
+      )
+      .catch((err) => {
+        console.dir(err);
+        error = err;
+        throw error;
+      });
+
+    console.log(response.data);
+  },
+  async deleteUser(context) {
+    let error;
+    await axios
+      .delete(
+        "http://localhost:3000/special-connections/users/" +
+          context.rootState.auth.userId
+      )
+      .catch((err) => {
+        console.dir(err);
+        error = err;
+        throw error;
+      });
   },
   logOut(context) {
     context.commit("setUser", {

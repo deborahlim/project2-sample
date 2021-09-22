@@ -36,6 +36,13 @@
         >
           Review Us</router-link
         >
+        <router-link
+          class="nav-link link-light"
+          active-class="active"
+          :to="'/user/account/' + getId"
+        >
+          My Account
+        </router-link>
       </ul>
       <button class="btn btn-sm btn-outline-light ms-auto" @click="logOut">
         Log Out

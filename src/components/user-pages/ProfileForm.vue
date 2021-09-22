@@ -11,7 +11,7 @@
       <p>{{ error }}</p>
     </base-modal>
     <div
-      v-if="form === 1 && prevRoutePath.includes('join-us')"
+      v-if="form === 1 && prevRoutePath.includes('join-us') && !!alert"
       class="alert alert-success"
       role="alert"
     >
@@ -19,12 +19,12 @@
     </div>
 
     <div class="sign-up">
-      <h1 v-if="hasProfile" class="display-7 m-3">
+      <h1 v-if="hasProfile" class="display-7 m-5">
         Update your profile
       </h1>
 
       <div v-else>
-        <h1 class="display-7 m-3">Create your profile</h1>
+        <h1 class="display-7 m-5">Create your profile</h1>
       </div>
       <!-- FORM 1 -->
       <div v-if="form == 1">
@@ -320,9 +320,18 @@ export default {
         "Positive about Disability",
       ],
       interests: interests,
+      prevRoute: null,
+      alert: false,
     };
   },
-
+  watch: {
+    alert(value) {
+      setTimeout(() => {
+        this.alert = false;
+      }, 2000);
+      console.log(value);
+    },
+  },
   computed: {
     hasProfile() {
       return this.$store.state.auth.profile || this.$store.getters.profile;
@@ -337,9 +346,13 @@ export default {
       return this.prevRoute ? this.prevRoute.path : "/";
     },
   },
+  mounted() {
+    this.alert = true;
+  },
   // https://stackoverflow.com/questions/53788975/vue-router-how-to-get-previous-page-url
   beforeRouteEnter(to, from, next) {
     next((vm) => {
+      console.log(vm);
       vm.prevRoute = from;
     });
   },
@@ -360,6 +373,7 @@ export default {
         this.$router.replace("/user/" + this.$store.state.auth.userId);
       }
     },
+
     async submitFull() {
       try {
         this.loading = true;

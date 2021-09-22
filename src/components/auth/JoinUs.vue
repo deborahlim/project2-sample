@@ -123,7 +123,6 @@ export default {
       confirmPasswordValidity: "pending",
       isLoading: false,
       error: null,
-      fullPage: true,
       id: this.$route.params.id,
     };
   },

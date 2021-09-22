@@ -3,7 +3,7 @@
     <div v-if="show" class="modal-dialog">
       <div class="modal-content">
         <slot name="header">
-          <h1 class="modal-title">
+          <h1 class="modal-title mt-3">
             {{ title }}
           </h1>
         </slot>

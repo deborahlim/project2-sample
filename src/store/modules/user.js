@@ -105,10 +105,17 @@ const actions = {
     context.commit("setProfile", updatedProfile);
   },
   async getMatches(context) {
-    const response = await axios.get(
-      "http://localhost:3000/special-connections/users/" +
-        context.rootState.auth.userId
-    );
+    let error;
+    const response = await axios
+      .get(
+        "http://localhost:3000/special-connections/users/" +
+          context.rootState.auth.userId
+      )
+      .catch((err) => {
+        console.dir(err);
+        error = err;
+        throw error;
+      });
 
     let matches = [];
     for (const match of response.data) {
@@ -158,7 +165,7 @@ const actions = {
   },
   async postReview(context, payload) {
     const response = await axios.patch(
-      "http://localhost:3000/special-connections/users/reviews/" +
+      "http://localhost:3000/special-connections/users/review/" +
         context.rootState.auth.userId,
       {
         review: payload.review,
@@ -169,7 +176,7 @@ const actions = {
   },
   async loadReviews(context) {
     const response = await axios.get(
-      "http://localhost:3000/special-connections/users/reviews/reviews/reviews"
+      "http://localhost:3000/special-connections/users/reviews"
     );
 
     context.commit("setReviews", response.data);
@@ -178,7 +185,11 @@ const actions = {
   logOut(context) {
     context.commit("setMatches", {
       matches: [],
+    });
+    context.commit("setUsers", {
       users: [],
+    });
+    context.commit("setProfile", {
       profile: null,
     });
   },
