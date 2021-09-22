@@ -1,5 +1,5 @@
 <template>
-  <div class="">
+  <div class="overflow">
     <Loading :active.sync="isLoading" :can-cancel="true" :is-full-page="true">
     </Loading>
     <base-modal
@@ -12,22 +12,22 @@
     </base-modal>
     <div
       v-if="form === 1 && prevRoutePath.includes('join-us') && !!alert"
-      class="alert alert-success"
+      class="alert alert-success alert-box"
       role="alert"
     >
       Your account has been created!
     </div>
-
-    <div class="sign-up">
-      <h1 v-if="hasProfile" class="display-7 m-5">
+    <div class="mx-auto m-5" style="width: 50vw">
+      <h1 v-if="hasProfile" class="display-5 m-5">
         Update your profile
       </h1>
 
       <div v-else>
-        <h1 class="display-7 m-5">Create your profile</h1>
+        <h1 class="display-5 m-5">Create your profile</h1>
       </div>
       <!-- FORM 1 -->
-      <div v-if="form == 1">
+
+      <div v-if="form == 1" class="fw-bold">
         <div class="mx-auto text-center">
           <p class="lead">Step 1 of 3: Tell us about yourself</p>
         </div>
@@ -87,7 +87,10 @@
             </datalist>
           </div>
         </form>
-        <button class="btn btn-outline-danger" @click="goUserOrProfilePage">
+        <button
+          class="btn btn-outline-danger me-3"
+          @click="goUserOrProfilePage"
+        >
           Cancel
         </button>
         <button class="btn btn-outline-danger" @click="next()">
@@ -105,7 +108,7 @@
         <div class="mx-auto text-center">
           <p class="lead">Step 2 of 3: Tell us about your preferences</p>
         </div>
-        <form class="">
+        <form class="fw-bold">
           <div class="mb-4">
             <p class="">What are you interested In?</p>
             <div class="">
@@ -133,7 +136,6 @@
               </div>
             </div>
           </div>
-          <!-- -->
           <div class="mb-4 ">
             <p class="">What is your gender preference?</p>
             <div class="">
@@ -212,7 +214,7 @@
             </datalist>
           </div>
         </form>
-        <button class="btn btn-outline-danger" @click="prev()">
+        <button class="btn btn-outline-danger me-3" @click="prev()">
           Back
         </button>
         <button class="btn btn-outline-danger" @click="next()">
@@ -229,7 +231,7 @@
         <div class="mx-auto text-center">
           <p class="lead">Step 3 of 3: Tell us more about yourself</p>
         </div>
-        <form class="">
+        <form class="fw-bold">
           <div class="mb-4">
             <label for="" class="form-label">About Me</label>
             <textarea
@@ -271,7 +273,7 @@
             />
           </div>
         </form>
-        <button class="btn btn-outline-danger" @click="prev()">
+        <button class="btn btn-outline-danger me-3" @click="prev()">
           Back
         </button>
         <button class="btn btn-outline-danger" @click="submitFull">
@@ -391,9 +393,9 @@ export default {
 };
 </script>
 
-<style scoped>
-p,
-label {
-  font-weight: bold;
+<style>
+.alert-box {
+  position: absolute;
+  right: 0;
 }
 </style>

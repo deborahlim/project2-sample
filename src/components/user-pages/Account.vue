@@ -18,8 +18,8 @@
     >
     </base-confirm>
     <div
-      v-if="!!isAccountUpdated && !!alert"
-      class="alert alert-success"
+      v-if="alert === true"
+      class="alert alert-success alert-box"
       role="alert"
     >
       Your password has been updated!
@@ -149,19 +149,24 @@ export default {
   },
   methods: {
     async updateAccount() {
-      if (this.isAccountUpdated === true) {
-        await this.$store.dispatch("updatePassword", {
-          currentPassword: this.currentPassword,
-          password: this.newPassword,
-          confirmPassword: this.confirmNewPassword,
-        });
-        this.currentPassword = "";
-        this.newPassword = "";
-        this.confirmNewPassword = "";
-        this.alert = true;
-        this.isAccountUpdated = false;
-      } else {
-        this.isAccountUpdated = true;
+      try {
+        if (this.isAccountUpdated === true) {
+          await this.$store.dispatch("updatePassword", {
+            currentPassword: this.currentPassword,
+            password: this.newPassword,
+            confirmPassword: this.confirmNewPassword,
+          });
+          this.currentPassword = "";
+          this.newPassword = "";
+          this.confirmNewPassword = "";
+          this.alert = true;
+          this.isAccountUpdated = false;
+        } else {
+          this.isAccountUpdated = true;
+        }
+      } catch (err) {
+        this.error = err.response.data.error.message;
+        this.loading = false;
       }
     },
     validatePassword() {
@@ -188,7 +193,7 @@ export default {
         this.deleteClick = false;
         this.$router.replace("/");
       } catch (err) {
-        this.error = err.message;
+        this.error = err.response.data.error.message;
         this.loading = false;
       }
     },

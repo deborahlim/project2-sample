@@ -1,6 +1,6 @@
 // https://github.com/ankurk91/vue-loading-overlay/tree/v3.x
 <template>
-  <div class="vld-parent">
+  <div class="overflow">
     <Loading :active.sync="isLoading" :can-cancel="true" :is-full-page="true">
     </Loading>
     <base-modal
@@ -11,13 +11,13 @@
     >
       <p>{{ error }}</p>
     </base-modal>
-    <div class="sign-up">
+    <div class="mx-auto m-5" style="width: 50vw">
       <div class="mx-auto ">
         <h1 class="display-4 my-5">Get started with your account</h1>
       </div>
-      <form action="" class="" @submit.prevent="submitBasic">
+      <form action="" class="fw-bold" @submit.prevent="submitBasic">
         <div class="mb-4">
-          <label for="" class="form-label font-weight-bold">Username</label>
+          <label for="" class="form-label">Username</label>
           <input
             class="form-control"
             :class="{
@@ -95,7 +95,7 @@
             Passwords do not match!
           </span>
         </div>
-        <button class="btn btn-outline-danger mb-5">
+        <button class="btn btn-danger mb-5">
           Get Started!
         </button>
       </form>
@@ -126,8 +126,6 @@ export default {
       id: this.$route.params.id,
     };
   },
-  watch: {},
-  computed: {},
   methods: {
     validateUsername() {
       if (this.username.length > 2) {

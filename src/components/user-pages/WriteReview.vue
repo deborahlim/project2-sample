@@ -1,5 +1,5 @@
 <template>
-  <div class="">
+  <div class="overflow">
     <Loading :active.sync="isLoading" :can-cancel="true" :is-full-page="true">
     </Loading>
     <base-modal
@@ -10,7 +10,7 @@
     >
     </base-modal>
     <div class="form">
-      <div class="alert alert-success" v-if="submitted">
+      <div class="alert alert-success alert-box" v-if="submitted">
         Thank you! Your review has been submitted.
       </div>
       <h1 class="display-3 m-5">Write A Review</h1>

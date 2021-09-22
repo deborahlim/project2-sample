@@ -13,7 +13,7 @@
       <div class="mx-auto">
         <h1 class="display-4 my-5">Log into your account</h1>
       </div>
-      <form action="" class="" @submit.prevent="submitLogin">
+      <form action="" class="fw-bold" @submit.prevent="submitLogin">
         <div class="mb-4">
           <label for="" class="form-label">Email Address</label>
           <input
@@ -32,7 +32,7 @@
             v-model="password"
           />
         </div>
-        <button class="btn btn-outline-danger">
+        <button class="btn btn-danger">
           Login
         </button>
       </form>

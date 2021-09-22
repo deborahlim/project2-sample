@@ -1,6 +1,6 @@
 <template>
-  <div class="about">
-    <h1 class="display-3 m-5">
+  <div class="overflow">
+    <h1 class="display-4 m-5">
       Dating service and Social Network for Disabled People
     </h1>
     <p class="p-5">

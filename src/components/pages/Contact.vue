@@ -13,7 +13,7 @@
       <div class="alert alert-success" v-if="submitted">
         Thank you! Your review has been submitted.
       </div>
-      <h1 class="display-3 m-5">Contact Us</h1>
+      <h1 class="display-4 m-5">Contact Us</h1>
       <p class="fw-bold fs-4">
         Have a question? Drop us a line and we will get back to you shortly
       </p>
@@ -35,7 +35,7 @@
             v-model="enquiry"
           ></textarea>
         </div>
-        <button class="btn btn-lg btn-danger" @click.prevent="submitContact">
+        <button class="btn btn-danger" @click.prevent="submitContact">
           Submit
         </button>
       </form>

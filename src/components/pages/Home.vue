@@ -4,7 +4,9 @@
       <!-- <font-awesome-icon icon="heart" class="heart-icon"></font-awesome-icon> -->
       <font-awesome-icon icon="users" class="users-icon" />
       <h1 class="display-1 text-uppercase">Special Connections</h1>
-      <p class="lead">A safe community for everyone</p>
+      <p class="lead">
+        A Dating Service and Social Network for Disabled People
+      </p>
       <button class="btn btn-danger" @click="joinUsToday">
         Join Us Today!
       </button>
