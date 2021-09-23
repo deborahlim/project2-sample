@@ -59,10 +59,7 @@ export default {
         this.loadReviewsSuccess = true;
       } catch (err) {
         console.dir(err);
-        this.error =
-          err.response === undefined
-            ? err.message
-            : err.response.data.error.message;
+        this.error = null;
       }
       this.isLoading = false;
     },
