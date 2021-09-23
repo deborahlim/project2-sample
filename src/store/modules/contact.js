@@ -1,4 +1,4 @@
-import axios from "axios";
+const customAxios = require('./../../../customAxios');
 
 const state = {
   enquiries: [],
@@ -28,8 +28,8 @@ const actions = {
       email: payload.email,
       enquiry: payload.enquiry,
     };
-    let response = await axios.post(
-      "http://localhost:3000/special-connections/enquiry",
+    let response = await customAxios.post(
+      "enquiry",
       newEnquiry
     );
 
@@ -49,8 +49,8 @@ const actions = {
     // }
   },
   async loadEnquiries(context) {
-    let response = await axios.get(
-      "http://localhost:3000/special-connections/enquiry"
+    let response = await customAxios.get(
+      "enquiry"
     );
     console.log(response.data);
     context.commit("setEnquires", response.data);

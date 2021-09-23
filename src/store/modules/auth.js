@@ -1,4 +1,5 @@
-import axios from "axios";
+const customAxios = require('./../../../customAxios');
+
 
 const state = {
   userId: null,
@@ -42,8 +43,8 @@ const mutations = {
 const actions = {
   async login(context, payload) {
     let error;
-    let response = await axios
-      .post("http://localhost:3000/special-connections/users/login", {
+    let response = await customAxios
+      .post("users/login", {
         email: payload.email,
         password: payload.password,
         // returnSercureToken: true,
@@ -69,8 +70,8 @@ const actions = {
 
   async signup(context, payload) {
     let error;
-    const response = await axios
-      .post("http://localhost:3000/special-connections/users/joinUs", {
+    const response = await customAxios
+      .post("users/joinUs", {
         username: payload.username,
         email: payload.email,
         password: payload.password,
@@ -92,9 +93,9 @@ const actions = {
   },
   async updatePassword(context, payload) {
     let error;
-    const response = await axios
+    const response = await customAxios
       .patch(
-        "http://localhost:3000/special-connections/users/update-password/" +
+        "users/update-password/" +
           context.rootState.auth.userId,
         {
           currentPassword: payload.currentPassword,
@@ -112,9 +113,9 @@ const actions = {
   },
   async deleteUser(context) {
     let error;
-    await axios
+    await customAxios
       .delete(
-        "http://localhost:3000/special-connections/users/" +
+        "users/" +
           context.rootState.auth.userId
       )
       .catch((err) => {

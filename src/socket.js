@@ -1,6 +1,6 @@
 import { io } from "socket.io-client";
 
-const URL = "http://localhost:3000";
+const URL = "https://3000-brown-viper-dk87gdu8.ws-us17.gitpod.io/";
 const socket = io(URL, { autoConnect: false });
 
 socket.onAny((event, ...args) => {

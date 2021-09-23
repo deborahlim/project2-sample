@@ -1,4 +1,5 @@
-import axios from "axios";
+const customAxios = require('./../../../customAxios');
+
 
 const state = {
   profile: null,
@@ -80,9 +81,9 @@ const actions = {
       interests: payload.interests,
       photoURL: payload.photoURL,
     };
-    await axios
+    await customAxios
       .patch(
-        "http://localhost:3000/special-connections/users/profile/" +
+        "users/profile/" +
           context.rootState.auth.userId,
         profile
       )
@@ -96,8 +97,8 @@ const actions = {
     });
   },
   async getUpdatedProfile(context) {
-    let result = await axios.get(
-      "http://localhost:3000/special-connections/users/profile/" +
+    let result = await customAxios.get(
+     "users/profile/" +
         context.rootState.auth.userId
     );
 
@@ -106,9 +107,9 @@ const actions = {
   },
   async getMatches(context) {
     let error;
-    const response = await axios
+    const response = await customAxios
       .get(
-        "http://localhost:3000/special-connections/users/" +
+       "users/" +
           context.rootState.auth.userId
       )
       .catch((err) => {
@@ -132,8 +133,8 @@ const actions = {
     });
   },
   async getAllUsers(context) {
-    const response = await axios.get(
-      "http://localhost:3000/special-connections/users/",
+    const response = await customAxios.get(
+       "users/",
       {
         params: { _id: context.rootState.auth.userId },
       }
@@ -154,8 +155,8 @@ const actions = {
     });
   },
   async deleteProfile(context) {
-    await axios.delete(
-      "http://localhost:3000/special-connections/users/profile/" +
+    await customAxios.delete(
+       "users/profile/" +
         context.rootState.auth.userId
     );
     context.rootState.auth.profile = null;
@@ -164,8 +165,8 @@ const actions = {
     });
   },
   async postReview(context, payload) {
-    const response = await axios.patch(
-      "http://localhost:3000/special-connections/users/review/" +
+    const response = await customAxios.patch(
+        "users/review/" +
         context.rootState.auth.userId,
       {
         review: payload.review,
@@ -175,8 +176,8 @@ const actions = {
     context.commit("setReview", response.data);
   },
   async loadReviews(context) {
-    const response = await axios.get(
-      "http://localhost:3000/special-connections/users/reviews"
+    const response = await customAxios.get(
+        "users/reviews"
     );
 
     context.commit("setReviews", response.data);

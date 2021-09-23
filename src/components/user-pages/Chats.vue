@@ -43,7 +43,7 @@
 </template>
 <script>
 import socket from "./../../socket";
-import axios from "axios";
+const customAxios = require('./../../../customAxios');
 export default {
   name: "Chats",
 
@@ -76,7 +76,7 @@ export default {
       }
     },
     async sendMessage() {
-      await axios.patch("http://localhost:3000/special-connections/chats", {
+      await customAxios.patch("chats", {
         room: this.updatedRoomName,
         messages: {
           input: this.input,
@@ -105,16 +105,17 @@ export default {
   },
 
   async created() {
+        socket.connect();
     socket.emit("join", `${this.getCurrentUser}--with--${this.username}`);
     socket.on("joined", async (updatedRoomName) => {
       this.updatedRoomName = updatedRoomName;
-      let result = await axios.get(
-        "http://localhost:3000/special-connections/chats",
+      let result = await customAxios.get(
+        "chats",
         { params: { room: updatedRoomName } }
       );
 
       if (!result.data) {
-        await axios.post("http://localhost:3000/special-connections/chats", {
+        await customAxios.post("chats", {
           room: updatedRoomName,
           messages: [],
         });

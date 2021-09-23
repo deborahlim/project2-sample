@@ -2,7 +2,7 @@ import Vue from "vue";
 import App from "./App.vue";
 import "bootstrap/dist/css/bootstrap.css";
 import { library } from "@fortawesome/fontawesome-svg-core";
-import { faHeart, faUsers } from "@fortawesome/free-solid-svg-icons";
+import {faUsers } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import VueRouter from "vue-router";
 import { routes } from "./routes";
@@ -12,11 +12,7 @@ import BaseConfirm from "./../src/components/base/BaseConfirm";
 import BaseProfileCard from "./../src/components/base/BaseProfileCard";
 import Loading from "vue-loading-overlay";
 import "vue-loading-overlay/dist/vue-loading.css";
-// import axios from "axios";
-library.add(faHeart, faUsers);
-
-// axios.defaults.withCredentials = true;
-// axios.defaults.baseURL = "http://localhost:3000/special-connections";
+library.add(faUsers);
 
 Vue.use(VueRouter);
 const router = new VueRouter({ routes, mode: "history" });
