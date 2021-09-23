@@ -66,13 +66,13 @@ export default {
         } catch (err) {
           console.log(err);
           this.error =
-            err.message ||
-            "Something went wrong! Could not submit review. Try again later";
+          console.dir(err)
+          this.error = err.message || err.response.data.error.message;
         }
       } else {
-        this.isLoading = false;
         this.error = "Review cannot be blank";
       }
+         this.isLoading = false;
     },
     handleError() {
       this.error = null;

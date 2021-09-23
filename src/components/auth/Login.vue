@@ -9,7 +9,7 @@
       @close="handleError"
     >
     </base-modal>
-    <div class="sign-up">
+    <div class="mx-auto m-5" style="width: 50vw">
       <div class="mx-auto">
         <h1 class="display-4 my-5">Log into your account</h1>
       </div>
@@ -67,7 +67,7 @@ export default {
         });
       } catch (err) {
         console.dir(err);
-        this.error = err.response.data.error.message;
+        this.error = err.message || err.response.data.error.message;
         this.isLoading = false;
       }
     },

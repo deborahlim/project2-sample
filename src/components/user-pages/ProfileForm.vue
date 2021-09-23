@@ -43,17 +43,20 @@
           </div>
           <div class="mb-4">
             <label for="" class="form-label">Gender</label>
-            <select
-              name="gender"
-              class="form-select"
-              value="male"
-              v-model="getProfile.gender"
-            >
-              <option selected>Please Select</option>
-              <option value="male">Male</option>
-              <option value="female">Female</option>
-              <option value="non-binary">Non-Binary</option>
-            </select>
+            <div class="">
+            <div class="form-check-inline">
+              <input class="form-check-input" type="radio" id="male" value="male" v-model = getProfile.gender> 
+            <label class="form-label fw-normal ms-1" for="male"> Male</label>
+            </div>
+            <div class="form-check-inline">
+                <input class="form-check-input" type="radio" id="female" value="female" v-model = getProfile.gender> 
+            <label class="form-label fw-normal ms-1" for="female"> Female</label>
+            </div>
+           <div class="form-check-inline">
+               <input class="form-check-input" type="radio" id="non-binary" value="non-binary" v-model = getProfile.gender> 
+            <label class="form-label fw-normal ms-1"  for="non-binary"> Non-Binary</label>
+           </div>
+            </div>
           </div>
           <div class="mb-4">
             <label for="" class="form-label">Country</label>
@@ -244,24 +247,14 @@
           </div>
           <div class="mb-4">
             <p class="form-label">Hobbies and Interests</p>
-            <div
-              class="form-check-inline"
-              v-for="interest in interests"
-              :key="interest.hobby"
-            >
-              <input
-                type="checkbox"
-                name="interest"
-                :value="interest.hobby"
-                class="form-check-input me-1"
-                v-model="getProfile.interests"
-                id="interests"
-              />
-              <label :for="interest.hobby" class="form-label fw-normal">{{
-                interest.hobby
-              }}</label>
-            </div>
+              <select name="interest" size="8" id="" class="form-select"  v-model="getProfile.interests" multiple>
+                <option selected>Choose one or more options below</option>
+                <option v-for="interest in interests"
+              :key="interest.hobby" :value="interest.hobby" >{{interest.hobby}}</option>
+              </select>
+        
           </div>
+
           <div class="mb-4">
             <label for="" class="form-label">Upload Photo</label>
             <input
@@ -382,7 +375,8 @@ export default {
         await this.$store.dispatch("createProfile", this.getProfile);
         this.$router.replace("/user/" + this.$store.state.auth.userId);
       } catch (err) {
-        this.error = err.response.data.message;
+        console.log(err);
+        this.error = err.message || err.response.data.message;
         this.isLoading = false;
       }
     },

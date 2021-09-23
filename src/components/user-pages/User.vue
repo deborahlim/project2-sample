@@ -11,14 +11,14 @@
     </base-modal>
 
     <div class="hero" v-if="!!checkProfileCompleted === false">
-      <h1 class="display-1 m-3">Create Your Profile Today!</h1>
+      <h1 class="display-1 m-3 text-dark">Create Your Profile Today!</h1>
       <button @click="goToCreateProfile" class=" btn btn-lg btn-danger">
         Create Profile
       </button>
     </div>
     <h1 v-else-if="hasMatches" class="display-3 m-5">Your Matches</h1>
     <div class="hero" v-else>
-      <h1 class="m-5">
+      <h1 class="m-5 text-dark">
         Sorry, you do not have not matches currently.
       </h1>
       <button class="btn btn-lg btn-dark" @click="goToAllUsers">
@@ -42,7 +42,6 @@
       ></base-profile-card>
     </div>
   </div>
-  <!--  <h1 class="display-3 m-3">Your Groups</h1> -->
 </template>
 
 <script>
@@ -80,11 +79,10 @@ export default {
         try {
           await this.$store.dispatch("getMatches");
         } catch (err) {
-          this.error = err.message;
-          console.log(err.message);
+          console.dir(err)
+          this.error = err.message || err.response.data.error.message;
+         
         }
-      } else {
-        this.error = "Create a profile to see your matches!";
       }
 
       this.isLoading = false;

@@ -72,10 +72,9 @@ export default {
           this.enquiry = null;
           setTimeout(() => (this.submitted = false), 2000);
         } catch (err) {
-          console.log(err);
-          this.error =
-            err.message ||
-            "Something went wrong! Could not submit form. Try again later";
+         console.dir(err);
+        this.error = err.message || err.response.data.error.message;
+        this.isLoading = false;
         }
       } else {
         this.isLoading = false;

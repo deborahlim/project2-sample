@@ -89,7 +89,7 @@ const actions = {
       )
       .catch((err) => {
         console.dir(err);
-        error = err;
+        error = err.response.data.message;
         throw error;
       });
     context.commit("setProfile", {

@@ -23,35 +23,38 @@ const mutations = {
 
 const actions = {
   async sendEnquiry(context, payload) {
+    let error;
     let newEnquiry = {
       name: payload.name,
       email: payload.email,
       enquiry: payload.enquiry,
     };
     let response = await customAxios.post(
+      
       "enquiry",
       newEnquiry
-    );
+    ).catch((err) => {
+      console.dir(err);
+      error = err.response.data.message;
+      throw error;
+    })
 
-    // if (response.status !== 200) {
-    //   console.log(response.status);
-    //   // const error = new Error(response.status || "Failed to authenticate.");
-    //   const error = response;
-    //   console.log(error);
-    //   throw error;
-    // }
     console.log(response);
     newEnquiry.id = response.data.id;
     context.commit("addEnquiry", {
       newEnquiry,
-      // tokenExpiration: response.expiresIn,
     });
-    // }
+
   },
   async loadEnquiries(context) {
+    let error;
     let response = await customAxios.get(
       "enquiry"
-    );
+    ).catch((err) => {
+      console.dir(err);
+      error = err.response.data.message;
+      throw error;
+    });
     console.log(response.data);
     context.commit("setEnquires", response.data);
   },
