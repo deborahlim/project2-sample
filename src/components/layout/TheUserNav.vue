@@ -58,14 +58,24 @@ export default {
   data() {
     return {
       isLoading: false,
+      hasProfile: false,
     };
   },
   computed: {
     getId() {
       return this.$store.state.auth.userId;
     },
-    hasProfile() {
+    checkHasProfile() {
       return this.$store.state.auth.profile || this.$store.getters.profile;
+    },
+  },
+  watch: {
+    checkHasProfile() {
+      if (this.checkHasProfile) {
+        this.hasProfile = true;
+      } else {
+        this.hasProfile = false;
+      }
     },
   },
   methods: {

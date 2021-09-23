@@ -247,7 +247,7 @@
           </div>
           <div class="mb-4">
             <p class="form-label">Hobbies and Interests</p>
-              <select name="interest" size="8" id="" class="form-select"  v-model="getProfile.interests" multiple>
+              <select name="interest" size="8" class="form-select" v-model="getProfile.interests" multiple>
                 <option selected>Choose one or more options below</option>
                 <option v-for="interest in interests"
               :key="interest.hobby" :value="interest.hobby" >{{interest.hobby}}</option>
@@ -320,11 +320,11 @@ export default {
     };
   },
   watch: {
-    alert(value) {
+    // To make alert disappear after 2s
+    alert() {
       setTimeout(() => {
         this.alert = false;
       }, 2000);
-      console.log(value);
     },
   },
   computed: {
@@ -347,7 +347,6 @@ export default {
   // https://stackoverflow.com/questions/53788975/vue-router-how-to-get-previous-page-url
   beforeRouteEnter(to, from, next) {
     next((vm) => {
-      console.log(vm);
       vm.prevRoute = from;
     });
   },
@@ -370,15 +369,19 @@ export default {
     },
 
     async submitFull() {
+      this.loading = true;
       try {
-        this.loading = true;
+   
         await this.$store.dispatch("createProfile", this.getProfile);
         this.$router.replace("/user/" + this.$store.state.auth.userId);
       } catch (err) {
-        console.log(err);
-        this.error = err.message || err.response.data.message;
-        this.isLoading = false;
+       console.dir(err);
+        this.error =
+          err.response === undefined
+            ? err.message
+            : err.response.data.error.message;
       }
+      this.isLoading = false;
     },
     handleError() {
       this.error = null;

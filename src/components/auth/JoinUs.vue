@@ -157,6 +157,7 @@ export default {
     },
     async submitBasic() {
       this.isLoading = true;
+      // check if form input meets requirments, if so submit form
       if (
         this.usernameValidity === "valid" &&
         this.emailValidity === "valid" &&
@@ -170,17 +171,19 @@ export default {
             password: this.password,
             confirmPassword: this.confirmPassword,
           });
-          this.isLoading = false;
           let id = this.$store.state.auth.userId;
           this.$router.push("/user/profile-form/" + id);
         } catch (err) {
-          this.error = err.response.data.message;
-          this.isLoading = false;
+            console.dir(err);
+        this.error =
+          err.response === undefined
+            ? err.message
+            : err.response.data.error.message;
         }
       } else {
-        this.isLoading = false;
         this.error = "Your form input does not meet the requirements";
       }
+      this.isLoading = false;
     },
     handleError() {
       this.error = null;
@@ -189,5 +192,3 @@ export default {
 };
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped></style>

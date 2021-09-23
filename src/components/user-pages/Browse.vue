@@ -18,10 +18,7 @@
       </p>
     </div>
 
-    <div
-      class="row
-    "
-    >
+    <div class="row">
       <div class="col-sm-4 md-3">
         <label class="form-label" for="">Username</label>
         <input
@@ -65,7 +62,7 @@
         </datalist>
       </div>
     </div>
-    <div class="row m-4">
+    <div class="row m-4" v-if="!isLoading">
       <h3 class="display-6 mt-5 mb-3">Results</h3>
       <base-profile-card
         v-for="user in filteredUsers"
@@ -81,7 +78,6 @@
         :interestedIn="user.profile.interestedIn"
       ></base-profile-card>
     </div>
-    <!--  <h1 class="display-3 m-3">Your Groups</h1> -->
   </div>
 </template>
 
@@ -142,8 +138,10 @@ export default {
       try {
         await this.$store.dispatch("getAllUsers");
       } catch (err) {
-        this.error = err.message;
-        console.log(err);
+     this.error =
+          err.response === undefined
+            ? err.message
+            : err.response.data.error.message;
       }
 
       this.isLoading = false;

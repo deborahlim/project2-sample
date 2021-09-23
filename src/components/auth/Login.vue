@@ -60,16 +60,19 @@ export default {
           email: this.email,
           password: this.password,
         });
-        this.isLoading = false;
+
         this.$router.replace({
           name: "user",
           params: { id: this.$store.state.auth.userId },
         });
       } catch (err) {
         console.dir(err);
-        this.error = err.message || err.response.data.error.message;
-        this.isLoading = false;
+        this.error =
+          err.response === undefined
+            ? err.message
+            : err.response.data.error.message;
       }
+      this.isLoading = false;
     },
     handleError() {
       this.error = null;
@@ -77,6 +80,3 @@ export default {
   },
 };
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped></style>

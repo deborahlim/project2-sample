@@ -1,7 +1,7 @@
 <template>
   <div class="d-flex flex-column flex-grow-1">
     <h1 class="text-start m-3">{{ this.username }}</h1>
-    <div class="messages flex-grow-1" v-if="messages !== []">
+    <div class="messages flex-grow-1">
       <div
         v-for="message in messages"
         :key="message.id"
@@ -43,15 +43,13 @@
 </template>
 <script>
 import socket from "./../../socket";
-const customAxios = require('./../../../customAxios');
+const customAxios = require("./../../../customAxios");
 export default {
   name: "Chats",
 
   data() {
     return {
       input: "",
-      selectedChat: this.username,
-      chats: [],
       messages: [],
       updatedRoomName: "",
     };
@@ -98,21 +96,15 @@ export default {
       this.input = "";
     },
   },
-  beforeRouteEnter(to, from, next) {
-    next((vm) => {
-      vm.prevRoute = from;
-    });
-  },
 
   async created() {
-        socket.connect();
+    socket.connect();
     socket.emit("join", `${this.getCurrentUser}--with--${this.username}`);
     socket.on("joined", async (updatedRoomName) => {
       this.updatedRoomName = updatedRoomName;
-      let result = await customAxios.get(
-        "chats",
-        { params: { room: updatedRoomName } }
-      );
+      let result = await customAxios.get("chats", {
+        params: { room: updatedRoomName },
+      });
 
       if (!result.data) {
         await customAxios.post("chats", {

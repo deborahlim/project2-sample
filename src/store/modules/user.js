@@ -16,8 +16,7 @@ const state = {
     "Positive about Disability",
   ],
   review: null,
-  reviews: null,
-  // tokenExpiration: null,
+  reviews: null,               
 };
 
 const getters = {
@@ -31,7 +30,7 @@ const getters = {
     return state.matches && state.matches.length > 0;
   },
   users(state) {
-    return state.users;
+    return state.users;                         
   },
   review(state) {
     return state.review;
@@ -48,7 +47,6 @@ const mutations = {
 
   setMatches(state, payload) {
     state.matches = payload.matches;
-    // state.tokenExpiration = payload.tokenExpiration;
   },
 
   setUsers(state, payload) {
@@ -89,7 +87,7 @@ const actions = {
       )
       .catch((err) => {
         console.dir(err);
-        error = err.response.data.message;
+        error = err;
         throw error;
       });
     context.commit("setProfile", {

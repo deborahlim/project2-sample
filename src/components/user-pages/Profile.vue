@@ -86,14 +86,13 @@ export default {
   data() {
     return {
       error: null,
-      isLoading: false,
+      isLoading: true,
       deleteClick: false,
       selectedUser: null,
     };
   },
   props: ["id"],
   created() {
-    this.isLoading = true;
     this.loadSelectedUser(this.id);
     this.isLoading = false;
   },
@@ -157,14 +156,18 @@ export default {
     },
 
     async loadSelectedUser(id) {
+      // load profile
       await this.$store.dispatch("getUpdatedProfile");
+      // if user clicks a profile in matches before going to the browse tab
       let users =
         this.$store.getters.users.length !== 0
           ? this.$store.getters.users
           : this.$store.getters.matches;
 
+// if user goes to my profile tab after creating an account 
       let profile =
         this.$store.getters.profile || this.$store.state.auth.profile;
+        // selectedUser gets current user details
       if (id === this.getCurrentUser) {
         this.selectedUser = this.$store.state.auth;
         this.selectedUser.profile = profile;

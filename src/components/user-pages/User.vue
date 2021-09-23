@@ -9,15 +9,17 @@
       @close="handleError"
     >
     </base-modal>
-
-    <div class="hero" v-if="!!checkProfileCompleted === false">
+<!-- display if profile not completed and not loading -->
+    <div class="hero" v-if="!checkProfileCompleted && !isLoading">
       <h1 class="display-1 m-3 text-dark">Create Your Profile Today!</h1>
       <button @click="goToCreateProfile" class=" btn btn-lg btn-danger">
         Create Profile
       </button>
     </div>
-    <h1 v-else-if="hasMatches" class="display-3 m-5">Your Matches</h1>
-    <div class="hero" v-else>
+    <!-- display if user has matches and not loading -->
+    <h1 v-else-if="hasMatches && !isLoading" class="display-3 m-5">Your Matches</h1>
+    <!-- display if user has completed profile but no matches and not loading-->
+    <div class="hero" v-else-if="checkProfileCompleted && !hasMatches &&!isLoading">
       <h1 class="m-5 text-dark">
         Sorry, you do not have not matches currently.
       </h1>
