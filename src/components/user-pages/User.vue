@@ -9,7 +9,7 @@
       @close="handleError"
     >
     </base-modal>
-<!-- display if profile not completed and not loading -->
+    <!-- display if profile not completed and not loading -->
     <div class="hero" v-if="!checkProfileCompleted && !isLoading">
       <h1 class="display-1 m-3 text-dark">Create Your Profile Today!</h1>
       <button @click="goToCreateProfile" class=" btn btn-lg btn-danger">
@@ -17,9 +17,14 @@
       </button>
     </div>
     <!-- display if user has matches and not loading -->
-    <h1 v-else-if="hasMatches && !isLoading" class="display-3 m-5">Your Matches</h1>
+    <h1 v-else-if="hasMatches && !isLoading" class="display-3 m-5">
+      Your Matches
+    </h1>
     <!-- display if user has completed profile but no matches and not loading-->
-    <div class="hero" v-else-if="checkProfileCompleted && !hasMatches &&!isLoading">
+    <div
+      class="hero"
+      v-else-if="checkProfileCompleted && !hasMatches && !isLoading"
+    >
       <h1 class="m-5 text-dark">
         Sorry, you do not have not matches currently.
       </h1>
@@ -81,9 +86,11 @@ export default {
         try {
           await this.$store.dispatch("getMatches");
         } catch (err) {
-          console.dir(err)
-          this.error = err.message || err.response.data.error.message;
-         
+          console.dir(err);
+          this.error =
+            err.response === undefined
+              ? err.message
+              : err.response.data.error.message;
         }
       }
 
@@ -98,9 +105,3 @@ export default {
   },
 };
 </script>
-
-<style>
-.centered {
-  height: 100vh;
-}
-</style>

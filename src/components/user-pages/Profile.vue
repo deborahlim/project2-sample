@@ -148,8 +148,12 @@ export default {
         await this.$store.dispatch("deleteProfile");
         this.$router.push("/browse");
       } catch (err) {
-        this.error = err.message || err.response.data.message;
-        console.log(err);
+         console.dir(err);
+        this.error =
+          err.response === undefined
+            ? err.message
+            : err.response.data.error.message;
+      
       }
       this.loading = false;
       this.deleteClick = false;

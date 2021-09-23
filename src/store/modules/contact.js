@@ -1,4 +1,4 @@
-const customAxios = require('./../../../customAxios');
+const customAxios = require("./../../utils/customAxios");
 
 const state = {
   enquiries: [],
@@ -29,28 +29,23 @@ const actions = {
       email: payload.email,
       enquiry: payload.enquiry,
     };
-    let response = await customAxios.post(
-      
-      "enquiry",
-      newEnquiry
-    ).catch((err) => {
-      console.dir(err);
-      error = err.response.data.message;
-      throw error;
-    })
+    let response = await customAxios
+      .post("enquiry", newEnquiry)
+      .catch((err) => {
+        console.dir(err);
+        error = err.response.data.message;
+        throw error;
+      });
 
     console.log(response);
     newEnquiry.id = response.data.id;
     context.commit("addEnquiry", {
       newEnquiry,
     });
-
   },
   async loadEnquiries(context) {
     let error;
-    let response = await customAxios.get(
-      "enquiry"
-    ).catch((err) => {
+    let response = await customAxios.get("enquiry").catch((err) => {
       console.dir(err);
       error = err.response.data.message;
       throw error;

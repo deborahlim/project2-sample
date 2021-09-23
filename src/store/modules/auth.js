@@ -1,5 +1,4 @@
-const customAxios = require('./../../../customAxios');
-
+const customAxios = require("./../../utils/customAxios");
 
 const state = {
   userId: null,
@@ -94,15 +93,11 @@ const actions = {
   async updatePassword(context, payload) {
     let error;
     const response = await customAxios
-      .patch(
-        "users/update-password/" +
-          context.rootState.auth.userId,
-        {
-          currentPassword: payload.currentPassword,
-          password: payload.password,
-          confirmPassword: payload.confirmPassword,
-        }
-      )
+      .patch("users/update-password/" + context.rootState.auth.userId, {
+        currentPassword: payload.currentPassword,
+        password: payload.password,
+        confirmPassword: payload.confirmPassword,
+      })
       .catch((err) => {
         console.dir(err);
         error = err;
@@ -114,10 +109,7 @@ const actions = {
   async deleteUser(context) {
     let error;
     await customAxios
-      .delete(
-        "users/" +
-          context.rootState.auth.userId
-      )
+      .delete("users/" + context.rootState.auth.userId)
       .catch((err) => {
         console.dir(err);
         error = err;

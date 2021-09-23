@@ -1,4 +1,4 @@
-const customAxios = require('./../../../customAxios');
+const customAxios = require("./../../utils/customAxios");
 
 
 const state = {
@@ -149,7 +149,6 @@ const actions = {
     }
     context.commit("setUsers", {
       users,
-      // tokenExpiration: response.expiresIn,
     });
   },
   async deleteProfile(context) {

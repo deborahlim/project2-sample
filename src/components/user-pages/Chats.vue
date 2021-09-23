@@ -43,7 +43,7 @@
 </template>
 <script>
 import socket from "./../../socket";
-const customAxios = require("./../../../customAxios");
+const customAxios = require("./../../utils/customAxios");
 export default {
   name: "Chats",
 

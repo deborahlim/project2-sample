@@ -1,5 +1,7 @@
 <template>
   <div class="overflow">
+    <Loading :active.sync="isLoading" :can-cancel="true" :is-full-page="true">
+    </Loading>
     <h1 class="display-4 m-5">
       Dating service and Social Network for Disabled People
     </h1>
@@ -12,13 +14,17 @@
     <div class="" v-if="loadReviewsSuccess">
       <h3>What our members are saying</h3>
       <div class="row mx-3 my-5">
-        <div class="col-sm-4" v-for="user in getReviews" :key="user.username">
-          <div class="card p-3 h-100">
+        <div
+          class="col-sm-12 col-md-6 col-lg-3 mb-3"
+          v-for="user in getReviews"
+          :key="user.username"
+        >
+          <div class="card p-3" style="height: 190px">
             <div class="card-title">
               <h1>{{ user.username }}</h1>
             </div>
             <div class="card-text">
-              <p>{{ user.review }}</p>
+              <p class="lead">{{ user.review }}</p>
             </div>
           </div>
         </div>
@@ -35,6 +41,7 @@ export default {
     return {
       loadReviewsSuccess: false,
       error: null,
+      isLoading: true,
     };
   },
   computed: {
@@ -49,11 +56,15 @@ export default {
     async displayReviews() {
       try {
         await this.$store.dispatch("loadReviews");
-        this.loadDataSuccess = true;
+        this.loadReviewsSuccess = true;
       } catch (err) {
         console.dir(err);
-        this.error = err.message || err.response.data.error.message;
+        this.error =
+          err.response === undefined
+            ? err.message
+            : err.response.data.error.message;
       }
+      this.isLoading = false;
     },
   },
 };

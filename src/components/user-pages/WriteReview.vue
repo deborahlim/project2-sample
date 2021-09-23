@@ -62,17 +62,18 @@ export default {
           this.isLoading = false;
           this.submitted = true;
           this.review = null;
-          setTimeout(() => (this.submitted = false), 2000);
+          setTimeout(() => (this.submitted = false), 3000);
         } catch (err) {
-          console.log(err);
-          this.error =
-          console.dir(err)
-          this.error = err.message || err.response.data.error.message;
+        console.dir(err);
+        this.error =
+          err.response === undefined
+            ? err.message
+            : err.response.data.error.message;
         }
       } else {
         this.error = "Review cannot be blank";
       }
-         this.isLoading = false;
+      this.isLoading = false;
     },
     handleError() {
       this.error = null;

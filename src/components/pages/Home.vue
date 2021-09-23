@@ -1,7 +1,6 @@
 <template>
   <div class="background">
     <div class="hero">
-      <!-- <font-awesome-icon icon="heart" class="heart-icon"></font-awesome-icon> -->
       <font-awesome-icon icon="users" class="users-icon" />
       <h1 class="display-1 text-uppercase">Special Connections</h1>
       <p class="lead">

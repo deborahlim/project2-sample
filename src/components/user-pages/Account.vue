@@ -140,15 +140,15 @@ export default {
     },
   },
   watch: {
-    alert(value) {
+    alert() {
       setTimeout(() => {
         this.alert = false;
-      }, 2000);
-      console.log(value);
+      }, 3000);
     },
   },
   methods: {
     async updateAccount() {
+      this.isLoading = true;
       try {
         if (this.isAccountUpdated === true) {
           await this.$store.dispatch("updatePassword", {
@@ -165,10 +165,15 @@ export default {
           this.isAccountUpdated = true;
         }
       } catch (err) {
-        this.error = err.response.data.error.message;
-        this.loading = false;
+        console.dir(err);
+        this.error =
+          err.response === undefined
+            ? err.message
+            : err.response.data.error.message;
       }
+      this.isLoading = false;
     },
+
     validatePassword() {
       if (this.newPassword.length > 4) {
         this.passwordValidity = "valid";
@@ -184,23 +189,24 @@ export default {
       }
     },
     async deleteAccount() {
-      this.loading = true;
+      this.isLoading = true;
       try {
-        this.loading = true;
         await this.$store.dispatch("deleteUser");
         await this.$store.dispatch("logOut");
-        this.loading = false;
         this.deleteClick = false;
         this.$router.replace("/");
       } catch (err) {
-        this.error = err.response.data.error.message;
-        this.loading = false;
+        console.dir(err);
+        this.error =
+          err.response === undefined
+            ? err.message
+            : err.response.data.error.message;
       }
+      this.isLoading = false;
     },
     handleError() {
       this.error = null;
     },
   },
-  props: ["id"],
 };
 </script>

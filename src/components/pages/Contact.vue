@@ -10,7 +10,7 @@
     >
     </base-modal>
     <div class="form">
-      <div class="alert alert-success" v-if="submitted">
+      <div class="alert alert-success alert-box" v-if="submitted">
         Thank you! Your review has been submitted.
       </div>
       <h1 class="display-4 m-5">Contact Us</h1>
@@ -70,11 +70,14 @@ export default {
           this.isLoading = false;
           this.submitted = true;
           this.enquiry = null;
-          setTimeout(() => (this.submitted = false), 2000);
+          setTimeout(() => (this.submitted = false), 3000);
         } catch (err) {
-         console.dir(err);
-        this.error = err.message || err.response.data.error.message;
-        this.isLoading = false;
+          console.dir(err);
+          this.error =
+            err.response === undefined
+              ? err.message
+              : err.response.data.error.message;
+          this.isLoading = false;
         }
       } else {
         this.isLoading = false;

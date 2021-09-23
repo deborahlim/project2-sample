@@ -45,7 +45,6 @@ export const routes = [
     path: "/user/account/:id",
     component: Account,
     name: "account",
-    props: true,
   },
   {
     path: "/user/review/:id",

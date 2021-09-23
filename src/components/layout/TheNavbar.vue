@@ -40,7 +40,6 @@
       >
         Log In</router-link
       >
-      <!-- "btn btn-sm btn-outline-light" -->
     </div>
   </div>
 </template>

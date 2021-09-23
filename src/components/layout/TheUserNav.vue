@@ -47,7 +47,6 @@
       <button class="btn btn-sm btn-outline-light ms-auto" @click="logOut">
         Log Out
       </button>
-      <!-- "btn btn-sm btn-outline-light" -->
     </div>
   </div>
 </template>
@@ -79,11 +78,19 @@ export default {
     },
   },
   methods: {
-    logOut() {
+    async logOut() {
       this.isLoading = true;
-      this.$store.dispatch("logOut");
+      try {
+        await this.$store.dispatch("logOut");
+      } catch (err) {
+        console.dir(err);
+        this.error =
+          err.response === undefined
+            ? err.message
+            : err.response.data.error.message;
+      }
+
       this.$router.replace("/");
-      this.isLoading = false;
     },
   },
 };

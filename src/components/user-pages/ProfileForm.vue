@@ -44,18 +44,42 @@
           <div class="mb-4">
             <label for="" class="form-label">Gender</label>
             <div class="">
-            <div class="form-check-inline">
-              <input class="form-check-input" type="radio" id="male" value="male" v-model = getProfile.gender> 
-            <label class="form-label fw-normal ms-1" for="male"> Male</label>
-            </div>
-            <div class="form-check-inline">
-                <input class="form-check-input" type="radio" id="female" value="female" v-model = getProfile.gender> 
-            <label class="form-label fw-normal ms-1" for="female"> Female</label>
-            </div>
-           <div class="form-check-inline">
-               <input class="form-check-input" type="radio" id="non-binary" value="non-binary" v-model = getProfile.gender> 
-            <label class="form-label fw-normal ms-1"  for="non-binary"> Non-Binary</label>
-           </div>
+              <div class="form-check-inline">
+                <input
+                  class="form-check-input"
+                  type="radio"
+                  id="male"
+                  value="male"
+                  v-model="getProfile.gender"
+                />
+                <label class="form-label fw-normal ms-1" for="male">
+                  Male</label
+                >
+              </div>
+              <div class="form-check-inline">
+                <input
+                  class="form-check-input"
+                  type="radio"
+                  id="female"
+                  value="female"
+                  v-model="getProfile.gender"
+                />
+                <label class="form-label fw-normal ms-1" for="female">
+                  Female</label
+                >
+              </div>
+              <div class="form-check-inline">
+                <input
+                  class="form-check-input"
+                  type="radio"
+                  id="non-binary"
+                  value="non-binary"
+                  v-model="getProfile.gender"
+                />
+                <label class="form-label fw-normal ms-1" for="non-binary">
+                  Non-Binary</label
+                >
+              </div>
             </div>
           </div>
           <div class="mb-4">
@@ -84,7 +108,7 @@
               v-model="getProfile.disability"
             />
             <datalist id="disabilityOptions">
-              <option v-for="disability in disabilities" :key="disability">{{
+              <option v-for="disability in getDisabilities" :key="disability">{{
                 disability
               }}</option>
             </datalist>
@@ -211,7 +235,7 @@
             />
             <datalist id="disabilityPreferenceOptions">
               <option value="Open To All Disabilities" />
-              <option v-for="disability in disabilities" :key="disability">{{
+              <option v-for="disability in getDisabilities" :key="disability">{{
                 disability
               }}</option>
             </datalist>
@@ -247,12 +271,21 @@
           </div>
           <div class="mb-4">
             <p class="form-label">Hobbies and Interests</p>
-              <select name="interest" size="8" class="form-select" v-model="getProfile.interests" multiple>
-                <option selected>Choose one or more options below</option>
-                <option v-for="interest in interests"
-              :key="interest.hobby" :value="interest.hobby" >{{interest.hobby}}</option>
-              </select>
-        
+            <select
+              name="interest"
+              size="8"
+              class="form-select"
+              v-model="getProfile.interests"
+              multiple
+            >
+              <option selected>Choose one or more options below: </option>
+              <option
+                v-for="interest in interests"
+                :key="interest.hobby"
+                :value="interest.hobby"
+                >{{ interest.hobby }}</option
+              >
+            </select>
           </div>
 
           <div class="mb-4">
@@ -304,16 +337,6 @@ export default {
         photoURL: null,
       },
       countries: countries,
-      disabilities: [
-        "Vision Impairment",
-        "Deafness or Hardness of Hearing",
-        "Intellectual Disability",
-        "Mental Health Conditions",
-        "Acquired Brain Injury",
-        "Autism Spectrum Disorder",
-        "Physical Disability",
-        "Positive about Disability",
-      ],
       interests: interests,
       prevRoute: null,
       alert: false,
@@ -336,7 +359,9 @@ export default {
         this.$store.state.auth.profile || this.$store.getters.profile;
       return profile ? profile : this.inputs;
     },
-
+    getDisabilities() {
+      return this.$store.state.user.disabilities;
+    },
     prevRoutePath() {
       return this.prevRoute ? this.prevRoute.path : "/";
     },
@@ -371,11 +396,10 @@ export default {
     async submitFull() {
       this.loading = true;
       try {
-   
         await this.$store.dispatch("createProfile", this.getProfile);
         this.$router.replace("/user/" + this.$store.state.auth.userId);
       } catch (err) {
-       console.dir(err);
+        console.dir(err);
         this.error =
           err.response === undefined
             ? err.message
