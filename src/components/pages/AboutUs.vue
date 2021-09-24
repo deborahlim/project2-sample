@@ -30,7 +30,6 @@
         </div>
       </div>
     </div>
-    <h3>{{ error }}</h3>
   </div>
 </template>
 

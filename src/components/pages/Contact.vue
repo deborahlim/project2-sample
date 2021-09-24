@@ -69,6 +69,8 @@ export default {
           });
           this.isLoading = false;
           this.submitted = true;
+          this.name = null;
+          this.email = null;
           this.enquiry = null;
           setTimeout(() => (this.submitted = false), 3000);
         } catch (err) {
