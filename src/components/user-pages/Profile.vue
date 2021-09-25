@@ -46,7 +46,7 @@
           </ul>
         </div>
       </div>
-      <div class="">
+      <div class="mb-3">
         <button
           v-if="isCurrentUser"
           class="btn btn-primary m-3"
@@ -148,12 +148,11 @@ export default {
         await this.$store.dispatch("deleteProfile");
         this.$router.push("/browse");
       } catch (err) {
-         console.dir(err);
+        console.dir(err);
         this.error =
           err.response === undefined
             ? err.message
             : err.response.data.error.message;
-      
       }
       this.loading = false;
       this.deleteClick = false;
@@ -168,10 +167,10 @@ export default {
           ? this.$store.getters.users
           : this.$store.getters.matches;
 
-// if user goes to my profile tab after creating an account 
+      // if user goes to my profile tab after creating an account
       let profile =
         this.$store.getters.profile || this.$store.state.auth.profile;
-        // selectedUser gets current user details
+      // selectedUser gets current user details
       if (id === this.getCurrentUser) {
         this.selectedUser = this.$store.state.auth;
         this.selectedUser.profile = profile;

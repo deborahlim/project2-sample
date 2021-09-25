@@ -369,7 +369,6 @@ export default {
   mounted() {
     this.alert = true;
   },
-  // https://stackoverflow.com/questions/53788975/vue-router-how-to-get-previous-page-url
   beforeRouteEnter(to, from, next) {
     next((vm) => {
       vm.prevRoute = from;

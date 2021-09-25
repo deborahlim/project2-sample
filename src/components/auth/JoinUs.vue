@@ -1,4 +1,3 @@
-// https://github.com/ankurk91/vue-loading-overlay/tree/v3.x
 <template>
   <div class="overflow">
     <Loading :active.sync="isLoading" :can-cancel="true" :is-full-page="true">

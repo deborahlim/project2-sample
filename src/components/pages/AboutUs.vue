@@ -15,11 +15,11 @@
       <h3>What our members are saying</h3>
       <div class="row mx-3 my-5">
         <div
-          class="col-sm-12 col-md-6 col-lg-3 mb-3"
+          class="col-sm-12 col-md-6 col-lg-4 col-xl-3 mb-3"
           v-for="user in getReviews"
           :key="user.username"
         >
-          <div class="card p-3" style="height: 190px">
+          <div class="card p-3" style="height: 200px">
             <div class="card-title">
               <h1>{{ user.username }}</h1>
             </div>

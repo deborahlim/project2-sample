@@ -60,6 +60,13 @@ export default {
       hasProfile: false,
     };
   },
+  created() {
+    if (this.checkHasProfile) {
+      this.hasProfile = true;
+    } else {
+      this.hasProfile = false;
+    }
+  },
   computed: {
     getId() {
       return this.$store.state.auth.userId;
