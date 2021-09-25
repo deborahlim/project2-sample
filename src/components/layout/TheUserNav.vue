@@ -60,13 +60,17 @@ export default {
       hasProfile: false,
     };
   },
-  created() {
+  mounted() {
     if (this.checkHasProfile) {
       this.hasProfile = true;
     } else {
       this.hasProfile = false;
     }
   },
+  destroyed() {
+    this.hasProfile = false;
+  },
+
   computed: {
     getId() {
       return this.$store.state.auth.userId;

@@ -9,7 +9,13 @@
       @cancel="deleteClick = false"
     >
     </base-confirm>
-    <div class="" v-if="!!selectedUser">
+    <div
+      class=""
+      v-if="
+        !!selectedUser &&
+          (this.$store.state.auth.profile || this.$store.getters.profile)
+      "
+    >
       <h1 class="display-3 m-5">{{ selectedUser.username }}</h1>
       <div class="row d-flex justify-content-center  m-3">
         <div class="col-lg-6">
@@ -107,9 +113,6 @@ export default {
     },
     isCurrentUser() {
       return this.id === this.getCurrentUser;
-    },
-    getProfile() {
-      return this.$store.state.auth.profile || this.$store.getters.profile;
     },
     getAgeRange() {
       return `${this.selectedUser.profile.minAge} - ${this.selectedUser.profile.maxAge}`;
