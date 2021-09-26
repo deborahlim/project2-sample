@@ -23,10 +23,6 @@ export default {
       return this.$store.getters.isLoggedIn;
     },
   },
-  props: [name],
-  methods: {
-    checkLoggedIn() {},
-  },
 };
 </script>
 

@@ -38,6 +38,10 @@ const getters = {
   reviews(state) {
     return state.reviews;
   },
+  hasProfile(state) {
+    return !!state.profile;
+    // to change to true boolean
+  },
 };
 
 const mutations = {

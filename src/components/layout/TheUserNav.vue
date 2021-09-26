@@ -24,7 +24,7 @@
           active-class="active"
           exact
           :to="'/user/profile/' + getId"
-          v-if="hasProfile"
+          v-if="checkHasProfile"
         >
           My Profile
         </router-link>
@@ -57,35 +57,14 @@ export default {
   data() {
     return {
       isLoading: false,
-      hasProfile: false,
     };
   },
-  created() {
-    if (this.checkHasProfile) {
-      this.hasProfile = true;
-    } else {
-      this.hasProfile = false;
-    }
-  },
-  destroyed() {
-    this.hasProfile = false;
-  },
-
   computed: {
     getId() {
       return this.$store.state.auth.userId;
     },
     checkHasProfile() {
-      return this.$store.state.auth.profile || this.$store.getters.profile;
-    },
-  },
-  watch: {
-    checkHasProfile() {
-      if (this.checkHasProfile) {
-        this.hasProfile = true;
-      } else {
-        this.hasProfile = false;
-      }
+      return this.$store.getters.hasProfile || this.$store.getters.hasProfileAuth;
     },
   },
   methods: {

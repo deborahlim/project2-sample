@@ -5,6 +5,7 @@ const state = {
   token: null,
   username: null,
   email: null,
+  profile: null
   // tokenExpiration: null,
 };
 
@@ -26,6 +27,9 @@ const getters = {
     return !!state.token;
     // to change to true boolean
   },
+  hasProfileAuth(state) {
+    return !!state.profile
+  }
 };
 
 const mutations = {
