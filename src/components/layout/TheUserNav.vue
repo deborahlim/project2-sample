@@ -60,7 +60,7 @@ export default {
       hasProfile: false,
     };
   },
-  mounted() {
+  created() {
     if (this.checkHasProfile) {
       this.hasProfile = true;
     } else {

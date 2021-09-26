@@ -11,7 +11,7 @@
     </base-modal>
     <div class="form">
       <div class="alert alert-success alert-box" v-if="submitted">
-        Thank you! Your review has been submitted.
+        Thank you! Your enquiry has been submitted.
       </div>
       <h1 class="display-4 m-5">Contact Us</h1>
       <p class="fw-bold fs-4">
