@@ -75,20 +75,16 @@ export default {
     },
     async sendMessage() {
       let message = {
-          input: this.input,
-          from: this.getCurrentUser,
-          to: this.username,
-        }
+        input: this.input,
+        from: this.getCurrentUser,
+        to: this.username,
+      };
       await customAxios.patch("chats", {
         room: this.updatedRoomName,
-        message: message
+        message: message,
       });
-      socket.emit("private message", {
-        message
-      });
-      this.messages.push({
-        message
-      });
+      socket.emit("private message", message);
+      this.messages.push(message);
       this.formatMessages();
       this.input = "";
     },
