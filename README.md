@@ -6,7 +6,7 @@
 This project is a dating and social networking website for disabled people worldwide
 
 - A live website can be found here: https://nostalgic-cray-7a084a.netlify.app
-- GitHub link to express & mongoDB backend can be found here: https://dlhy-tgc-special-connections.herokuapp.com/
+- GitHub link to API backed by express & mongoDB can be found here: https://github.com/deborahlim/tgc-assignment-2-api
 
 ## A) Strategy
 
