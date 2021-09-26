@@ -396,7 +396,7 @@ export default {
       this.loading = true;
       try {
         await this.$store.dispatch("createProfile", this.getProfile);
-        this.$router.replace("/user/" + this.$store.state.auth.userId);
+        this.goUserOrProfilePage();
       } catch (err) {
         console.dir(err);
         this.error =
