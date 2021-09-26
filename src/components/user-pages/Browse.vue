@@ -120,9 +120,6 @@ export default {
     checkProfileCompleted() {
       return this.$store.state.auth.profile;
     },
-    hasUsers() {
-      return this.$store.getters.hasUsers;
-    },
     getDisabilityOptions() {
       return this.$store.state.user.disabilities;
     },

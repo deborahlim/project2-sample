@@ -1,7 +1,6 @@
 <template>
   <div class="background">
     <div class="hero">
-      <font-awesome-icon icon="users" class="users-icon" />
       <h1 class="display-1 text-uppercase">Special Connections</h1>
       <p class="lead">
         A Dating Service and Social Network for Disabled People
@@ -27,9 +26,10 @@ export default {
 
 <style>
 .background {
-  background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)),
-    url("./../../assets/wheelchair-dating.jpg");
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url("./../../assets/hero.jpeg");
   background-size: cover;
+  background-position: center;
   height: 100%;
 }
 
