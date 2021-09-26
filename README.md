@@ -1,4 +1,4 @@
-# tgc-assignment-2
+# tgc-assignment-2 Dating & Social Networking Web Application for disabled people
 
 
 ## Context
@@ -20,7 +20,10 @@ This project is a dating and social networking website for disabled people world
 - People who are positive about disabled people
 - Caretakers of disabled people
 
-Identifying External Users’ Goals: - Find like minded people to talk to - Expand social circle - Start romantic relationships
+Identifying External Users’ Goals:
+- Find like minded people to talk to 
+- Expand social circle 
+- Start romantic relationships
 
 ### Identifying Pain Points:
 
